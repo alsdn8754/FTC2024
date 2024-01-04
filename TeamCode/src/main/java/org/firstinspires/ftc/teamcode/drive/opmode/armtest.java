@@ -149,7 +149,7 @@ public class armtest extends LinearOpMode {
                 aTargetPosition = 900;
                 armMotor.setTargetPosition(aTargetPosition);
                 armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                armMotor.setPower(0.2);
+                armMotor.setPower(0.6);
                 aCurrentPosition = armMotor.getCurrentPosition();
             }
             //grab Coding
