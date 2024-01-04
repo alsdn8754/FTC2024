@@ -20,10 +20,10 @@ public class centerstage extends LinearOpMode {
 // Declare our motors
 // Make sure your ID's match your configuration
 
-        DcMotor frontLeftMotor = hardwareMap.dcMotor.get("FL");
-        DcMotor backLeftMotor = hardwareMap.dcMotor.get("BL");
-        DcMotor frontRightMotor = hardwareMap.dcMotor.get("FR");
-        DcMotor backRightMotor = hardwareMap.dcMotor.get("BR");
+        DcMotor frontLeftMotor = hardwareMap.dcMotor.get("leftFront");
+        DcMotor backLeftMotor = hardwareMap.dcMotor.get("leftRear");
+        DcMotor frontRightMotor = hardwareMap.dcMotor.get("rightFront");
+        DcMotor backRightMotor = hardwareMap.dcMotor.get("rightRear");
         DcMotor armMotor = hardwareMap.dcMotor.get("ARM");
 
 // Reverse the right side motors. This may be wrong for your setup.
