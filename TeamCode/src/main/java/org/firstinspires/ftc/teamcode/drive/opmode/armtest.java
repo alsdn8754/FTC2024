@@ -8,7 +8,6 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
-
 @TeleOp
 
 public class armtest extends LinearOpMode {
@@ -50,7 +49,19 @@ public class armtest extends LinearOpMode {
 
         waitForStart();
 
+        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         if (isStopRequested()) return;
+
+        boolean aStatus = false;
+        boolean aCurrent = false;
+        boolean upStatus = false;
+        boolean downStatus = false;
+        int targetPosition = 0;
+        int currentPosition = 0;
+        int gPosition = 0;
+        int wPosition = 0;
 
         while (opModeIsActive()) {
 
@@ -59,6 +70,10 @@ public class armtest extends LinearOpMode {
             double rx = gamepad1.right_stick_x;
             double ay = -gamepad2.left_stick_y;
             float slow = (float) (gamepad1.right_trigger + 1.5);
+            aCurrent = gamepad2.a;
+            boolean downCurrent = gamepad2.dpad_left;
+            boolean upCurrent = gamepad2.dpad_right;
+            armMotor.setPower(gamepad2.left_stick_y * 0.1);
 
 // This button choice was made so that it is hard to hit on accident,
 // it can be freely changed based on preference.
@@ -93,6 +108,52 @@ public class armtest extends LinearOpMode {
             frontRightMotor.setPower(frontRightPower);
             backRightMotor.setPower(backRightPower);
             armMotor.setPower(armPower);
+
+            while (gamepad2.b) {
+                targetPosition = currentPosition + 130;
+                armMotor.setTargetPosition(targetPosition);
+                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                armMotor.setPower(0.2);
+                currentPosition = armMotor.getCurrentPosition();
+            }
+                while (gamepad2.x) {
+                    if (targetPosition > 10) {
+                        targetPosition = currentPosition - 130;
+                        armMotor.setTargetPosition(targetPosition);
+                        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                        armMotor.setPower(0.2); currentPosition = armMotor.getCurrentPosition();
+                    }
+                    else {
+                        targetPosition = 10; armMotor.setTargetPosition(targetPosition);
+                        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                        armMotor.setPower(0.2);
+                        currentPosition = armMotor.getCurrentPosition();
+                    }
+                }
+
+            while (gamepad2.a) {
+                targetPosition = 30;
+                armMotor.setTargetPosition(targetPosition);
+                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                armMotor.setPower(0.2);
+                currentPosition = armMotor.getCurrentPosition();
+            }
+
+            while (gamepad2.y) {
+                targetPosition = 900;
+                armMotor.setTargetPosition(targetPosition);
+                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                armMotor.setPower(0.2);
+                currentPosition = armMotor.getCurrentPosition();
+            }
+
+            telemetry.addData("encoder", armMotor.getCurrentPosition());
+            telemetry.addData("aCurrent", aCurrent);
+            telemetry.addData("aStatus", aStatus);
+            telemetry.addData("wPosition", wPosition);
+            telemetry.update();
+
+
 
         }
 
