@@ -24,6 +24,7 @@ public class armtest extends LinearOpMode {
         DcMotor frontRightMotor = hardwareMap.dcMotor.get("rightFront");
         DcMotor backRightMotor = hardwareMap.dcMotor.get("rightRear");
         DcMotor armMotor = hardwareMap.dcMotor.get("ARM");
+        DcMotor grabMotor = hardwareMap.dcMotor.get("grab");
 
 // Reverse the right side motors. This may be wrong for your setup.
 // If your robot moves backwards when commanded to go forwards,
@@ -69,11 +70,12 @@ public class armtest extends LinearOpMode {
             double x = gamepad1.left_stick_x;
             double rx = gamepad1.right_stick_x;
             double ay = -gamepad2.left_stick_y;
+            double gy = -gamepad2.right_stick_y;
             float slow = (float) (gamepad1.right_trigger + 1.5);
             aCurrent = gamepad2.a;
             boolean downCurrent = gamepad2.dpad_left;
             boolean upCurrent = gamepad2.dpad_right;
-            armMotor.setPower(gamepad2.left_stick_y * 0.1);
+
 
 // This button choice was made so that it is hard to hit on accident,
 // it can be freely changed based on preference.
@@ -102,12 +104,14 @@ public class armtest extends LinearOpMode {
             double frontRightPower = ((rotY - rotX + rx) / denominator)/slow;
             double backRightPower = ((rotY + rotX + rx) / denominator)/slow;
             double armPower = ay;
+            double grabPower = gy;
 
             frontLeftMotor.setPower(frontLeftPower);
             backLeftMotor.setPower(backLeftPower);
             frontRightMotor.setPower(frontRightPower);
             backRightMotor.setPower(backRightPower);
             armMotor.setPower(armPower);
+            grabMotor.setPower(grabPower);
 
             while (gamepad2.b) {
                 targetPosition = currentPosition + 130;
