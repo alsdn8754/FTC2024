@@ -154,10 +154,18 @@ public class armtest extends LinearOpMode {
             }
             //grab Coding
             while (gamepad2.dpad_up) {
-                gTargetPosition = 100;
+                gTargetPosition = 2000;
                 grabMotor.setTargetPosition(gTargetPosition);
                 grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                grabMotor.setPower(0.2);
+                grabMotor.setPower(1);
+                gCurrentPosition = grabMotor.getCurrentPosition();
+            }
+
+            while (gamepad2.dpad_down) {
+                gTargetPosition = 0;
+                grabMotor.setTargetPosition(gTargetPosition);
+                grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                grabMotor.setPower(1);
                 gCurrentPosition = grabMotor.getCurrentPosition();
             }
 
