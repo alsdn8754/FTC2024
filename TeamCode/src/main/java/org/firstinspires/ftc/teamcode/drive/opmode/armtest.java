@@ -52,17 +52,21 @@ public class armtest extends LinearOpMode {
 
         armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        grabMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        grabMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         if (isStopRequested()) return;
 
         boolean aStatus = false;
         boolean aCurrent = false;
         boolean upStatus = false;
+        boolean upCurrent = false;
         boolean downStatus = false;
-        int targetPosition = 0;
-        int currentPosition = 0;
-        int gPosition = 0;
-        int wPosition = 0;
+        boolean downCurrent = false;
+        int aTargetPosition = 0; //ARM
+        int aCurrentPosition = 0;
+        int gTargetPosition = 0; //grab
+        int gCurrentPosition = 0;
 
         while (opModeIsActive()) {
 
@@ -70,11 +74,10 @@ public class armtest extends LinearOpMode {
             double x = gamepad1.left_stick_x;
             double rx = gamepad1.right_stick_x;
             double ay = -gamepad2.left_stick_y;
-            double gy = -gamepad2.right_stick_y;
             float slow = (float) (gamepad1.right_trigger + 1.5);
             aCurrent = gamepad2.a;
-            boolean downCurrent = gamepad2.dpad_left;
-            boolean upCurrent = gamepad2.dpad_right;
+            downCurrent = gamepad2.dpad_left;
+            upCurrent = gamepad2.dpad_right;
 
 
 // This button choice was made so that it is hard to hit on accident,
@@ -104,57 +107,67 @@ public class armtest extends LinearOpMode {
             double frontRightPower = ((rotY - rotX + rx) / denominator)/slow;
             double backRightPower = ((rotY + rotX + rx) / denominator)/slow;
             double armPower = ay;
-            double grabPower = gy;
 
             frontLeftMotor.setPower(frontLeftPower);
             backLeftMotor.setPower(backLeftPower);
             frontRightMotor.setPower(frontRightPower);
             backRightMotor.setPower(backRightPower);
             armMotor.setPower(armPower);
-            grabMotor.setPower(grabPower);
 
+            //ARM Coding
             while (gamepad2.b) {
-                targetPosition = currentPosition + 130;
-                armMotor.setTargetPosition(targetPosition);
+                aTargetPosition = aCurrentPosition + 130;
+                armMotor.setTargetPosition(aTargetPosition);
                 armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 armMotor.setPower(0.2);
-                currentPosition = armMotor.getCurrentPosition();
+                aCurrentPosition = armMotor.getCurrentPosition();
             }
                 while (gamepad2.x) {
-                    if (targetPosition > 10) {
-                        targetPosition = currentPosition - 130;
-                        armMotor.setTargetPosition(targetPosition);
+                    if (aTargetPosition > 10) {
+                        aTargetPosition = aCurrentPosition - 130;
+                        armMotor.setTargetPosition(aTargetPosition);
                         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        armMotor.setPower(0.2); currentPosition = armMotor.getCurrentPosition();
+                        armMotor.setPower(0.2); aCurrentPosition = armMotor.getCurrentPosition();
                     }
                     else {
-                        targetPosition = 10; armMotor.setTargetPosition(targetPosition);
+                        aTargetPosition = 10; armMotor.setTargetPosition(aTargetPosition);
                         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                         armMotor.setPower(0.2);
-                        currentPosition = armMotor.getCurrentPosition();
+                        aCurrentPosition = armMotor.getCurrentPosition();
                     }
                 }
 
             while (gamepad2.a) {
-                targetPosition = 30;
-                armMotor.setTargetPosition(targetPosition);
+                aTargetPosition = 30;
+                armMotor.setTargetPosition(aTargetPosition);
                 armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 armMotor.setPower(0.2);
-                currentPosition = armMotor.getCurrentPosition();
+                aCurrentPosition = armMotor.getCurrentPosition();
             }
 
             while (gamepad2.y) {
-                targetPosition = 900;
-                armMotor.setTargetPosition(targetPosition);
+                aTargetPosition = 900;
+                armMotor.setTargetPosition(aTargetPosition);
                 armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 armMotor.setPower(0.2);
-                currentPosition = armMotor.getCurrentPosition();
+                aCurrentPosition = armMotor.getCurrentPosition();
+            }
+            //grab Coding
+            while (gamepad2.dpad_up) {
+                gTargetPosition = 100;
+                grabMotor.setTargetPosition(gTargetPosition);
+                grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                grabMotor.setPower(0.2);
+                gCurrentPosition = grabMotor.getCurrentPosition();
             }
 
-            telemetry.addData("encoder", armMotor.getCurrentPosition());
+            telemetry.addData("aEncoder", armMotor.getCurrentPosition()); //ARM
             telemetry.addData("aCurrent", aCurrent);
             telemetry.addData("aStatus", aStatus);
-            telemetry.addData("wPosition", wPosition);
+            telemetry.addData("gEncoder", grabMotor.getCurrentPosition()); //grab
+            telemetry.addData("upCurrent", upCurrent);
+            telemetry.addData("upStatus", upStatus);
+
             telemetry.update();
 
 
