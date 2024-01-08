@@ -74,7 +74,7 @@ public class armtest extends LinearOpMode {
             double x = gamepad1.left_stick_x;
             double rx = gamepad1.right_stick_x;
             double ay = -gamepad2.left_stick_y;
-            float slow = (float) (gamepad1.right_trigger + 1.5);
+            double slow = 0.8 - (0.6 * gamepad1.right_trigger);
             aCurrent = gamepad2.a;
             downCurrent = gamepad2.dpad_left;
             upCurrent = gamepad2.dpad_right;
@@ -102,10 +102,10 @@ public class armtest extends LinearOpMode {
 // but only if at least one is out of the range [-1, 1]
 
             double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(rx), 1);
-            double frontLeftPower = ((rotY + rotX - rx) / denominator)/slow;
-            double backLeftPower = ((rotY - rotX - rx) / denominator)/slow;
-            double frontRightPower = ((rotY - rotX + rx) / denominator)/slow;
-            double backRightPower = ((rotY + rotX + rx) / denominator)/slow;
+            double frontLeftPower = ((rotY + rotX - rx) / denominator) * slow;
+            double backLeftPower = ((rotY - rotX - rx) / denominator) * slow;
+            double frontRightPower = ((rotY - rotX + rx) / denominator) * slow;
+            double backRightPower = ((rotY + rotX + rx) / denominator) * slow;
             double armPower = ay;
 
             frontLeftMotor.setPower(frontLeftPower);
