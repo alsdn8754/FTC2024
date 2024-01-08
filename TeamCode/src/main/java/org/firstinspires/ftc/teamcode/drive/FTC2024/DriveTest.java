@@ -11,7 +11,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 @TeleOp
 
-public class drivetest extends LinearOpMode {
+public class DriveTest extends LinearOpMode {
 
     @Override
 
