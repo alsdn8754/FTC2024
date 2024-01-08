@@ -27,9 +27,11 @@ public class ServoInitialize extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            leftHandServo.setPosition(0.5);
-            wristServo.setPosition(0.5);
-            rightHandServo.setPosition(0.5);
+            leftHandServo.setPosition(0.2);//open 0.5, close 0.2
+            wristServo.setPosition(0.5);//
+            rightHandServo.setPosition(0.8);//open 0.5, close 0.8
+
+
 
 
 

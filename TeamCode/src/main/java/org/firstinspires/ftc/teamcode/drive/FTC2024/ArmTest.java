@@ -144,10 +144,10 @@ public class ArmTest extends LinearOpMode {
             }
 
             while (gamepad2.y) {
-                aTargetPosition = 900;
+                aTargetPosition = 800;
                 armMotor.setTargetPosition(aTargetPosition);
                 armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                armMotor.setPower(0.6);
+                armMotor.setPower(0.5);
                 aCurrentPosition = armMotor.getCurrentPosition();
             }
             //grab Coding
