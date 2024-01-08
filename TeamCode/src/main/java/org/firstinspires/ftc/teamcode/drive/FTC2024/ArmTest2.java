@@ -8,9 +8,10 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.IMU;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+
 @TeleOp
 
-public class ArmTest extends LinearOpMode {
+public class ArmTest2 extends LinearOpMode {
 
     @Override
 
@@ -106,11 +107,13 @@ public class ArmTest extends LinearOpMode {
             double backLeftPower = ((rotY - rotX - rx) / denominator) * slow;
             double frontRightPower = ((rotY - rotX + rx) / denominator) * slow;
             double backRightPower = ((rotY + rotX + rx) / denominator) * slow;
+            double armPower = ay;
 
             frontLeftMotor.setPower(frontLeftPower);
             backLeftMotor.setPower(backLeftPower);
             frontRightMotor.setPower(frontRightPower);
             backRightMotor.setPower(backRightPower);
+            armMotor.setPower(armPower);
 
             //ARM Coding
             while (gamepad2.b) {
@@ -120,23 +123,23 @@ public class ArmTest extends LinearOpMode {
                 armMotor.setPower(0.2);
                 aCurrentPosition = armMotor.getCurrentPosition();
             }
-            while (gamepad2.x) {
-                if (aTargetPosition > 10) {
-                    aTargetPosition = aCurrentPosition - 130;
-                    armMotor.setTargetPosition(aTargetPosition);
-                    armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    armMotor.setPower(0.2); aCurrentPosition = armMotor.getCurrentPosition();
+                while (gamepad2.x) {
+                    if (aTargetPosition > 10) {
+                        aTargetPosition = aCurrentPosition - 130;
+                        armMotor.setTargetPosition(aTargetPosition);
+                        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                        armMotor.setPower(0.2); aCurrentPosition = armMotor.getCurrentPosition();
+                    }
+                    else {
+                        aTargetPosition = 10; armMotor.setTargetPosition(aTargetPosition);
+                        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                        armMotor.setPower(0.2);
+                        aCurrentPosition = armMotor.getCurrentPosition();
+                    }
                 }
-                else {
-                    aTargetPosition = 10; armMotor.setTargetPosition(aTargetPosition);
-                    armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    armMotor.setPower(0.2);
-                    aCurrentPosition = armMotor.getCurrentPosition();
-                }
-            }
 
             while (gamepad2.a) {
-                aTargetPosition = 0;
+                aTargetPosition = 30;
                 armMotor.setTargetPosition(aTargetPosition);
                 armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 armMotor.setPower(0.2);
@@ -166,6 +169,7 @@ public class ArmTest extends LinearOpMode {
                 grabMotor.setPower(1);
                 gCurrentPosition = grabMotor.getCurrentPosition();
             }
+            //eat position
 
             telemetry.addData("aEncoder", armMotor.getCurrentPosition()); //ARM
             telemetry.addData("aCurrent", aCurrent);
