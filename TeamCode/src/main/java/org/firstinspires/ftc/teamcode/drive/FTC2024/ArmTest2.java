@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.IMU;
+import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
@@ -26,6 +27,9 @@ public class ArmTest2 extends LinearOpMode {
         DcMotor backRightMotor = hardwareMap.dcMotor.get("rightRear");
         DcMotor armMotor = hardwareMap.dcMotor.get("ARM");
         DcMotor grabMotor = hardwareMap.dcMotor.get("grab");
+        Servo leftHandServo = hardwareMap.servo.get("leftHand");
+        Servo wristServo = hardwareMap.servo.get("wrist");
+        Servo rightHandServo = hardwareMap.servo.get("rightHand");
 
 // Reverse the right side motors. This may be wrong for your setup.
 // If your robot moves backwards when commanded to go forwards,
@@ -107,13 +111,11 @@ public class ArmTest2 extends LinearOpMode {
             double backLeftPower = ((rotY - rotX - rx) / denominator) * slow;
             double frontRightPower = ((rotY - rotX + rx) / denominator) * slow;
             double backRightPower = ((rotY + rotX + rx) / denominator) * slow;
-            double armPower = ay;
 
             frontLeftMotor.setPower(frontLeftPower);
             backLeftMotor.setPower(backLeftPower);
             frontRightMotor.setPower(frontRightPower);
             backRightMotor.setPower(backRightPower);
-            armMotor.setPower(armPower);
 
             //ARM Coding
             while (gamepad2.b) {
@@ -123,23 +125,23 @@ public class ArmTest2 extends LinearOpMode {
                 armMotor.setPower(0.2);
                 aCurrentPosition = armMotor.getCurrentPosition();
             }
-                while (gamepad2.x) {
-                    if (aTargetPosition > 10) {
-                        aTargetPosition = aCurrentPosition - 130;
-                        armMotor.setTargetPosition(aTargetPosition);
-                        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        armMotor.setPower(0.2); aCurrentPosition = armMotor.getCurrentPosition();
-                    }
-                    else {
-                        aTargetPosition = 10; armMotor.setTargetPosition(aTargetPosition);
-                        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                        armMotor.setPower(0.2);
-                        aCurrentPosition = armMotor.getCurrentPosition();
-                    }
+            while (gamepad2.x) {
+                if (aTargetPosition > 10) {
+                    aTargetPosition = aCurrentPosition - 130;
+                    armMotor.setTargetPosition(aTargetPosition);
+                    armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    armMotor.setPower(0.2); aCurrentPosition = armMotor.getCurrentPosition();
                 }
+                else {
+                    aTargetPosition = 10; armMotor.setTargetPosition(aTargetPosition);
+                    armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    armMotor.setPower(0.2);
+                    aCurrentPosition = armMotor.getCurrentPosition();
+                }
+            }
 
             while (gamepad2.a) {
-                aTargetPosition = 30;
+                aTargetPosition = 0;
                 armMotor.setTargetPosition(aTargetPosition);
                 armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 armMotor.setPower(0.2);
@@ -147,10 +149,10 @@ public class ArmTest2 extends LinearOpMode {
             }
 
             while (gamepad2.y) {
-                aTargetPosition = 900;
+                aTargetPosition = 800;
                 armMotor.setTargetPosition(aTargetPosition);
                 armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                armMotor.setPower(0.6);
+                armMotor.setPower(0.5);
                 aCurrentPosition = armMotor.getCurrentPosition();
             }
             //grab Coding
@@ -169,7 +171,8 @@ public class ArmTest2 extends LinearOpMode {
                 grabMotor.setPower(1);
                 gCurrentPosition = grabMotor.getCurrentPosition();
             }
-            //eat position
+
+
 
             telemetry.addData("aEncoder", armMotor.getCurrentPosition()); //ARM
             telemetry.addData("aCurrent", aCurrent);
