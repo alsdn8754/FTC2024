@@ -193,7 +193,7 @@ public class ArmTest2 extends LinearOpMode {
             //initial position
             while (gamepad2.dpad_down) {
                 //grab
-                gTargetPosition = 0;
+                gTargetPosition = 10;
                 grabMotor.setTargetPosition(gTargetPosition);
                 grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 grabMotor.setPower(1);
@@ -230,8 +230,8 @@ public class ArmTest2 extends LinearOpMode {
             }
 
             //arm angle optional adjust
-            if (gamepad2.right_stick_button && !RightstickButton == true) {
-                if (aCurrentPosition <= 200) {
+            if (gamepad2.back && gamepad2.b && !bCurrent == true) {
+                if (aCurrentPosition > 1100) {
                     aTargetPosition = 1300;
                     armMotor.setTargetPosition(aTargetPosition);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -246,8 +246,8 @@ public class ArmTest2 extends LinearOpMode {
                 }
             }
 
-            if (gamepad2.left_stick_button && !LeftstickButton == true) {
-                if (aCurrentPosition > 200) {
+            if (gamepad2.back && gamepad2.x && !xCurrent == true) {
+                if (aCurrentPosition < 200) {
                     aTargetPosition = 0;
                     armMotor.setTargetPosition(aTargetPosition);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -282,14 +282,14 @@ public class ArmTest2 extends LinearOpMode {
             }
 
             if (gamepad2.dpad_left && !leftCurrent == true) {
-                if (gCurrentPosition > 300) {
+                if (gCurrentPosition > 310) {
                     gTargetPosition = gCurrentPosition - 300;
                     grabMotor.setTargetPosition(gTargetPosition);
                     grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     grabMotor.setPower(1);
                     gCurrentPosition = gTargetPosition;
                 } else {
-                    gTargetPosition = 0;
+                    gTargetPosition = 10;
                     grabMotor.setTargetPosition(gTargetPosition);
                     grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     grabMotor.setPower(1);
@@ -307,7 +307,7 @@ public class ArmTest2 extends LinearOpMode {
                 armMotor.setPower(0.3);
 
                 //grip length adjust
-                gTargetPosition = 0;
+                gTargetPosition = 10;
                 grabMotor.setTargetPosition(gTargetPosition);
                 grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 grabMotor.setPower(1);
@@ -371,6 +371,7 @@ public class ArmTest2 extends LinearOpMode {
             telemetry.addData("upCurrent", upCurrent);
             telemetry.addData("upStatus", upStatus);
             telemetry.addData("wposition", wCurrentPosition);
+            telemetry.addData("armtarget", aTargetPosition);
 
             telemetry.update();
 
