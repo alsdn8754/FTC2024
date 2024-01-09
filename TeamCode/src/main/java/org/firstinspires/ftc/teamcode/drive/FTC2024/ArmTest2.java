@@ -64,10 +64,14 @@ public class ArmTest2 extends LinearOpMode {
 
         if (isStopRequested()) return;
 
-        boolean aStatus = false;
-        boolean aCurrent = false;
-        boolean upStatus = false;
-        boolean upCurrent = false;
+        boolean bStatus = false;
+        boolean bCurrent = false;
+        boolean xStatus = false; //by code
+        boolean xCurrent = false; //live gamepad
+        boolean upStatus = false; //by code
+        boolean upCurrent = false; //live gamepad
+        boolean rightCurrent = false; //live gamepad
+        boolean leftCurrent = false; //live gamepad
         boolean downStatus = false;
         boolean downCurrent = false;
         int aTargetPosition = 0; //ARM
@@ -84,9 +88,12 @@ public class ArmTest2 extends LinearOpMode {
             double x = gamepad1.left_stick_x;
             double rx = gamepad1.right_stick_x;
             double slow = 0.8 - (0.6 * gamepad1.right_trigger);
-            aCurrent = gamepad2.a;
-            downCurrent = gamepad2.dpad_left;
-            upCurrent = gamepad2.dpad_right;
+            bCurrent = gamepad2.b;
+            xCurrent = gamepad2.x;
+            downCurrent = gamepad2.dpad_down;
+            upCurrent = gamepad2.dpad_up;
+            leftCurrent = gamepad2.dpad_left;
+            rightCurrent = gamepad2.dpad_right;
 
 
 // This button choice was made so that it is hard to hit on accident,
@@ -190,34 +197,63 @@ public class ArmTest2 extends LinearOpMode {
             }
 
             //wrist optional adjust
-            if (gamepad2.x) {
-                wTargetPosition = wCurrentPosition - 0.05;
-                wristServo.setPosition(wTargetPosition);
-                wCurrentPosition = wTargetPosition;
+            if (gamepad2.x && !xCurrent == true) {
+                if (wCurrentPosition <= 0.05) {
+                    wTargetPosition = 0;
+                    wristServo.setPosition(wTargetPosition);
+                    wCurrentPosition = wTargetPosition;
+                } else {
+                    wTargetPosition = wCurrentPosition - 0.05;
+                    wristServo.setPosition(wTargetPosition);
+                    wCurrentPosition = wTargetPosition;
+                }
             }
 
-            if (gamepad2.b) {
-                wTargetPosition = wCurrentPosition + 0.05;
-                wristServo.setPosition(wTargetPosition);
-                wCurrentPosition = wTargetPosition;
+            if (gamepad2.b && !bCurrent == true) {
+                if (wCurrentPosition >= 0.95) {
+                    wTargetPosition = 1;
+                    wristServo.setPosition(wTargetPosition);
+                    wCurrentPosition = wTargetPosition;
+                } else {
+                    wTargetPosition = wCurrentPosition + 0.05;
+                    wristServo.setPosition(wTargetPosition);
+                    wCurrentPosition = wTargetPosition;
+                }
             }
 
 
             //arm length optional adjust, max: 2400
-            if (gamepad2.dpad_left && gCurrentPosition <= 2400) {
-                gTargetPosition = gCurrentPosition + 300;
-                grabMotor.setTargetPosition(gTargetPosition);
-                grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                armMotor.setPower(1);
-                gCurrentPosition = gTargetPosition;
+            if (gamepad2.dpad_right && !rightCurrent == true) {
+                if (gCurrentPosition < 2100) {
+                    gTargetPosition = gCurrentPosition + 300;
+                    grabMotor.setTargetPosition(gTargetPosition);
+                    grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    armMotor.setPower(1);
+                    gCurrentPosition = gTargetPosition;
+                } else {
+                    gTargetPosition = 2400;
+                    grabMotor.setTargetPosition(gTargetPosition);
+                    grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    armMotor.setPower(1);
+                    gCurrentPosition = gTargetPosition;
+                }
+
             }
 
-            if (gamepad2.dpad_right && gCurrentPosition >= 300) {
-                gTargetPosition = gCurrentPosition - 300;
-                grabMotor.setTargetPosition(gTargetPosition);
-                grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                armMotor.setPower(1);
-                gCurrentPosition = gTargetPosition;
+            if (gamepad2.dpad_left && !leftCurrent == true) {
+                if (gCurrentPosition > 300) {
+                    gTargetPosition = gCurrentPosition - 300;
+                    grabMotor.setTargetPosition(gTargetPosition);
+                    grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    armMotor.setPower(1);
+                    gCurrentPosition = gTargetPosition;
+                } else {
+                    gTargetPosition = 0;
+                    grabMotor.setTargetPosition(gTargetPosition);
+                    grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    armMotor.setPower(1);
+                    gCurrentPosition = gTargetPosition;
+                }
             }
 
             //init arm code    arm high: 800, min: 0
@@ -276,8 +312,8 @@ public class ArmTest2 extends LinearOpMode {
 
 
             telemetry.addData("aEncoder", armMotor.getCurrentPosition()); //ARM
-            telemetry.addData("aCurrent", aCurrent);
-            telemetry.addData("aStatus", aStatus);
+            telemetry.addData("bCurrent", bCurrent);
+            telemetry.addData("xCurrent", xCurrent);
             telemetry.addData("gEncoder", grabMotor.getCurrentPosition()); //grab
             telemetry.addData("upCurrent", upCurrent);
             telemetry.addData("upStatus", upStatus);
