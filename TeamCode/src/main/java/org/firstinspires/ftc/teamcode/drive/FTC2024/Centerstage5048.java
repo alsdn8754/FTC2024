@@ -30,6 +30,8 @@ public class Centerstage5048 extends LinearOpMode {
         Servo leftHandServo = hardwareMap.servo.get("leftHand");
         Servo wristServo = hardwareMap.servo.get("wrist");
         Servo rightHandServo = hardwareMap.servo.get("rightHand");
+        Servo shotServo = hardwareMap.servo.get("shoot");
+        Servo angleServo = hardwareMap.servo.get("angle");
 
 // Reverse the right side motors. This may be wrong for your setup.
 // If your robot moves backwards when commanded to go forwards,
@@ -81,6 +83,8 @@ public class Centerstage5048 extends LinearOpMode {
         double wCurrentPosition = 0;
         boolean RightstickButton = false;
         boolean LeftstickButton = false;
+        double shootertarget = 0.02;
+
 
 
         while (opModeIsActive()) {
@@ -173,6 +177,7 @@ public class Centerstage5048 extends LinearOpMode {
                 armMotor.setPower(0.5);
                 aCurrentPosition = armMotor.getCurrentPosition();
             }*/
+
 
 
             //eat Coding
@@ -360,6 +365,22 @@ public class Centerstage5048 extends LinearOpMode {
             } else {
                 leftHandServo.setPosition(0.15);
             }
+
+
+            //drone shooter trig position
+            shotServo.setPosition(shootertarget);
+
+
+            //drone shooter angle adjust
+            if (gamepad1.back) {
+                angleServo.setPosition(0);
+            }
+
+            //drone shooter trig launch
+            if (gamepad1.dpad_up && gamepad1.y) {
+                shootertarget = 0.35;
+            }
+
 
 
             telemetry.addData("aEncoder", armMotor.getCurrentPosition()); //ARM
