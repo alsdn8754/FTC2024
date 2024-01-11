@@ -5,13 +5,15 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
+
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 @TeleOp
 
-public class Centerstage5048 extends LinearOpMode {
+public class Centerstage5048sonsw0973 extends LinearOpMode {
 
     @Override
 
@@ -50,18 +52,18 @@ public class Centerstage5048 extends LinearOpMode {
                 RevHubOrientationOnRobot.LogoFacingDirection.UP,
                 RevHubOrientationOnRobot.UsbFacingDirection.LEFT));
 
+// Without this, the REV Hub's orientation is assumed to be logo up / USB forward
+
 
         // By setting these values to new Gamepad(), they will default to all
         // boolean values as false and all float values as 0
-
         Gamepad currentGamepad1 = new Gamepad();
         Gamepad currentGamepad2 = new Gamepad();
 
         Gamepad previousGamepad1 = new Gamepad();
         Gamepad previousGamepad2 = new Gamepad();
 
-
-// Without this, the REV Hub's orientation is assumed to be logo up / USB forward
+        // other initialization code goes here
 
         imu.initialize(parameters);
 
@@ -74,25 +76,13 @@ public class Centerstage5048 extends LinearOpMode {
 
         if (isStopRequested()) return;
 
-        boolean bStatus = false;
-        boolean bCurrent = false;
-        boolean xStatus = false; //by code
-        boolean xCurrent = false; //live gamepad
-        boolean upStatus = false; //by code
-        boolean upCurrent = false; //live gamepad
-        boolean rightCurrent = false; //live gamepad
-        boolean leftCurrent = false; //live gamepad
-        boolean downStatus = false;
-        boolean downCurrent = false;
-        boolean yCurrent = false;
+
         int aTargetPosition = 0; //ARM
         int aCurrentPosition = 0;
         int gTargetPosition = 0; //grab
         int gCurrentPosition = 0;
         double wTargetPosition = 0;
         double wCurrentPosition = 0;
-        boolean RightstickButton = false;
-        boolean LeftstickButton = false;
         double shooterTrigTarget = 0.02;
         double shooterAngleTarget = 0;
 
@@ -117,21 +107,12 @@ public class Centerstage5048 extends LinearOpMode {
 
             // Main teleop loop goes here
 
+
             double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
             double x = gamepad1.left_stick_x;
             double rx = gamepad1.right_stick_x;
             double slow = 0.8 - (0.6 * gamepad1.right_trigger);
 
-            bCurrent = gamepad2.b;
-            xCurrent = gamepad2.x;
-            yCurrent = gamepad2.y;
-            downCurrent = gamepad2.dpad_down;
-            upCurrent = gamepad2.dpad_up;
-            leftCurrent = gamepad2.dpad_left;
-            rightCurrent = gamepad2.dpad_right;
-
-            RightstickButton = gamepad2.right_stick_button;
-            LeftstickButton = gamepad2.left_stick_button;
 
 
 // This button choice was made so that it is hard to hit on accident,
@@ -166,46 +147,6 @@ public class Centerstage5048 extends LinearOpMode {
             frontRightMotor.setPower(frontRightPower);
             backRightMotor.setPower(backRightPower);
 
-            //ARM Coding
-            /*while (gamepad2.b) {
-                aTargetPosition = aCurrentPosition + 130;
-                armMotor.setTargetPosition(aTargetPosition);
-                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                armMotor.setPower(0.2);
-                aCurrentPosition = armMotor.getCurrentPosition();
-            }*/
-
-            /*while (gamepad2.x) {
-                if (aTargetPosition > 10) {
-                    aTargetPosition = aCurrentPosition - 130;
-                    armMotor.setTargetPosition(aTargetPosition);
-                    armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    armMotor.setPower(0.2); aCurrentPosition = armMotor.getCurrentPosition();
-                }
-                else {
-                    aTargetPosition = 10; armMotor.setTargetPosition(aTargetPosition);
-                    armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    armMotor.setPower(0.2);
-                    aCurrentPosition = armMotor.getCurrentPosition();
-                }
-            }*/
-
-            /*while (gamepad2.a) {
-                aTargetPosition = 0;
-                armMotor.setTargetPosition(aTargetPosition);
-                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                armMotor.setPower(0.2);
-                aCurrentPosition = armMotor.getCurrentPosition();
-            }*/
-
-            /*while (gamepad2.y) {
-                aTargetPosition = 800;
-                armMotor.setTargetPosition(aTargetPosition);
-                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                armMotor.setPower(0.5);
-                aCurrentPosition = armMotor.getCurrentPosition();
-            }*/
-
 
 
             //eat Coding
@@ -236,7 +177,7 @@ public class Centerstage5048 extends LinearOpMode {
             }
 
             //wrist optional adjust
-            if (gamepad2.x && !xCurrent == true) {
+            if (currentGamepad2.x && !previousGamepad2.x) {
                 if (wCurrentPosition <= 0.05) {
                     wTargetPosition = 0;
                     wristServo.setPosition(wTargetPosition);
@@ -248,7 +189,7 @@ public class Centerstage5048 extends LinearOpMode {
                 }
             }
 
-            if (gamepad2.b && !bCurrent == true) {
+            if (currentGamepad2.b && !previousGamepad2.b) {
                 if (wCurrentPosition >= 0.95) {
                     wTargetPosition = 1;
                     wristServo.setPosition(wTargetPosition);
@@ -261,7 +202,7 @@ public class Centerstage5048 extends LinearOpMode {
             }
 
             //arm angle optional adjust
-            if (gamepad2.right_stick_button && !RightstickButton == true) {
+            if (currentGamepad2.right_stick_button && !previousGamepad2.right_stick_button) {
                 if (aCurrentPosition > 4000) {
                     aTargetPosition = 4200;
                     armMotor.setTargetPosition(aTargetPosition);
@@ -277,7 +218,7 @@ public class Centerstage5048 extends LinearOpMode {
                 }
             }
 
-            if (gamepad2.left_stick_button && !LeftstickButton == true) {
+            if (currentGamepad2.left_stick_button && !previousGamepad2.left_stick_button) {
                 if (aCurrentPosition < 200) {
                     aTargetPosition = 0;
                     armMotor.setTargetPosition(aTargetPosition);
@@ -295,7 +236,7 @@ public class Centerstage5048 extends LinearOpMode {
 
 
             //arm length optional adjust, max: 2400
-            if (gamepad2.dpad_right && !rightCurrent == true) {
+            if (currentGamepad2.dpad_right && !previousGamepad2.dpad_right) {
                 if (gCurrentPosition < 2100) {
                     gTargetPosition = gCurrentPosition + 300;
                     grabMotor.setTargetPosition(gTargetPosition);
@@ -312,7 +253,7 @@ public class Centerstage5048 extends LinearOpMode {
 
             }
 
-            if (gamepad2.dpad_left && !leftCurrent == true) {
+            if (currentGamepad2.dpad_left && !previousGamepad2.dpad_left) {
                 if (gCurrentPosition > 310) {
                     gTargetPosition = gCurrentPosition - 300;
                     grabMotor.setTargetPosition(gTargetPosition);
@@ -410,16 +351,19 @@ public class Centerstage5048 extends LinearOpMode {
                 shooterTrigTarget = 0.35;
             }
 
+            //adjust unexpected armangle encoder error
+            if (currentGamepad2.back && !previousGamepad2.back) {
+                aCurrentPosition = aCurrentPosition + 10;
+            }
 
+            if (currentGamepad2.start && !previousGamepad2.start) {
+                aCurrentPosition = aCurrentPosition - 10;
+            }
 
             telemetry.addData("aEncoder", armMotor.getCurrentPosition()); //ARM
             telemetry.addData("code.acurrent", aCurrentPosition);
-            telemetry.addData("bCurrent", bCurrent);
-            telemetry.addData("xCurrent", xCurrent);
             telemetry.addData("gEncoder", grabMotor.getCurrentPosition()); //grab
             telemetry.addData("code.gcurrent", gCurrentPosition);
-            telemetry.addData("upCurrent", upCurrent);
-            telemetry.addData("upStatus", upStatus);
             telemetry.addData("wposition", wCurrentPosition);
             telemetry.addData("armtarget", aTargetPosition);
 
