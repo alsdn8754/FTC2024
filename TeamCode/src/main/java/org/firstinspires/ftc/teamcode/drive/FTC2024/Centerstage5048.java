@@ -82,7 +82,8 @@ public class Centerstage5048 extends LinearOpMode {
         double wCurrentPosition = 0;
         boolean RightstickButton = false;
         boolean LeftstickButton = false;
-        double shootertarget = 0.02;
+        double shooterTrigTarget = 0.02;
+        double shooterAngleTarget = 0;
 
 
 
@@ -367,17 +368,18 @@ public class Centerstage5048 extends LinearOpMode {
 
 
             //drone shooter trig position
-            shotServo.setPosition(shootertarget);
+            shotServo.setPosition(shooterTrigTarget);
+            angleServo.setPosition(shooterAngleTarget);
 
 
             //drone shooter angle adjust
             if (gamepad1.back) {
-                angleServo.setPosition(0);
+                shooterAngleTarget = 0.5;
             }
 
             //drone shooter trig launch
             if (gamepad1.dpad_up && gamepad1.y) {
-                shootertarget = 0.35;
+                shooterTrigTarget = 0.35;
             }
 
 
