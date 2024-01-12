@@ -111,7 +111,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
             double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
             double x = gamepad1.left_stick_x;
             double rx = gamepad1.right_stick_x;
-            double slow = 0.8 - (0.6 * gamepad1.right_trigger);
+            double slow = 1 - (0.6 * gamepad1.right_trigger);
 
 
 
@@ -299,7 +299,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
             //high arm code    arm high: 900, min: 0
             while (gamepad2.y) {
                 //arm angle adjust
-                aTargetPosition = 3000;
+                aTargetPosition = 2900;
                 armMotor.setTargetPosition(aTargetPosition);
                 armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 armMotor.setPower(1);
