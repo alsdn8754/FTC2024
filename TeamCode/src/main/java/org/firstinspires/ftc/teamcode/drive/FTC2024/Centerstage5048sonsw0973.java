@@ -301,7 +301,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
                 aCurrentPosition = aTargetPosition;
                 wCurrentPosition = wTargetPosition;
 
-                //Armhighposition to 0
+                //ArmHighPosition to 0
                 Armhighposition = 0;
             }
 
@@ -329,7 +329,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
                     aCurrentPosition = aTargetPosition;
                     wCurrentPosition = wTargetPosition;
 
-                    //Armhighposition to 1
+                    //ArmHighPosition to 1
                     Armhighposition = 1;
 
                 } else if (Armhighposition == 1) { //position 1 -> 2
@@ -354,7 +354,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
                     aCurrentPosition = aTargetPosition;
                     wCurrentPosition = wTargetPosition;
 
-                    //Armhighposition to 2
+                    //ArmHighPosition to 2
                     Armhighposition = 2;
 
                 } else if (Armhighposition == 2) {
@@ -379,7 +379,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
                     aCurrentPosition = aTargetPosition;
                     wCurrentPosition = wTargetPosition;
 
-                    //Armhighposition to 0
+                    //ArmHighPosition to 0
                     Armhighposition = 0;
                 }
 
@@ -408,10 +408,10 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
 
             //drone shooter angle adjust
             if (currentGamepad1.back && !previousGamepad2.back) {
-                if (DroneshooterAngleStatus == 0) { //droneshooter angle adjust: low -> high
+                if (DroneshooterAngleStatus == 0) { //DroneShooter angle adjust: low -> high
                     shooterAngleTarget = 0.5;
                     DroneshooterAngleStatus = 1;
-                } else if (DroneshooterAngleStatus == 1) { //droneshooter angle adjust: high -> low
+                } else if (DroneshooterAngleStatus == 1) { //DroneShooter angle adjust: high -> low
                     shooterAngleTarget = 0;
                     DroneshooterAngleStatus = 0;
                 }
@@ -432,9 +432,10 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
             }
 
             telemetry.addData("aEncoder", armMotor.getCurrentPosition()); //ARM
-            telemetry.addData("code.acurrent", aCurrentPosition);
-            telemetry.addData("armtarget", aTargetPosition);
+            telemetry.addData("code.aCurrent", aCurrentPosition);
+            telemetry.addData("armTarget", aTargetPosition);
             telemetry.addData("angleErr", AngleErrorValue);
+            telemetry.addData("y value", Armhighposition);
             telemetry.addLine();
             telemetry.addData("gEncoder", grabMotor.getCurrentPosition()); //grab
             telemetry.addData("code.gcurrent", gCurrentPosition);
