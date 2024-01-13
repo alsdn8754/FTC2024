@@ -92,6 +92,8 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
 
         int DroneshooterAngleStatus = 0;
 
+        int Armhighposition = 0; //using with Gamepad2.y
+
 
 
         while (opModeIsActive()) {
@@ -209,14 +211,14 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
 
             //arm angle optional adjust
             if (currentGamepad2.right_stick_button && !previousGamepad2.right_stick_button) {
-                if (aCurrentPosition > 4000 + AngleErrorValue) {
-                    aTargetPosition = 4200 + AngleErrorValue;
+                if (aCurrentPosition > 4000 - AngleErrorValue) {
+                    aTargetPosition = 4200 - AngleErrorValue;
                     armMotor.setTargetPosition(aTargetPosition);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     armMotor.setPower(0.8);
                     aCurrentPosition = aTargetPosition;
                 } else {
-                    aTargetPosition = aCurrentPosition + 200 + AngleErrorValue;
+                    aTargetPosition = aCurrentPosition + 200 - AngleErrorValue;
                     armMotor.setTargetPosition(aTargetPosition);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     armMotor.setPower(0.8);
@@ -225,14 +227,14 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
             }
 
             if (currentGamepad2.left_stick_button && !previousGamepad2.left_stick_button) {
-                if (aCurrentPosition < 200 + AngleErrorValue) {
-                    aTargetPosition = 0 + AngleErrorValue;
+                if (aCurrentPosition < 200 - AngleErrorValue) {
+                    aTargetPosition = 0 - AngleErrorValue;
                     armMotor.setTargetPosition(aTargetPosition);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     armMotor.setPower(0.8);
                     aCurrentPosition = aTargetPosition;
                 } else {
-                    aTargetPosition = aCurrentPosition - 200 + AngleErrorValue;
+                    aTargetPosition = aCurrentPosition - 200 - AngleErrorValue;
                     armMotor.setTargetPosition(aTargetPosition);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     armMotor.setPower(0.8);
@@ -279,7 +281,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
             //init wrist servo = 0.82
             while (gamepad2.a) {
                 //arm angle adjust
-                aTargetPosition = 0 + AngleErrorValue;
+                aTargetPosition = 0 - AngleErrorValue;
                 armMotor.setTargetPosition(aTargetPosition);
                 armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 armMotor.setPower(0.8);
@@ -298,30 +300,89 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
                 gCurrentPosition = gTargetPosition;
                 aCurrentPosition = aTargetPosition;
                 wCurrentPosition = wTargetPosition;
+
+                //Armhighposition to 0
+                Armhighposition = 0;
             }
 
             //high arm code    arm high: 3000, min: 0
-            while (gamepad2.y) {
-                //arm angle adjust
-                aTargetPosition = 3000 + AngleErrorValue;
-                armMotor.setTargetPosition(aTargetPosition);
-                armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                armMotor.setPower(0.8);
+            while (currentGamepad2.y && !previousGamepad2.y) {
+                if (Armhighposition == 0) { //position 0 -> 1
+                    //arm angle adjust
+                    aTargetPosition = 3000 - AngleErrorValue;
+                    armMotor.setTargetPosition(aTargetPosition);
+                    armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    armMotor.setPower(0.8);
 
-                //grab length adjust
-                gTargetPosition = 600;
-                grabMotor.setTargetPosition(gTargetPosition);
-                grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                grabMotor.setPower(1);
+                    //grab length adjust
+                    gTargetPosition = 600;
+                    grabMotor.setTargetPosition(gTargetPosition);
+                    grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    grabMotor.setPower(1);
 
-                //wrist adjust
-                wTargetPosition = 0.45;
-                wristServo.setPosition(wTargetPosition);
+                    //wrist adjust
+                    wTargetPosition = 0.45;
+                    wristServo.setPosition(wTargetPosition);
 
-                //sync with current - target position
-                gCurrentPosition = gTargetPosition;
-                aCurrentPosition = aTargetPosition;
-                wCurrentPosition = wTargetPosition;
+                    //sync with current - target position
+                    gCurrentPosition = gTargetPosition;
+                    aCurrentPosition = aTargetPosition;
+                    wCurrentPosition = wTargetPosition;
+
+                    //Armhighposition to 1
+                    Armhighposition = 1;
+
+                } else if (Armhighposition == 1) { //position 1 -> 2
+                    //arm angle adjust
+                    aTargetPosition = 300 - AngleErrorValue;
+                    armMotor.setTargetPosition(aTargetPosition);
+                    armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    armMotor.setPower(0.8);
+
+                    //grab length adjust
+                    gTargetPosition = 1200;
+                    grabMotor.setTargetPosition(gTargetPosition);
+                    grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    grabMotor.setPower(1);
+
+                    //wrist adjust
+                    wTargetPosition = 0.45;
+                    wristServo.setPosition(wTargetPosition);
+
+                    //sync with current - target position
+                    gCurrentPosition = gTargetPosition;
+                    aCurrentPosition = aTargetPosition;
+                    wCurrentPosition = wTargetPosition;
+
+                    //Armhighposition to 2
+                    Armhighposition = 2;
+
+                } else if (Armhighposition == 2) {
+                    //arm angle adjust
+                    aTargetPosition = 0 - AngleErrorValue;
+                    armMotor.setTargetPosition(aTargetPosition);
+                    armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    armMotor.setPower(0.8);
+
+                    //grip length adjust
+                    gTargetPosition = 20;
+                    grabMotor.setTargetPosition(gTargetPosition);
+                    grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    grabMotor.setPower(1);
+
+                    //wrist adjust
+                    wTargetPosition = 0.82;
+                    wristServo.setPosition(wTargetPosition);
+
+                    //sync with current - target position
+                    gCurrentPosition = gTargetPosition;
+                    aCurrentPosition = aTargetPosition;
+                    wCurrentPosition = wTargetPosition;
+
+                    //Armhighposition to 0
+                    Armhighposition = 0;
+                }
+
             }
 
 
