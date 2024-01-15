@@ -1,6 +1,5 @@
 package org.firstinspires.ftc.teamcode.drive.FTC2024;
 
-import com.acmerobotics.roadrunner.util.Angle;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -10,7 +9,6 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.IMU;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 @TeleOp
@@ -86,11 +84,11 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
         double wTargetPosition = 0;
         double wCurrentPosition = 0;
         double shooterTrigTarget = 0.02;
-        double shooterAngleTarget = 0;
+        double shooterAngleTarget = 0.2;
 
         int AngleErrorValue = 0; //adjust by player - encoder err
 
-        int DroneshooterAngleStatus = 0;
+        int DroneShooterAngleStatus = 0;
 
         int Armhighposition = 0; //using with Gamepad2.y
 
@@ -119,7 +117,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
             double y = -gamepad1.left_stick_y; // Remember, Y stick value is reversed
             double x = gamepad1.left_stick_x;
             double rx = gamepad1.right_stick_x;
-            double slow = 0.8 - (0.6 * gamepad1.right_trigger);
+            double slow = 0.9 - (0.7 * gamepad1.right_trigger);
 
 
 
@@ -218,7 +216,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
                     armMotor.setPower(0.8);
                     aCurrentPosition = aTargetPosition;
                 } else {
-                    aTargetPosition = aCurrentPosition + 200 - AngleErrorValue;
+                    aTargetPosition = aCurrentPosition + 200 - (2 * AngleErrorValue);
                     armMotor.setTargetPosition(aTargetPosition);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     armMotor.setPower(0.8);
@@ -234,7 +232,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
                     armMotor.setPower(0.8);
                     aCurrentPosition = aTargetPosition;
                 } else {
-                    aTargetPosition = aCurrentPosition - 200 - AngleErrorValue;
+                    aTargetPosition = aCurrentPosition - 200 - (2 * AngleErrorValue);
                     armMotor.setTargetPosition(aTargetPosition);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     armMotor.setPower(0.8);
@@ -252,7 +250,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
                     grabMotor.setPower(1);
                     gCurrentPosition = gTargetPosition;
                 } else {
-                    gTargetPosition = 2400;
+                    gTargetPosition = 2200;
                     grabMotor.setTargetPosition(gTargetPosition);
                     grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     grabMotor.setPower(1);
@@ -306,7 +304,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
             }
 
             //high arm code    arm high: 3000, min: 0
-            while (currentGamepad2.y && !previousGamepad2.y) {
+            if (currentGamepad2.y && !previousGamepad2.y) {
                 if (Armhighposition == 0) { //position 0 -> 1
                     //arm angle adjust
                     aTargetPosition = 3000 - AngleErrorValue;
@@ -334,7 +332,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
 
                 } else if (Armhighposition == 1) { //position 1 -> 2
                     //arm angle adjust
-                    aTargetPosition = 300 - AngleErrorValue;
+                    aTargetPosition = 2800 - AngleErrorValue;
                     armMotor.setTargetPosition(aTargetPosition);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     armMotor.setPower(0.8);
@@ -407,28 +405,32 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
 
 
             //drone shooter angle adjust
-            if (currentGamepad1.back && !previousGamepad2.back) {
-                if (DroneshooterAngleStatus == 0) { //DroneShooter angle adjust: low -> high
-                    shooterAngleTarget = 0.5;
-                    DroneshooterAngleStatus = 1;
-                } else if (DroneshooterAngleStatus == 1) { //DroneShooter angle adjust: high -> low
-                    shooterAngleTarget = 0;
-                    DroneshooterAngleStatus = 0;
+            if (currentGamepad1.back && !previousGamepad1.back) {
+                if (DroneShooterAngleStatus == 0) { //DroneShooter angle adjust: low -> high
+                    shooterAngleTarget = 0.35;
+                    DroneShooterAngleStatus = 1;
+                } else if (DroneShooterAngleStatus == 1) { //DroneShooter angle adjust: high -> low
+                    shooterAngleTarget = 0.18;
+                    DroneShooterAngleStatus = 0;
                 }
             }
 
             //drone shooter trig launch
             if (gamepad1.dpad_up && gamepad1.y) {
                 shooterTrigTarget = 0.35;
+
+                shooterAngleTarget = 0.18;
+                DroneShooterAngleStatus = 0;
+
             }
 
             //adjust unexpected arm angle encoder error
              if (currentGamepad2.back && !previousGamepad2.back) {
-                AngleErrorValue = AngleErrorValue - 10;
+                AngleErrorValue = AngleErrorValue - 50;
            }
 
             if (currentGamepad2.start && !previousGamepad2.start) {
-                AngleErrorValue = AngleErrorValue + 10;
+                AngleErrorValue = AngleErrorValue + 50;
             }
 
             telemetry.addData("aEncoder", armMotor.getCurrentPosition()); //ARM
