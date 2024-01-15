@@ -10,8 +10,6 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
-import java.lang.annotation.Target;
-
 @TeleOp
 
 public class ArmTest2 extends LinearOpMode {
