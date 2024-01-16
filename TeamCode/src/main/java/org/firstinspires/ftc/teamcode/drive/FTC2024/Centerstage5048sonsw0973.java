@@ -224,7 +224,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
                     armMotor.setPower(0.8);
                     aCurrentPosition = aTargetPosition;
                 } else {
-                    aTargetPosition = aCurrentPosition + 200 - (2 * AngleErrorValue);
+                    aTargetPosition = aCurrentPosition + 200;
                     armMotor.setTargetPosition(aTargetPosition);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     armMotor.setPower(0.8);
@@ -240,7 +240,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
                     armMotor.setPower(0.8);
                     aCurrentPosition = aTargetPosition;
                 } else {
-                    aTargetPosition = aCurrentPosition - 200 - (2 * AngleErrorValue);
+                    aTargetPosition = aCurrentPosition - 200;
                     armMotor.setTargetPosition(aTargetPosition);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     armMotor.setPower(0.8);

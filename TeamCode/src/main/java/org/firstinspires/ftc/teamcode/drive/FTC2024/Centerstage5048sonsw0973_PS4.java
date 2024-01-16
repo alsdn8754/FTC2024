@@ -97,7 +97,7 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
         //Rumble Gamepad begin ENDGAME PERIOD
         Gamepad.RumbleEffect ENDGAME_ALERT = new Gamepad.RumbleEffect.Builder()
                 .addStep(0.0, 0.0, 90000) //Rumble wait for 90000ms = 90sec
-                .addStep(1.0, 1.0, 2000) //ENDGAME RUMBLE for 2000ms = 2sec
+                .addStep(1.0, 1.0, 1000) //ENDGAME RUMBLE for 1000ms = 1sec
                 .build();
 
 
@@ -235,7 +235,7 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
                     armMotor.setPower(0.8);
                     aCurrentPosition = aTargetPosition;
                 } else {
-                    aTargetPosition = aCurrentPosition + 200 - (2 * AngleErrorValue);
+                    aTargetPosition = aCurrentPosition + 200;
                     armMotor.setTargetPosition(aTargetPosition);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     armMotor.setPower(0.8);
@@ -251,7 +251,7 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
                     armMotor.setPower(0.8);
                     aCurrentPosition = aTargetPosition;
                 } else {
-                    aTargetPosition = aCurrentPosition - 200 - (2 * AngleErrorValue);
+                    aTargetPosition = aCurrentPosition - 200;
                     armMotor.setTargetPosition(aTargetPosition);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     armMotor.setPower(0.8);
@@ -374,7 +374,32 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
                     //ArmHighPosition to 2
                     Armhighposition = 2;
 
-                } else if (Armhighposition == 2) {
+                } else if (Armhighposition == 2) { //position 2 -> 3
+                    //arm angle adjust
+                    aTargetPosition = 2400 - AngleErrorValue;
+                    armMotor.setTargetPosition(aTargetPosition);
+                    armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    armMotor.setPower(0.8);
+
+                    //grip length adjust
+                    gTargetPosition = 1900;
+                    grabMotor.setTargetPosition(gTargetPosition);
+                    grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    grabMotor.setPower(1);
+
+                    //wrist adjust
+                    wTargetPosition = 0.55;
+                    wristServo.setPosition(wTargetPosition);
+
+                    //sync with current - target position
+                    gCurrentPosition = gTargetPosition;
+                    aCurrentPosition = aTargetPosition;
+                    wCurrentPosition = wTargetPosition;
+
+                    //ArmHighPosition to 3
+                    Armhighposition = 3;
+
+                } else if (Armhighposition == 3) { //position 3 -> 0
                     //arm angle adjust
                     aTargetPosition = 0 - AngleErrorValue;
                     armMotor.setTargetPosition(aTargetPosition);
@@ -399,7 +424,6 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
                     //ArmHighPosition to 0
                     Armhighposition = 0;
                 }
-
             }
 
 
@@ -424,7 +448,7 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
 
 
             //drone shooter angle adjust
-            if (currentGamepad1.back && !previousGamepad1.back) {
+            if (currentGamepad1.touchpad && !previousGamepad1.touchpad) {
                 if (DroneShooterAngleStatus == 0) { //DroneShooter angle adjust: low -> high
                     shooterAngleTarget = 0.35;
                     DroneShooterAngleStatus = 1;
