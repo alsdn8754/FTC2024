@@ -108,6 +108,8 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
                 gamepad1.runRumbleEffect(ENDGAME_ALERT);
                 gamepad2.runRumbleEffect(ENDGAME_ALERT);
 
+                wristServo.setPosition(0.82);
+
                 isFirstRun = false; /*!important!*/
             }
 

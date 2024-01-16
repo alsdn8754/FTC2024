@@ -92,9 +92,17 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
 
         int Armhighposition = 0; //using with Gamepad2.y
 
+        boolean isFirstRun = true;
+
 
 
         while (opModeIsActive()) {
+
+            if (isFirstRun) {  //ONLY ONCE RUNNING CODE
+                wristServo.setPosition(0.82);
+
+                isFirstRun = false; /*!important!*/
+            }
 
             // Store the gamepad values from the previous loop iteration in
             // previousGamepad1/2 to be used in this loop iteration.
