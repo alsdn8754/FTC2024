@@ -186,10 +186,19 @@ public class TensorFlowTestRedAutonomous extends LinearOpMode {
         for (Recognition recognition : currentRecognitions) {
             double x = (recognition.getLeft() + recognition.getRight()) / 2 ;
             double y = (recognition.getTop()  + recognition.getBottom()) / 2 ;
+            int biconPosition;
+            if (x < 200) {
+                biconPosition = 1;
+            } else if (x >= 200 && x < 400) {
+                biconPosition = 2;
+            } else {
+                biconPosition = 3;
+            }
 
             telemetry.addData(""," ");
             telemetry.addData("Image", "%s (%.0f %% Conf.)", recognition.getLabel(), recognition.getConfidence() * 100);
             telemetry.addData("- Position", "%.0f / %.0f", x, y);
+            telemetry.addData("biconPosition", biconPosition);
         }   // end for() loop
 
     }   // end method telemetryTfod()
