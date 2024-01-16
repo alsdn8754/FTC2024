@@ -6,21 +6,14 @@ import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.tel
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.teamcode.util.Encoder;
+public class AutoCodeLib {
 
-public class Auto_code_lib {
 
-    DcMotor frontLeftMotor = hardwareMap.dcMotor.get("leftFront");
-    DcMotor backLeftMotor = hardwareMap.dcMotor.get("leftRear");
-    DcMotor frontRightMotor = hardwareMap.dcMotor.get("rightFront");
-    DcMotor backRightMotor = hardwareMap.dcMotor.get("rightRear");
     DcMotor armMotor = hardwareMap.dcMotor.get("ARM");
     DcMotor grabMotor = hardwareMap.dcMotor.get("grab");
     Servo leftHandServo = hardwareMap.servo.get("leftHand");
     Servo wristServo = hardwareMap.servo.get("wrist");
     Servo rightHandServo = hardwareMap.servo.get("rightHand");
-    Servo shotServo = hardwareMap.servo.get("shoot");
-    Servo angleServo = hardwareMap.servo.get("angle");
 
     public void A_A_W_adjust(double ArmPower, int ArmTarget, double GrabPower, int GrabTarget, double WristTarget) {
 

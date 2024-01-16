@@ -36,7 +36,6 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
-import org.firstinspires.ftc.teamcode.drive.FTC2024.Auto_code_lib;
 
 import java.util.List;
 
@@ -50,7 +49,8 @@ import java.util.List;
 @Autonomous(name = "RedClose", group = "Concept")
 public class TensorFlowTestRedAutonomous extends LinearOpMode {
 
-    Auto_code_lib autoCode;
+
+    AutoCodeLib autoCode;
 
     int biconPosition;
     private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
@@ -81,11 +81,12 @@ public class TensorFlowTestRedAutonomous extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        autoCode = new Auto_code_lib();
+        autoCode = new AutoCodeLib();
+
 
         initTfod();
 
-        autoCode.init_hand();
+
 
         // Wait for the DS start button to be touched.
         telemetry.addData("DS preview on/off", "3 dots, Camera Stream");
