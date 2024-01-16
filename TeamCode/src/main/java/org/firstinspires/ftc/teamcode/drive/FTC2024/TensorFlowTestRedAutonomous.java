@@ -46,9 +46,13 @@ import java.util.List;
  * Use Android Studio to Copy this Class, and Paste it into your team's code folder with a new name.
  * Remove or comment out the @Disabled line to add this OpMode to the Driver Station OpMode list.
  */
-@Autonomous(name = "Concept: TensorFlow Object Detection", group = "Concept")
+@Autonomous(name = "RedClose", group = "Concept")
 public class TensorFlowTestRedAutonomous extends LinearOpMode {
 
+
+    AutoCodeLib autoCode;
+
+    int biconPosition;
     private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
 
     // TFOD_MODEL_ASSET points to a model file stored in the project Asset location,
@@ -77,17 +81,31 @@ public class TensorFlowTestRedAutonomous extends LinearOpMode {
     @Override
     public void runOpMode() {
 
+        autoCode = new AutoCodeLib();
+
+
         initTfod();
+
+
 
         // Wait for the DS start button to be touched.
         telemetry.addData("DS preview on/off", "3 dots, Camera Stream");
         telemetry.addData(">", "Touch Play to start OpMode");
         telemetry.update();
+
         waitForStart();
 
         if (isStopRequested()) {
             while (isStopRequested()) {
+                if (biconPosition == 1) {
 
+                }
+                else if (biconPosition == 2) {
+
+                }
+                else {
+
+                }
                 telemetryTfod();
 
                 // Push telemetry to the Driver Station.
@@ -186,7 +204,6 @@ public class TensorFlowTestRedAutonomous extends LinearOpMode {
         for (Recognition recognition : currentRecognitions) {
             double x = (recognition.getLeft() + recognition.getRight()) / 2 ;
             double y = (recognition.getTop()  + recognition.getBottom()) / 2 ;
-            int biconPosition;
             if (x < 200) {
                 biconPosition = 1;
             } else if (x >= 200 && x < 400) {
