@@ -15,6 +15,12 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 @Autonomous(group = "drive")
 public class OdometryTest extends LinearOpMode {
 
+    double rightopen = 0.5;
+    double leftopen = 0.5;
+
+    double rightclose = 0.85;
+    double leftclose = 0.15;
+
     private void customSleep(int milliseconds) {
         try {
             Thread.sleep(milliseconds);
@@ -71,25 +77,33 @@ public class OdometryTest extends LinearOpMode {
         drive.setPoseEstimate(new Pose2d(28, -65, 0));
 
         Trajectory traj1 = drive.trajectoryBuilder(new Pose2d(27, -65))
-                .lineToLinearHeading(new Pose2d(28, -43, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(28, -41, Math.toRadians(90)))
                 .build();
 
         Trajectory traj2 = drive.trajectoryBuilder(traj1.end())
-                .lineToLinearHeading(new Pose2d(60, -40, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(50, -40, Math.toRadians(0)))
                 .build();
 
         waitForStart();
 
         if (isStopRequested()) return;
 
-        leftHandServo.setPosition(0.15);
-        rightHandServo.setPosition(0.85);
+        leftHandServo.setPosition(leftclose);
+        rightHandServo.setPosition(rightclose);
         drive.followTrajectory(traj1);
         aawAdjust(0, 0, 1, 600, 0.5);
        customSleep(200);
-        gripAdjust(0.5, 0.85);
-        customSleep(100);
-        gripAdjust(0.15, 0.85);
+        gripAdjust(leftopen, rightclose);
+        customSleep(200);
+        gripAdjust(leftclose, rightclose);
         drive.followTrajectory(traj2);
+        aawAdjust(1, 600, 1, 1900, 0.7);
+        customSleep(200);
+        gripAdjust(leftclose, rightopen);
+        customSleep(100);
+        gripAdjust(leftclose, rightclose);
+        aawAdjust(1, 0, 1, 20, 0.82);
+        customSleep(200);
+
     }
 }
