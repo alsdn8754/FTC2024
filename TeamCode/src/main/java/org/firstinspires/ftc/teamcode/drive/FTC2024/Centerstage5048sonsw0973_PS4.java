@@ -82,7 +82,7 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
         int gTargetPosition = 0; //grab
         int gCurrentPosition = 0;
         double wTargetPosition = 0;
-        double wCurrentPosition = 0;
+        double wCurrentPosition = 0.82;
         double shooterTrigTarget = 0.02;
         double shooterAngleTarget = 0.2;
 
@@ -108,7 +108,7 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
                 gamepad1.runRumbleEffect(ENDGAME_ALERT);
                 gamepad2.runRumbleEffect(ENDGAME_ALERT);
 
-                wristServo.setPosition(0.82);
+                wristServo.setPosition(wCurrentPosition);
 
                 isFirstRun = false; /*!important!*/
             }
@@ -228,8 +228,8 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
 
             //arm angle optional adjust
             if (currentGamepad2.right_stick_button && !previousGamepad2.right_stick_button) {
-                if (aCurrentPosition > 4000 - AngleErrorValue) {
-                    aTargetPosition = 4200 - AngleErrorValue;
+                if (aCurrentPosition > 3400 - AngleErrorValue) {
+                    aTargetPosition = 3600 - AngleErrorValue;
                     armMotor.setTargetPosition(aTargetPosition);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     armMotor.setPower(0.8);
@@ -363,7 +363,7 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
                     grabMotor.setPower(1);
 
                     //wrist adjust
-                    wTargetPosition = 0.45;
+                    wTargetPosition = 0.4;
                     wristServo.setPosition(wTargetPosition);
 
                     //sync with current - target position
@@ -465,6 +465,10 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
                 shooterAngleTarget = 0.18;
                 DroneShooterAngleStatus = 0;
 
+            }
+
+            if (gamepad1.dpad_down && gamepad1.a) {
+                shooterTrigTarget = 0.02;
             }
 
             //adjust unexpected arm angle encoder error
