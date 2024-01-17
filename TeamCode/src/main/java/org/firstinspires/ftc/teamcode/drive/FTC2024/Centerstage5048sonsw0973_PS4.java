@@ -228,8 +228,8 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
 
             //arm angle optional adjust
             if (currentGamepad2.right_stick_button && !previousGamepad2.right_stick_button) {
-                if (aCurrentPosition > 4000 - AngleErrorValue) {
-                    aTargetPosition = 4200 - AngleErrorValue;
+                if (aCurrentPosition > 3400 - AngleErrorValue) {
+                    aTargetPosition = 3600 - AngleErrorValue;
                     armMotor.setTargetPosition(aTargetPosition);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     armMotor.setPower(0.8);

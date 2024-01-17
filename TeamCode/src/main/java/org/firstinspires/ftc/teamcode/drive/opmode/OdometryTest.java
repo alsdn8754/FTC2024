@@ -16,23 +16,23 @@ public class OdometryTest extends LinearOpMode {
     public void runOpMode() {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        drive.setPoseEstimate(new Pose2d(27, -65, 0));
+        drive.setPoseEstimate(new Pose2d(28, -65, 0));
 
 
         Trajectory traj1 = drive.trajectoryBuilder(new Pose2d(27,-65))
-                .splineToLinearHeading(new Pose2d(59, -41, Math.toRadians(-12)), Math.toRadians(0))
+                .lineToLinearHeading(new Pose2d(28, -45, Math.toRadians(90)))
                 .build();
 
-       /* Trajectory traj2 = drive.trajectoryBuilder(traj1.end())
-                .splineToConstantHeading(new Vector2d(18, 18), Math.toRadians(0))
-                .build();*/
+        Trajectory traj2 = drive.trajectoryBuilder(traj1.end())
+                .lineToLinearHeading(new Pose2d(60, -40, Math.toRadians(0)))
+                .build();
 
         waitForStart();
 
         if(isStopRequested()) return;
 
         drive.followTrajectory(traj1);
-        //drive.followTrajectory(traj2);
+        drive.followTrajectory(traj2);
 
     }
 }
