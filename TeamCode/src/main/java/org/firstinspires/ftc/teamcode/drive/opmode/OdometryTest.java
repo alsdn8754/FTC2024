@@ -19,7 +19,7 @@ public class OdometryTest extends LinearOpMode {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         Trajectory traj1 = drive.trajectoryBuilder(new Pose2d(27,-63))
-                .splineToConstantHeading(new Vector2d(18, 18), Math.toRadians(0))
+                .splineToConstantHeading(new Vector2d(45, -45), Math.toRadians(0))
                 .build();
 
        /* Trajectory traj2 = drive.trajectoryBuilder(traj1.end())
