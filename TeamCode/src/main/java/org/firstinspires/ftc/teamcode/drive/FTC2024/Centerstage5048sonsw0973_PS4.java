@@ -363,7 +363,7 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
                     grabMotor.setPower(1);
 
                     //wrist adjust
-                    wTargetPosition = 0.45;
+                    wTargetPosition = 0.4;
                     wristServo.setPosition(wTargetPosition);
 
                     //sync with current - target position
@@ -465,6 +465,10 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
                 shooterAngleTarget = 0.18;
                 DroneShooterAngleStatus = 0;
 
+            }
+
+            if (gamepad1.dpad_down && gamepad1.a) {
+                shooterTrigTarget = 0.02;
             }
 
             //adjust unexpected arm angle encoder error
