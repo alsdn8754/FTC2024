@@ -93,7 +93,7 @@ public class OdometryTest extends LinearOpMode {
                 .build();
 
         Trajectory traj4 = drive.trajectoryBuilder(traj3.end())
-                .strafeLeft(30)
+                .strafeLeft(21)
                 .build();
 
 
@@ -104,10 +104,10 @@ public class OdometryTest extends LinearOpMode {
         leftHandServo.setPosition(leftclose);
         rightHandServo.setPosition(rightclose);
         drive.followTrajectory(traj1);
-        aawAdjust(0, 0, 1, 600, 0.5);
+        aawAdjust(0, 0, 1, 750, 0.5);
        customSleep(200);
         gripAdjust(leftopen, rightclose);
-        customSleep(200);
+        customSleep(100);
         gripAdjust(leftclose, rightclose);
         drive.followTrajectory(traj2);
         aawAdjust(1, 400, 1, 1800, 0.67);
@@ -115,9 +115,8 @@ public class OdometryTest extends LinearOpMode {
         gripAdjust(leftclose, rightopen);
         customSleep(100);
         gripAdjust(leftclose, rightclose);
-        customSleep(100);
         aawAdjust(1, 0, 1, 20, 0.82);
-        customSleep(2000);
+        customSleep(0);
         drive.followTrajectory(traj3);
         drive.followTrajectory(traj4);
         customSleep(2000);
