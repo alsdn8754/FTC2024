@@ -96,9 +96,11 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
 
 
 
+
         while (opModeIsActive()) {
 
             if (isFirstRun) {  //ONLY ONCE RUNNING CODE
+
                 wristServo.setPosition(0.82);
 
                 isFirstRun = false; /*!important!*/
@@ -160,6 +162,8 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
             backLeftMotor.setPower(backLeftPower);
             frontRightMotor.setPower(frontRightPower);
             backRightMotor.setPower(backRightPower);
+
+
 
 
 
@@ -352,7 +356,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
                     grabMotor.setPower(1);
 
                     //wrist adjust
-                    wTargetPosition = 0.45;
+                    wTargetPosition = 0.4;
                     wristServo.setPosition(wTargetPosition);
 
                     //sync with current - target position
@@ -363,7 +367,32 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
                     //ArmHighPosition to 2
                     Armhighposition = 2;
 
-                } else if (Armhighposition == 2) {
+                } else if (Armhighposition == 2) { //position 2 -> 3
+                    //arm angle adjust
+                    aTargetPosition = 2400 - AngleErrorValue;
+                    armMotor.setTargetPosition(aTargetPosition);
+                    armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    armMotor.setPower(0.8);
+
+                    //grip length adjust
+                    gTargetPosition = 1900;
+                    grabMotor.setTargetPosition(gTargetPosition);
+                    grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    grabMotor.setPower(1);
+
+                    //wrist adjust
+                    wTargetPosition = 0.55;
+                    wristServo.setPosition(wTargetPosition);
+
+                    //sync with current - target position
+                    gCurrentPosition = gTargetPosition;
+                    aCurrentPosition = aTargetPosition;
+                    wCurrentPosition = wTargetPosition;
+
+                    //ArmHighPosition to 3
+                    Armhighposition = 3;
+
+                } else if (Armhighposition == 3) { //position 3 -> 0
                     //arm angle adjust
                     aTargetPosition = 0 - AngleErrorValue;
                     armMotor.setTargetPosition(aTargetPosition);
@@ -388,7 +417,6 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
                     //ArmHighPosition to 0
                     Armhighposition = 0;
                 }
-
             }
 
 
@@ -413,7 +441,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
 
 
             //drone shooter angle adjust
-            if (currentGamepad1.back && !previousGamepad1.back) {
+            if (currentGamepad1.touchpad && !previousGamepad1.touchpad) {
                 if (DroneShooterAngleStatus == 0) { //DroneShooter angle adjust: low -> high
                     shooterAngleTarget = 0.35;
                     DroneShooterAngleStatus = 1;
@@ -432,14 +460,19 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
 
             }
 
+            if (gamepad1.dpad_down && gamepad1.a) {
+                shooterTrigTarget = 0.02;
+            }
+
             //adjust unexpected arm angle encoder error
-             if (currentGamepad2.back && !previousGamepad2.back) {
+            if (currentGamepad2.back && !previousGamepad2.back) {
                 AngleErrorValue = AngleErrorValue - 50;
-           }
+            }
 
             if (currentGamepad2.start && !previousGamepad2.start) {
                 AngleErrorValue = AngleErrorValue + 50;
             }
+
 
             telemetry.addData("aEncoder", armMotor.getCurrentPosition()); //ARM
             telemetry.addData("code.aCurrent", aCurrentPosition);
