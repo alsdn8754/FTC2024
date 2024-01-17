@@ -89,8 +89,13 @@ public class OdometryTest extends LinearOpMode {
                 .build();
 
         Trajectory traj3 = drive.trajectoryBuilder(traj2.end())
-                .splineToLinearHeading(new Pose2d(63, -9, Math.toRadians(270)), Math.toRadians(0))
+                .lineToLinearHeading(new Pose2d(60, -14, Math.toRadians(270)))
                 .build();
+
+        Trajectory traj4 = drive.trajectoryBuilder(traj3.end())
+                .strafeLeft(10)
+                .build();
+
 
         waitForStart();
 
@@ -115,7 +120,9 @@ public class OdometryTest extends LinearOpMode {
         customSleep(2000);
         drive.followTrajectory(traj3);
         customSleep(2000);
+        drive.followTrajectory(traj4);
         customSleep(2000);
+
 
     }
 }
