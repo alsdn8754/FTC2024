@@ -88,6 +88,10 @@ public class OdometryTest extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(60, -40, Math.toRadians(0)))
                 .build();
 
+        Trajectory traj3 = drive.trajectoryBuilder(traj2.end())
+                .splineToLinearHeading(new Pose2d(63, -9, Math.toRadians(270)), Math.toRadians(0))
+                .build();
+
         waitForStart();
 
         if (isStopRequested()) return;
@@ -108,6 +112,9 @@ public class OdometryTest extends LinearOpMode {
         gripAdjust(leftclose, rightclose);
         customSleep(100);
         aawAdjust(1, 0, 1, 20, 0.82);
+        customSleep(2000);
+        drive.followTrajectory(traj3);
+        customSleep(2000);
         customSleep(2000);
 
     }
