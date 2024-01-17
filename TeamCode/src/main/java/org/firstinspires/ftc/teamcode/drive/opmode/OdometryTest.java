@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.drive.opmode;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
-
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
@@ -18,8 +16,11 @@ public class OdometryTest extends LinearOpMode {
     public void runOpMode() {
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        Trajectory traj1 = drive.trajectoryBuilder(new Pose2d(27,-63))
-                .splineToConstantHeading(new Vector2d(45, -45), Math.toRadians(0))
+        drive.setPoseEstimate(new Pose2d(27, -65, 0));
+
+
+        Trajectory traj1 = drive.trajectoryBuilder(new Pose2d(27,-65))
+                .splineToLinearHeading(new Pose2d(59, -41, Math.toRadians(-12)), Math.toRadians(0))
                 .build();
 
        /* Trajectory traj2 = drive.trajectoryBuilder(traj1.end())
