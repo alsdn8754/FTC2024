@@ -82,7 +82,7 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
         int gTargetPosition = 0; //grab
         int gCurrentPosition = 0;
         double wTargetPosition = 0;
-        double wCurrentPosition = 0;
+        double wCurrentPosition = 0.82;
         double shooterTrigTarget = 0.02;
         double shooterAngleTarget = 0.2;
 
@@ -108,7 +108,7 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
                 gamepad1.runRumbleEffect(ENDGAME_ALERT);
                 gamepad2.runRumbleEffect(ENDGAME_ALERT);
 
-                wristServo.setPosition(0.82);
+                wristServo.setPosition(wCurrentPosition);
 
                 isFirstRun = false; /*!important!*/
             }

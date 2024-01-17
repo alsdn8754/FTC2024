@@ -37,12 +37,6 @@ public class OdometryTest extends LinearOpMode {
 
     public void aawAdjust(double ArmPower, int ArmTarget, double GrabPower, int GrabTarget, double WristTarget) {
 
-        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        grabMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        grabMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
         armMotor.setTargetPosition(ArmTarget);
         grabMotor.setTargetPosition(GrabTarget);
         wristServo.setPosition(WristTarget);
@@ -51,7 +45,11 @@ public class OdometryTest extends LinearOpMode {
         grabMotor.setPower(GrabPower);
 
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        sleep(1000);
         grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        telemetry.addData("armta", ArmTarget);
+        telemetry.addData("grta", GrabTarget);
 
         telemetry.update();
     }
@@ -72,6 +70,12 @@ public class OdometryTest extends LinearOpMode {
         wristServo = hardwareMap.servo.get("wrist");
         rightHandServo = hardwareMap.servo.get("rightHand");
 
+        armMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        grabMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        grabMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
         drive.setPoseEstimate(new Pose2d(28, -65, 0));
@@ -81,7 +85,7 @@ public class OdometryTest extends LinearOpMode {
                 .build();
 
         Trajectory traj2 = drive.trajectoryBuilder(traj1.end())
-                .lineToLinearHeading(new Pose2d(50, -40, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(60, -40, Math.toRadians(0)))
                 .build();
 
         waitForStart();
@@ -97,13 +101,14 @@ public class OdometryTest extends LinearOpMode {
         customSleep(200);
         gripAdjust(leftclose, rightclose);
         drive.followTrajectory(traj2);
-        aawAdjust(1, 600, 1, 1900, 0.7);
-        customSleep(200);
+        aawAdjust(1, 400, 1, 1800, 0.67);
+        customSleep(1000);
         gripAdjust(leftclose, rightopen);
         customSleep(100);
         gripAdjust(leftclose, rightclose);
+        customSleep(100);
         aawAdjust(1, 0, 1, 20, 0.82);
-        customSleep(200);
+        customSleep(2000);
 
     }
 }
