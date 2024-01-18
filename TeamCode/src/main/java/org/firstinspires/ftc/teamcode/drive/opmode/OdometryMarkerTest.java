@@ -83,47 +83,41 @@ public class OdometryMarkerTest extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(28, -41, Math.toRadians(90)))
 
                 .addTemporalMarker(1, () -> {
-                    // This marker runs one seconds into the trajectory
                     // Run your action in here!
 
-                    aawAdjust(0, 0, 1, 750, 0.5);
-                    customSleep(200);
-
+                    aawAdjust(0, 0, 1, 600, 0.5);
 
                 })
 
                 .build();
 
         Trajectory traj2 = drive.trajectoryBuilder(traj1.end())
-                .lineToLinearHeading(new Pose2d(60, -40, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(60, -37, Math.toRadians(0)))
 
-                .addDisplacementMarker( () -> {
-                    // This marker runs two seconds into the trajectory
+                .addTemporalMarker(1.6, () -> {
                     // Run your action in here!
 
                     aawAdjust(1, 400, 1, 1800, 0.67);
-                    customSleep(1000);
 
                 })
 
                 .build();
 
         Trajectory traj3 = drive.trajectoryBuilder(traj2.end())
-                .lineToLinearHeading(new Pose2d(60, -14, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(60, -13, Math.toRadians(270)))
 
-                .addDisplacementMarker(() -> {
+                .addTemporalMarker(1, () -> {
                     // Run your action in here!
                     // Drop servo, start motor, whatever
 
                     aawAdjust(1, 0, 1, 20, 0.82);
-                    customSleep(1000);
 
                 })
 
                 .build();
 
         Trajectory traj4 = drive.trajectoryBuilder(traj3.end())
-                .strafeLeft(21)
+                .strafeLeft(17)
                 .build();
 
 
