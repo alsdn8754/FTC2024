@@ -57,7 +57,7 @@ import java.util.List;
 public class TensorFlowTestRedAutonomous extends LinearOpMode {
 
 
-    int biconPosition;
+    int biconPosition = 0;
     private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
 
     // TFOD_MODEL_ASSET points to a model file stored in the project Asset location,
@@ -191,11 +191,10 @@ public class TensorFlowTestRedAutonomous extends LinearOpMode {
 
         initTfod();
 
-
-
         // Wait for the DS start button to be touched.
         telemetry.addData("DS preview on/off", "3 dots, Camera Stream");
         telemetry.addData(">", "Touch Play to start OpMode");
+        telemetry.addData("position", biconPosition);
         telemetry.update();
 
         waitForStart();
@@ -331,8 +330,8 @@ public class TensorFlowTestRedAutonomous extends LinearOpMode {
 
         // Step through the list of recognitions and display info for each one.
         for (Recognition recognition : currentRecognitions) {
-            double x = (recognition.getLeft() + recognition.getRight()) / 2 ;
-            double y = (recognition.getTop()  + recognition.getBottom()) / 2 ;
+            double x = (recognition.getLeft() + recognition.getRight()) / 2;
+            double y = (recognition.getTop()  + recognition.getBottom()) / 2;
             if (x < 200) {
                 biconPosition = 1;
             } else if (x >= 200 && x < 400) {
@@ -346,6 +345,8 @@ public class TensorFlowTestRedAutonomous extends LinearOpMode {
             telemetry.addData("- Position", "%.0f / %.0f", x, y);
             telemetry.addData("biconPosition", biconPosition);
         }   // end for() loop
+
+        telemetry.addData("Last object biconposition", biconPosition);
 
     }   // end method telemetryTfod()
 
