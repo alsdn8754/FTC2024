@@ -117,7 +117,7 @@ public class OdometryMarkerTest extends LinearOpMode {
                 .build();
 
         Trajectory traj4 = drive.trajectoryBuilder(traj3.end())
-                .strafeLeft(17)
+                .strafeLeft(15)
                 .build();
 
 
