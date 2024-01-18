@@ -36,6 +36,7 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
+import org.firstinspires.ftc.teamcode.drive.opmode.OdometryTest;
 
 import java.util.List;
 
@@ -49,8 +50,7 @@ import java.util.List;
 @Autonomous(name = "RedClose", group = "Concept")
 public class TensorFlowTestRedAutonomous extends LinearOpMode {
 
-
-    AutoCodeLib autoCode;
+    class.OdometryTest
 
     int biconPosition;
     private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera

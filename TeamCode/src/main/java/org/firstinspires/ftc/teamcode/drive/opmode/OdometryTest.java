@@ -104,13 +104,13 @@ public class OdometryTest extends LinearOpMode {
         leftHandServo.setPosition(leftclose);
         rightHandServo.setPosition(rightclose);
         drive.followTrajectory(traj1);
-        aawAdjust(0, 0, 1, 750, 0.5);
+        aawAdjust(0, 0, 1, 900, 0.5);
        customSleep(200);
         gripAdjust(leftopen, rightclose);
         customSleep(100);
         gripAdjust(leftclose, rightclose);
         drive.followTrajectory(traj2);
-        aawAdjust(1, 400, 1, 1800, 0.67);
+        aawAdjust(1, 400, 1, 2100, 0.67);
         customSleep(1000);
         gripAdjust(leftclose, rightopen);
         customSleep(100);
