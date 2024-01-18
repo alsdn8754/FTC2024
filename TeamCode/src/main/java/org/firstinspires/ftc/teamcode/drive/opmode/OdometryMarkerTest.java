@@ -20,7 +20,7 @@ public class OdometryMarkerTest extends LinearOpMode {
     double rightclose = 0.85;
     double leftclose = 0.15;
 
-    private void customSleep(int milliseconds) {
+    public void customSleep(int milliseconds) {
         try {
             Thread.sleep(milliseconds);
         } catch (InterruptedException e) {
