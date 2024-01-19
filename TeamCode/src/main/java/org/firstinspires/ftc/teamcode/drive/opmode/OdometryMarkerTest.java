@@ -6,14 +6,13 @@ import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 @Config
 @Autonomous(group = "drive")
-public class OdometryTest extends LinearOpMode {
+public class OdometryMarkerTest extends LinearOpMode {
 
     double rightopen = 0.5;
     double leftopen = 0.5;
@@ -21,7 +20,7 @@ public class OdometryTest extends LinearOpMode {
     double rightclose = 0.85;
     double leftclose = 0.15;
 
-    private void customSleep(int milliseconds) {
+    public void customSleep(int milliseconds) {
         try {
             Thread.sleep(milliseconds);
         } catch (InterruptedException e) {
@@ -82,18 +81,43 @@ public class OdometryTest extends LinearOpMode {
 
         Trajectory traj1 = drive.trajectoryBuilder(new Pose2d(27, -65))
                 .lineToLinearHeading(new Pose2d(28, -41, Math.toRadians(90)))
+
+                .addTemporalMarker(1, () -> {
+                    // Run your action in here!
+
+                    aawAdjust(0, 0, 1, 600, 0.5);
+
+                })
+
                 .build();
 
         Trajectory traj2 = drive.trajectoryBuilder(traj1.end())
-                .lineToLinearHeading(new Pose2d(60, -40, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(60, -37, Math.toRadians(0)))
+
+                .addTemporalMarker(1.6, () -> {
+                    // Run your action in here!
+
+                    aawAdjust(1, 400, 1, 1800, 0.67);
+
+                })
+
                 .build();
 
         Trajectory traj3 = drive.trajectoryBuilder(traj2.end())
-                .lineToLinearHeading(new Pose2d(60, -14, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(60, -13, Math.toRadians(270)))
+
+                .addTemporalMarker(1, () -> {
+                    // Run your action in here!
+                    // Drop servo, start motor, whatever
+
+                    aawAdjust(1, 0, 1, 20, 0.82);
+
+                })
+
                 .build();
 
         Trajectory traj4 = drive.trajectoryBuilder(traj3.end())
-                .strafeLeft(21)
+                .strafeLeft(15)
                 .build();
 
 
@@ -102,23 +126,27 @@ public class OdometryTest extends LinearOpMode {
         if (isStopRequested()) return;
 
         leftHandServo.setPosition(leftclose);
-        rightHandServo.setPosition(rightclose);
-        drive.followTrajectory(traj1);
-        aawAdjust(0, 0, 1, 900, 0.5);
-       customSleep(200);
-        gripAdjust(leftopen, rightclose);
-        customSleep(100);
-        gripAdjust(leftclose, rightclose);
-        drive.followTrajectory(traj2);
-        aawAdjust(1, 400, 1, 2100, 0.67);
-        customSleep(1000);
-        gripAdjust(leftclose, rightopen);
-        customSleep(100);
-        gripAdjust(leftclose, rightclose);
-        aawAdjust(1, 0, 1, 20, 0.82);
-        customSleep(0);
-        drive.followTrajectory(traj3);
-        drive.followTrajectory(traj4);
+        rightHandServo.setPosition(rightclose);  //init claw close
+
+        drive.followTrajectory(traj1);  //move to spike place, extend arm
+
+        gripAdjust(leftopen, rightclose);  //drop purple pixel
+
+        customSleep(100);  //wait for drop (purple)
+
+        gripAdjust(leftclose, rightclose);  //close grip
+
+        drive.followTrajectory(traj2);  //move to backstage, adjust angle and length
+
+        gripAdjust(leftclose, rightopen);  //drop yellow pixel
+        customSleep(100);  //wait for drop
+
+        gripAdjust(leftclose, rightclose);  //close grip
+
+        drive.followTrajectory(traj3);  //move to parking zone and init arm position
+
+        drive.followTrajectory(traj4);  //move to parking zone
+
         customSleep(2000);
 
 

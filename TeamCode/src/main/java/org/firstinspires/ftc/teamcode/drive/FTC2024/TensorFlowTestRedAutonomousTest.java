@@ -14,11 +14,10 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-
 import java.util.List;
 
-@Autonomous(name = "RedCloseLive", group = "Concept")
-public class TensorFlowTestRedAutonomous extends LinearOpMode {
+@Autonomous(name = "RedCloseTest", group = "Concept")
+public class TensorFlowTestRedAutonomousTest extends LinearOpMode {
 
 
     int biconPosition = 0;
@@ -140,6 +139,8 @@ public class TensorFlowTestRedAutonomous extends LinearOpMode {
 
         initTfod();
 
+        telemetryTfod();
+
         // Wait for the DS start button to be touched.
         telemetry.addData("DS preview on/off", "3 dots, Camera Stream");
         telemetry.addData(">", "Touch Play to start OpMode");
@@ -149,8 +150,6 @@ public class TensorFlowTestRedAutonomous extends LinearOpMode {
         waitForStart();
 
         if (!isStopRequested()) {
-
-                telemetryTfod();
 
                 // Push telemetry to the Driver Station.
                 telemetry.update();
