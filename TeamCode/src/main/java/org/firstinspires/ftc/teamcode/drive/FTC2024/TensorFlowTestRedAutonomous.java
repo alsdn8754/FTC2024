@@ -148,7 +148,7 @@ public class TensorFlowTestRedAutonomous extends LinearOpMode {
 
         waitForStart();
 
-        if (isStopRequested()) {
+        if (!isStopRequested()) {
 
                 telemetryTfod();
 
@@ -165,7 +165,7 @@ public class TensorFlowTestRedAutonomous extends LinearOpMode {
                 // Share the CPU.
                 sleep(20);
 
-            while (isStopRequested()) {
+            while (!isStopRequested()) {
                 if (biconPosition == 1) {
 
                 }
@@ -259,5 +259,4 @@ public class TensorFlowTestRedAutonomous extends LinearOpMode {
 
 
     }
-
 }
