@@ -295,14 +295,14 @@ public class TensorFlowTestRedAutonomous_RC_C_RP extends LinearOpMode {
 
         Trajectory RedC_L_LP = drive.trajectoryBuilder(RedC_trajL2.end())
                 .splineTo(new Vector2d(60, -13), Math.toRadians(270))
-                .splineTo(new Vector2d(77, -13), Math.toRadians(270))
+                .splineTo(new Vector2d(68, -13), Math.toRadians(270))
                 .build();
 
 
 
         Trajectory RedC_L_RP = drive.trajectoryBuilder(RedC_trajL2.end())
                 .splineTo(new Vector2d(60, -59), Math.toRadians(270))
-                .splineTo(new Vector2d(77, -59), Math.toRadians(270))
+                .splineTo(new Vector2d(68, -59), Math.toRadians(270))
                 .build();
 
 
@@ -310,14 +310,14 @@ public class TensorFlowTestRedAutonomous_RC_C_RP extends LinearOpMode {
 
         Trajectory RedC_M_LP = drive.trajectoryBuilder(RedC_trajM2.end())
                 .splineTo(new Vector2d(60, -13), Math.toRadians(270))
-                .splineTo(new Vector2d(77, -13), Math.toRadians(270))
+                .splineTo(new Vector2d(68, -13), Math.toRadians(270))
                 .build();
 
 
 
         Trajectory RedC_M_RP = drive.trajectoryBuilder(RedC_trajM2.end())
                 .splineTo(new Vector2d(60, -59), Math.toRadians(270))
-                .splineTo(new Vector2d(77, -59), Math.toRadians(270))
+                .splineTo(new Vector2d(68, -59), Math.toRadians(270))
                 .build();
 
 
@@ -325,14 +325,14 @@ public class TensorFlowTestRedAutonomous_RC_C_RP extends LinearOpMode {
 
         Trajectory RedC_R_LP = drive.trajectoryBuilder(RedC_trajR2.end())
                 .splineTo(new Vector2d(60, -13), Math.toRadians(270))
-                .splineTo(new Vector2d(77, -13), Math.toRadians(270))
+                .splineTo(new Vector2d(68, -13), Math.toRadians(270))
                 .build();
 
 
 
         Trajectory RedC_R_RP = drive.trajectoryBuilder(RedC_trajR2.end())
                 .splineTo(new Vector2d(60, -59), Math.toRadians(270))
-                .splineTo(new Vector2d(77, -59), Math.toRadians(270))
+                .splineTo(new Vector2d(68, -59), Math.toRadians(270))
                 .build();
 
 
