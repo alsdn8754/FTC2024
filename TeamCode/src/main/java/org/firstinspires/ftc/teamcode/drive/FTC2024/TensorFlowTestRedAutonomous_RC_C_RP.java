@@ -15,11 +15,10 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-
 import java.util.List;
 
-@Autonomous(name = "RedC_C_LP", group = "RedClose_Center")
-public class TensorFlowTestRedAutonomous_RC_C_LP extends LinearOpMode {
+@Autonomous(name = "RedC_C_RP", group = "RedClose_Center")
+public class TensorFlowTestRedAutonomous_RC_C_RP extends LinearOpMode {
 
 
     int biconPosition = 0;
@@ -283,9 +282,9 @@ public class TensorFlowTestRedAutonomous_RC_C_LP extends LinearOpMode {
 
                     gripAdjust(leftclose, rightclose);  //close grip
 
-                    drive.followTrajectory(RedC_traj3_LeftPark);  //move to parking zone and init arm position
+                    drive.followTrajectory(RedC_traj3_RightPark);  //move to parking zone and init arm position
 
-                    drive.followTrajectory(RedC_traj4_LeftPark);  //move to parking zone
+                    drive.followTrajectory(RedC_traj4_RightPark);  //move to parking zone
 
                 }
                 else if (biconPosition == 2) {  //code RedC_trajMn
@@ -308,9 +307,9 @@ public class TensorFlowTestRedAutonomous_RC_C_LP extends LinearOpMode {
 
                     gripAdjust(leftclose, rightclose);  //close grip
 
-                    drive.followTrajectory(RedC_traj3_LeftPark);  //move to parking zone and init arm position
+                    drive.followTrajectory(RedC_traj3_RightPark);  //move to parking zone and init arm position
 
-                    drive.followTrajectory(RedC_traj4_LeftPark);  //move to parking zone
+                    drive.followTrajectory(RedC_traj4_RightPark);  //move to parking zone
 
                     customSleep(2000);
 
@@ -335,9 +334,9 @@ public class TensorFlowTestRedAutonomous_RC_C_LP extends LinearOpMode {
 
                     gripAdjust(leftclose, rightclose);  //close grip
 
-                    drive.followTrajectory(RedC_traj3_LeftPark);  //move to parking zone and init arm position
+                    drive.followTrajectory(RedC_traj3_RightPark);  //move to parking zone and init arm position
 
-                    drive.followTrajectory(RedC_traj4_LeftPark);  //move to parking zone
+                    drive.followTrajectory(RedC_traj4_RightPark);  //move to parking zone
 
                 }
             }
