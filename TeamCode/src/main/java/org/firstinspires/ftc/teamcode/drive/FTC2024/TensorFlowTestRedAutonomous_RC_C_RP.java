@@ -17,7 +17,7 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
-@Autonomous(name = "RedC_C_LP", group = "RedClose_Center")
+@Autonomous(name = "RedC_C_RP", group = "RedClose_Center")
 public class TensorFlowTestRedAutonomous_RC_C_RP extends LinearOpMode {
 
 
