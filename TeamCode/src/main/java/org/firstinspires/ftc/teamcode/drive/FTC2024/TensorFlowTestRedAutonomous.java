@@ -17,7 +17,7 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
-@Autonomous(name = "RedClose", group = "Concept")
+@Autonomous(name = "RedCloseLive", group = "Concept")
 public class TensorFlowTestRedAutonomous extends LinearOpMode {
 
 
@@ -226,7 +226,6 @@ public class TensorFlowTestRedAutonomous extends LinearOpMode {
         }
 
 
-
         builder.addProcessor(tfod);
 
         visionPortal = builder.build();
@@ -246,12 +245,12 @@ public class TensorFlowTestRedAutonomous extends LinearOpMode {
             telemetry.addData("- Position", "%.0f / %.0f", x, y);
             telemetry.addData("biconPosition", biconPosition);
 
-            if (x < 200) {
-                biconPosition = 1;
-            } else if (x >= 200 && x < 400) {
+            if (x >= 200 && x < 400) {
                 biconPosition = 2;
-            } else {
+            } else if (x <=400) {
                 biconPosition = 3;
+            } else {
+                biconPosition = 1;
             }
 
 

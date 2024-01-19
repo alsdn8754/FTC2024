@@ -7,7 +7,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.robotcore.external.JavaUtil;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
@@ -17,13 +16,11 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
-@Autonomous(name = "RedClose", group = "Concept")
-public class TensorFlowTestRedAutonomoustest extends LinearOpMode {
+@Autonomous(name = "RedCloseTest", group = "Concept")
+public class TensorFlowTestRedAutonomousTest extends LinearOpMode {
 
 
-    List<Recognition> recognitions;
-    Recognition recognition;
-    int biconPosition;
+    int biconPosition = 0;
     private static final boolean USE_WEBCAM = true;
 
     private static final String TFOD_MODEL_ASSET = "5048Red.tflite";
@@ -142,6 +139,8 @@ public class TensorFlowTestRedAutonomoustest extends LinearOpMode {
 
         initTfod();
 
+        telemetryTfod();
+
         // Wait for the DS start button to be touched.
         telemetry.addData("DS preview on/off", "3 dots, Camera Stream");
         telemetry.addData(">", "Touch Play to start OpMode");
@@ -150,9 +149,7 @@ public class TensorFlowTestRedAutonomoustest extends LinearOpMode {
 
         waitForStart();
 
-        if (isStopRequested()) {
-
-                telemetryTfod();
+        if (!isStopRequested()) {
 
                 // Push telemetry to the Driver Station.
                 telemetry.update();
@@ -167,7 +164,7 @@ public class TensorFlowTestRedAutonomoustest extends LinearOpMode {
                 // Share the CPU.
                 sleep(20);
 
-            while (isStopRequested()) {
+            while (!isStopRequested()) {
                 if (biconPosition == 1) {
 
                 }
@@ -228,7 +225,6 @@ public class TensorFlowTestRedAutonomoustest extends LinearOpMode {
         }
 
 
-
         builder.addProcessor(tfod);
 
         visionPortal = builder.build();
@@ -248,67 +244,17 @@ public class TensorFlowTestRedAutonomoustest extends LinearOpMode {
             telemetry.addData("- Position", "%.0f / %.0f", x, y);
             telemetry.addData("biconPosition", biconPosition);
 
-            if (x < 200) {
-                biconPosition = 1;
-            } else if (x >= 200 && x < 400) {
+            if (x >= 200 && x < 400) {
                 biconPosition = 2;
-            } else {
+            } else if (x <=400) {
                 biconPosition = 3;
+            } else {
+                biconPosition = 1;
             }
 
 
         }
 
 
-    }
-
-    private void findobject() {
-        // Get a list of recognitions from TFOD.
-        recognitions = tfod.getRecognitions();
-        // If list is empty, inform the user. Otherwise, go through list and display info for each recognition.
-        if (JavaUtil.listLength(recognitions) > 0) {
-            // Iterate through list and call a function to display info for each recognized object.
-            for (Recognition recognition_item : recognitions) {
-                recognition = recognition_item;
-                if (recognition.getLabel().equals("One")) {
-                    biconPosition = 1;
-                } else if (recognition.getLabel().equals("Two")) {
-                    biconPosition = 2;
-                } else if (recognition.getLabel().equals("Three")) {
-                    biconPosition = 3;
-                }
-            }
-        } else {
-            biconPosition = Integer.parseInt("didnotdetectoned");
-            telemetry.addData("TFOD", "No items detected.");
-        }
-        telemetry.addData("level", biconPosition);
-        telemetry.update();
-    }
-
-    private void fucked_object_find() {
-        // Get a list of recognitions from TFOD.
-        recognitions = tfod.getRecognitions();
-        // If list is empty, inform the user. Otherwise, go through list and display info for each recognition.
-        if (JavaUtil.listLength(recognitions) > 0) {
-            // Iterate through list and call a function to display info for each recognized object.
-            for (Recognition recognition_item2 : recognitions) {
-                recognition = recognition_item2;
-                if (recognition.getLabel().equals("1 Bolt")) {
-                    biconPosition = 1;
-                } else if (recognition.getLabel().equals("2 Bulb")) {
-                    biconPosition = 2;
-                } else if (recognition.getLabel().equals("3 Panel")) {
-                    biconPosition = 3;
-                }
-            }
-        } else {
-            biconPosition = Integer.parseInt("did not detected");
-            telemetry.addData("TFOD", "No items detected.");
-        }
-        telemetry.addData("단계", biconPosition);
-        telemetry.update();
     }
 }
-
-
