@@ -17,12 +17,13 @@ public class MeepMeepTesting_RED_C {
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(11.5, -65, 0))
 
-                                .lineToLinearHeading(new Pose2d(11.5, -41, Math.toRadians(90)))
+                                .lineToLinearHeading(new Pose2d(11.5, -41, Math.toRadians(130)))
 
                                 .lineToLinearHeading(new Pose2d(43.5, -37, Math.toRadians(0)))
 
-                                .lineToLinearHeading(new Pose2d(43.5, -13, Math.toRadians(270)))
+                                .lineToLinearHeading(new Pose2d(43.5, -60, Math.toRadians(270)))
                                 .strafeLeft(17)
+
 
                                 .build()
                 );

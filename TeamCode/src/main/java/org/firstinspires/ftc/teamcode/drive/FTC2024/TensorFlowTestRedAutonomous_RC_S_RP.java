@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.drive.FTC2024;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -15,11 +14,10 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-
 import java.util.List;
 
-@Autonomous(name = "RedC_Short", group = "RedClose")
-public class TensorFlowTestRedAutonomous_RC_C_LP extends LinearOpMode {
+@Autonomous(name = "RedC_Short_RP", group = "RedClose")
+public class TensorFlowTestRedAutonomous_RC_S_RP extends LinearOpMode {
 
 
     int biconPosition = 0;
@@ -102,9 +100,9 @@ public class TensorFlowTestRedAutonomous_RC_C_LP extends LinearOpMode {
 
    //Trajectory "allianceColor + position(Close, Far) _ traj"biconposition" + "trajsequence"
 
-                //left traj
+                //right traj
 
-        Trajectory L1 = drive.trajectoryBuilder(new Pose2d(11.5, -65))
+        Trajectory R1 = drive.trajectoryBuilder(new Pose2d(11.5, -65))
                 .lineToLinearHeading(new Pose2d(43.5, -39, Math.toRadians(0)))
 
                 .addTemporalMarker(1, () -> {
@@ -116,8 +114,9 @@ public class TensorFlowTestRedAutonomous_RC_C_LP extends LinearOpMode {
 
                 .build();
 
-        Trajectory L2 = drive.trajectoryBuilder(L1.end())
-                .lineToLinearHeading(new Pose2d(43.5, -13, Math.toRadians(270)))
+        Trajectory R2 = drive.trajectoryBuilder(R1.end())
+                .lineToLinearHeading(new Pose2d(43.5, -60, Math.toRadians(270)))
+                .strafeLeft(17)
 
                 .addTemporalMarker(1, () -> {
                     // Run your action in here!
@@ -158,7 +157,49 @@ public class TensorFlowTestRedAutonomous_RC_C_LP extends LinearOpMode {
 
 
         Trajectory M3 = drive.trajectoryBuilder(M2.end())
-                .lineToLinearHeading(new Pose2d(43.5, -13, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, -60, Math.toRadians(270)))
+                .strafeLeft(17)
+
+                .addTemporalMarker(1, () -> {
+                    // Run your action in here!
+
+                    // aawAdjust(0, 0, 1, 600, 0.5);
+
+                })
+
+                .build();
+
+
+            //left traj
+
+        Trajectory L1 = drive.trajectoryBuilder(new Pose2d(11.5, -65))
+                .lineToLinearHeading(new Pose2d(11.5, -41, Math.toRadians(130)))
+
+                .addTemporalMarker(1, () -> {
+                    // Run your action in here!
+
+                    // aawAdjust(0, 0, 1, 600, 0.5);
+
+                })
+
+                .build();
+
+
+        Trajectory L2 = drive.trajectoryBuilder(L1.end())
+                .lineToLinearHeading(new Pose2d(43.5, -37, Math.toRadians(0)))
+
+                .addTemporalMarker(1, () -> {
+                    // Run your action in here!
+
+                    // aawAdjust(0, 0, 1, 600, 0.5);
+
+                })
+
+                .build();
+
+
+        Trajectory L3 = drive.trajectoryBuilder(L2.end())
+                .lineToLinearHeading(new Pose2d(43.5, -60, Math.toRadians(270)))
                 .strafeLeft(17)
 
                 .addTemporalMarker(1, () -> {
@@ -210,17 +251,7 @@ public class TensorFlowTestRedAutonomous_RC_C_LP extends LinearOpMode {
 
                     drive.followTrajectory(L1);  //move to backdrop place, extend arm
 
-                    gripAdjust(leftclose, rightopen);  //drop Y pixel
-
-                    drive.turn(Math.toRadians(160));
-
-                    aawAdjust(0, 0, 1, 300, 0.45);
-
-                    gripAdjust(leftopen, rightclose);  //drop Pur pixel
-
                     drive.followTrajectory(L2);
-
-                    gripAdjust(leftclose, rightclose);  //close grip
 
 
                 }
@@ -241,24 +272,15 @@ public class TensorFlowTestRedAutonomous_RC_C_LP extends LinearOpMode {
                     leftHandServo.setPosition(leftclose);
                     rightHandServo.setPosition(rightclose);  //init claw close
 
-                   // drive.followTrajectory(RedC_trajR1);  //move to spike place, extend arm
+                    leftHandServo.setPosition(leftclose);
+                    rightHandServo.setPosition(rightclose);  //init claw close
 
-                    gripAdjust(leftopen, rightclose);  //drop purple pixel
+                    drive.followTrajectory(R1);
 
-                    customSleep(100);  //wait for drop (purple)
+                    drive.turn(Math.toRadians(160));
 
-                    gripAdjust(leftclose, rightclose);  //close grip
+                    drive.followTrajectory(R2);
 
-                  //  drive.followTrajectory(RedC_trajR2);  //move to backstage, adjust angle and length
-
-                    gripAdjust(leftclose, rightopen);  //drop yellow pixel
-                    customSleep(100);  //wait for drop
-
-                    gripAdjust(leftclose, rightclose);  //close grip
-
-                   // drive.followTrajectory(RedC_trajR3_LP);  //move to parking zone and init arm position
-
-                  //  drive.followTrajectory(RedC_trajR4_LP);  //move to parking zone
 
                 }
             }
