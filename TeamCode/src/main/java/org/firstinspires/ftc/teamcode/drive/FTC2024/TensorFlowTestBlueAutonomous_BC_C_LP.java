@@ -96,14 +96,14 @@ public class TensorFlowTestBlueAutonomous_BC_C_LP extends LinearOpMode {
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        drive.setPoseEstimate(new Pose2d(28, 65, 180));
+        drive.setPoseEstimate(new Pose2d(11.5, 65, 180));
 
 
    //Trajectory "allianceColor + position(Close, Far) _ traj"biconposition" + "trajsequence"
 
 
-        Trajectory BlueC_trajL1 = drive.trajectoryBuilder(new Pose2d(27, 65))
-                .lineToLinearHeading(new Pose2d(28, 41, Math.toRadians(315)))
+        Trajectory BlueC_trajL1 = drive.trajectoryBuilder(new Pose2d(11.5, 65))
+                .lineToLinearHeading(new Pose2d(11.5, 41, Math.toRadians(315)))
 
                 .addTemporalMarker(1, () -> {
                     // Run your action in here!
@@ -117,8 +117,8 @@ public class TensorFlowTestBlueAutonomous_BC_C_LP extends LinearOpMode {
 
 
 
-        Trajectory BlueC_trajM1 = drive.trajectoryBuilder(new Pose2d(27, 65))
-                .lineToLinearHeading(new Pose2d(28, 41, Math.toRadians(270)))
+        Trajectory BlueC_trajM1 = drive.trajectoryBuilder(new Pose2d(11.5, 65))
+                .lineToLinearHeading(new Pose2d(11.5, 41, Math.toRadians(270)))
 
                 .addTemporalMarker(1, () -> {
                     // Run your action in here!
@@ -131,8 +131,8 @@ public class TensorFlowTestBlueAutonomous_BC_C_LP extends LinearOpMode {
 
 
 
-        Trajectory BlueC_trajR1 = drive.trajectoryBuilder(new Pose2d(27, 65))
-                .lineToLinearHeading(new Pose2d(28, 41, Math.toRadians(225)))
+        Trajectory BlueC_trajR1 = drive.trajectoryBuilder(new Pose2d(11.5, 65))
+                .lineToLinearHeading(new Pose2d(11.5, 41, Math.toRadians(225)))
 
                 .addTemporalMarker(1, () -> {
                     // Run your action in here!
@@ -145,7 +145,7 @@ public class TensorFlowTestBlueAutonomous_BC_C_LP extends LinearOpMode {
 
 
         Trajectory BlueC_trajL2 = drive.trajectoryBuilder(BlueC_trajL1.end())
-                .lineToLinearHeading(new Pose2d(60, 34, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(43.5, 34, Math.toRadians(0)))
 
                 .addTemporalMarker(1, () -> {
                     // Run your action in here!
@@ -158,7 +158,7 @@ public class TensorFlowTestBlueAutonomous_BC_C_LP extends LinearOpMode {
 
 
         Trajectory BlueC_trajM2 = drive.trajectoryBuilder(BlueC_trajM1.end())
-                .lineToLinearHeading(new Pose2d(60, 37, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(43.5, 37, Math.toRadians(0)))
 
                 .addTemporalMarker(1, () -> {
                     // Run your action in here!
@@ -172,7 +172,7 @@ public class TensorFlowTestBlueAutonomous_BC_C_LP extends LinearOpMode {
 
 
         Trajectory BlueC_trajR2 = drive.trajectoryBuilder(BlueC_trajR1.end())
-                .lineToLinearHeading(new Pose2d(60, 40, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(43.5, 40, Math.toRadians(0)))
 
                 .addTemporalMarker(1, () -> {
                     // Run your action in here!
@@ -186,7 +186,7 @@ public class TensorFlowTestBlueAutonomous_BC_C_LP extends LinearOpMode {
 
 
         Trajectory BlueC_trajL3_LP = drive.trajectoryBuilder(BlueC_trajL2.end())  //Blue parking
-                .lineToLinearHeading(new Pose2d(60, 13, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, 13, Math.toRadians(270)))
 
                 .addTemporalMarker(1, () -> {
 
@@ -205,7 +205,7 @@ public class TensorFlowTestBlueAutonomous_BC_C_LP extends LinearOpMode {
 
 
         Trajectory BlueC_trajM3_LP = drive.trajectoryBuilder(BlueC_trajM2.end())  //Blue parking
-                .lineToLinearHeading(new Pose2d(60, 13, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, 13, Math.toRadians(270)))
 
                 .addTemporalMarker(1, () -> {
 
@@ -223,7 +223,7 @@ public class TensorFlowTestBlueAutonomous_BC_C_LP extends LinearOpMode {
 
 
         Trajectory BlueC_trajR3_LP = drive.trajectoryBuilder(BlueC_trajR2.end())  //Blue parking
-                .lineToLinearHeading(new Pose2d(60, 13, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, 13, Math.toRadians(270)))
 
                 .addTemporalMarker(1, () -> {
 
@@ -240,7 +240,7 @@ public class TensorFlowTestBlueAutonomous_BC_C_LP extends LinearOpMode {
 
 
         Trajectory BlueC_trajL3_RP = drive.trajectoryBuilder(BlueC_trajL2.end())  //Blue parking
-                .lineToLinearHeading(new Pose2d(60, 59, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, 59, Math.toRadians(270)))
 
                 .addTemporalMarker(1, () -> {
 
@@ -258,7 +258,7 @@ public class TensorFlowTestBlueAutonomous_BC_C_LP extends LinearOpMode {
 
 
         Trajectory BlueC_trajM3_RP = drive.trajectoryBuilder(BlueC_trajM2.end())  //Blue parking
-                .lineToLinearHeading(new Pose2d(60, 59, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, 59, Math.toRadians(270)))
 
                 .addTemporalMarker(1, () -> {
 
@@ -277,7 +277,7 @@ public class TensorFlowTestBlueAutonomous_BC_C_LP extends LinearOpMode {
 
 
         Trajectory BlueC_trajR3_RP = drive.trajectoryBuilder(BlueC_trajR2.end())  //Blue parking
-                .lineToLinearHeading(new Pose2d(60, 59, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, 59, Math.toRadians(270)))
 
                 .addTemporalMarker(1, () -> {
 

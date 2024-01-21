@@ -18,7 +18,7 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
-@Autonomous(name = "RedC_C_LP", group = "RedClose_Center")
+@Autonomous(name = "RedC_Short", group = "RedClose")
 public class TensorFlowTestRedAutonomous_RC_C_LP extends LinearOpMode {
 
 
@@ -97,244 +97,80 @@ public class TensorFlowTestRedAutonomous_RC_C_LP extends LinearOpMode {
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        drive.setPoseEstimate(new Pose2d(28, -65, 0));
+        drive.setPoseEstimate(new Pose2d(11.5, -65, 0));
 
 
    //Trajectory "allianceColor + position(Close, Far) _ traj"biconposition" + "trajsequence"
 
+                //left traj
 
-        Trajectory RedC_trajL1 = drive.trajectoryBuilder(new Pose2d(27, -65))
-                .lineToLinearHeading(new Pose2d(28, -41, Math.toRadians(135)))
-
-                .addTemporalMarker(1, () -> {
-                    // Run your action in here!
-
-                    aawAdjust(0, 0, 1, 600, 0.5);
-
-                })
-
-                .build();
-
-
-
-
-        Trajectory RedC_trajM1 = drive.trajectoryBuilder(new Pose2d(27, -65))
-                .lineToLinearHeading(new Pose2d(28, -41, Math.toRadians(90)))
+        Trajectory L1 = drive.trajectoryBuilder(new Pose2d(11.5, -65))
+                .lineToLinearHeading(new Pose2d(43.5, -39, Math.toRadians(0)))
 
                 .addTemporalMarker(1, () -> {
                     // Run your action in here!
 
-                    aawAdjust(0, 0, 1, 600, 0.5);
+                    // aawAdjust(0, 0, 1, 600, 0.5);
 
                 })
 
                 .build();
 
-
-
-        Trajectory RedC_trajR1 = drive.trajectoryBuilder(new Pose2d(27, -65))
-                .lineToLinearHeading(new Pose2d(28, -41, Math.toRadians(45)))
+        Trajectory L2 = drive.trajectoryBuilder(L1.end())
+                .lineToLinearHeading(new Pose2d(43.5, -13, Math.toRadians(270)))
 
                 .addTemporalMarker(1, () -> {
                     // Run your action in here!
 
-                    aawAdjust(0, 0, 1, 600, 0.5);
+                    // aawAdjust(0, 0, 1, 600, 0.5);
 
                 })
 
                 .build();
 
 
-        Trajectory RedC_trajL2 = drive.trajectoryBuilder(RedC_trajL1.end())
-                .lineToLinearHeading(new Pose2d(60, -34, Math.toRadians(0)))
+                //mid traj
+
+        Trajectory M1 = drive.trajectoryBuilder(new Pose2d(11.5, -65))
+                .lineToLinearHeading(new Pose2d(11.5, -41, Math.toRadians(90)))
 
                 .addTemporalMarker(1, () -> {
                     // Run your action in here!
 
-                    aawAdjust(1, 400, 1, 1800, 0.67);
+                    // aawAdjust(0, 0, 1, 600, 0.5);
 
                 })
 
                 .build();
 
 
-        Trajectory RedC_trajM2 = drive.trajectoryBuilder(RedC_trajM1.end())
-                .lineToLinearHeading(new Pose2d(60, -37, Math.toRadians(0)))
+        Trajectory M2 = drive.trajectoryBuilder(M1.end())
+                .lineToLinearHeading(new Pose2d(43.5, -37, Math.toRadians(0)))
 
                 .addTemporalMarker(1, () -> {
                     // Run your action in here!
 
-                    aawAdjust(1, 400, 1, 1800, 0.67);
+                    // aawAdjust(0, 0, 1, 600, 0.5);
 
                 })
 
                 .build();
 
 
-
-        Trajectory RedC_trajR2 = drive.trajectoryBuilder(RedC_trajR1.end())
-                .lineToLinearHeading(new Pose2d(60, -40, Math.toRadians(0)))
+        Trajectory M3 = drive.trajectoryBuilder(M2.end())
+                .lineToLinearHeading(new Pose2d(43.5, -13, Math.toRadians(270)))
+                .strafeLeft(17)
 
                 .addTemporalMarker(1, () -> {
                     // Run your action in here!
 
-                    aawAdjust(1, 400, 1, 1800, 0.67);
+                    // aawAdjust(0, 0, 1, 600, 0.5);
 
                 })
 
                 .build();
 
 
-
-        Trajectory RedC_trajL3_LP = drive.trajectoryBuilder(RedC_trajL2.end())  //RED parking
-                .lineToLinearHeading(new Pose2d(60, -13, Math.toRadians(270)))
-
-                .addTemporalMarker(1, () -> {
-
-                    aawAdjust(1, 0, 1, 20, 0.82);
-
-                })
-
-                .build();
-
-
-
-        Trajectory RedC_trajL4_LP = drive.trajectoryBuilder(RedC_trajL3_LP.end())  //RED parking
-                .strafeLeft(17)
-                .build();
-
-
-
-        Trajectory RedC_trajM3_LP = drive.trajectoryBuilder(RedC_trajM2.end())  //RED parking
-                .lineToLinearHeading(new Pose2d(60, -13, Math.toRadians(270)))
-
-                .addTemporalMarker(1, () -> {
-
-                    aawAdjust(1, 0, 1, 20, 0.82);
-
-                })
-
-                .build();
-
-
-        Trajectory RedC_trajM4_LP = drive.trajectoryBuilder(RedC_trajM3_LP.end())  //RED parking
-                .strafeLeft(17)
-                .build();
-
-
-
-        Trajectory RedC_trajR3_LP = drive.trajectoryBuilder(RedC_trajR2.end())  //RED parking
-                .lineToLinearHeading(new Pose2d(60, -13, Math.toRadians(270)))
-
-                .addTemporalMarker(1, () -> {
-
-                    aawAdjust(1, 0, 1, 20, 0.82);
-
-                })
-
-                .build();
-
-
-        Trajectory RedC_trajR4_LP = drive.trajectoryBuilder(RedC_trajR3_LP.end())  //RED parking
-                .strafeLeft(17)
-                .build();
-
-
-        Trajectory RedC_trajL3_RP = drive.trajectoryBuilder(RedC_trajL2.end())  //RED parking
-                .lineToLinearHeading(new Pose2d(60, -59, Math.toRadians(270)))
-
-                .addTemporalMarker(1, () -> {
-
-                    aawAdjust(1, 0, 1, 20, 0.82);
-
-                })
-
-                .build();
-
-
-        Trajectory RedC_trajL4_RP = drive.trajectoryBuilder(RedC_trajL3_RP.end())  //RED parking
-                .strafeLeft(17)
-                .build();
-
-
-
-        Trajectory RedC_trajM3_RP = drive.trajectoryBuilder(RedC_trajM2.end())  //RED parking
-                .lineToLinearHeading(new Pose2d(60, -59, Math.toRadians(270)))
-
-                .addTemporalMarker(1, () -> {
-
-                    aawAdjust(1, 0, 1, 20, 0.82);
-
-                })
-
-                .build();
-
-
-        Trajectory RedC_trajM4_RP = drive.trajectoryBuilder(RedC_trajM3_RP.end())  //RED parking
-                .strafeLeft(17)
-                .build();
-
-
-
-
-        Trajectory RedC_trajR3_RP = drive.trajectoryBuilder(RedC_trajR2.end())  //RED parking
-                .lineToLinearHeading(new Pose2d(60, -59, Math.toRadians(270)))
-
-                .addTemporalMarker(1, () -> {
-
-                    aawAdjust(1, 0, 1, 20, 0.82);
-
-                })
-
-                .build();
-
-
-        Trajectory RedC_trajR4_RP = drive.trajectoryBuilder(RedC_trajR3_RP.end())  //RED parking
-                .strafeLeft(17)
-                .build();
-
-
-        Trajectory RedC_L_LP = drive.trajectoryBuilder(RedC_trajL2.end())
-                .splineTo(new Vector2d(60, -13), Math.toRadians(270))
-                .splineTo(new Vector2d(68, -13), Math.toRadians(270))
-                .build();
-
-
-
-        Trajectory RedC_L_RP = drive.trajectoryBuilder(RedC_trajL2.end())
-                .splineTo(new Vector2d(60, -59), Math.toRadians(270))
-                .splineTo(new Vector2d(68, -59), Math.toRadians(270))
-                .build();
-
-
-
-
-        Trajectory RedC_M_LP = drive.trajectoryBuilder(RedC_trajM2.end())
-                .splineTo(new Vector2d(60, -13), Math.toRadians(270))
-                .splineTo(new Vector2d(68, -13), Math.toRadians(270))
-                .build();
-
-
-
-        Trajectory RedC_M_RP = drive.trajectoryBuilder(RedC_trajM2.end())
-                .splineTo(new Vector2d(60, -59), Math.toRadians(270))
-                .splineTo(new Vector2d(68, -59), Math.toRadians(270))
-                .build();
-
-
-
-
-        Trajectory RedC_R_LP = drive.trajectoryBuilder(RedC_trajR2.end())
-                .splineTo(new Vector2d(60, -13), Math.toRadians(270))
-                .splineTo(new Vector2d(68, -13), Math.toRadians(270))
-                .build();
-
-
-
-        Trajectory RedC_R_RP = drive.trajectoryBuilder(RedC_trajR2.end())
-                .splineTo(new Vector2d(60, -59), Math.toRadians(270))
-                .splineTo(new Vector2d(68, -59), Math.toRadians(270))
-                .build();
 
 
 
@@ -372,24 +208,20 @@ public class TensorFlowTestRedAutonomous_RC_C_LP extends LinearOpMode {
                     leftHandServo.setPosition(leftclose);
                     rightHandServo.setPosition(rightclose);  //init claw close
 
-                    drive.followTrajectory(RedC_trajL1);  //move to spike place, extend arm
+                    drive.followTrajectory(L1);  //move to backdrop place, extend arm
 
-                    gripAdjust(leftopen, rightclose);  //drop purple pixel
+                    gripAdjust(leftclose, rightopen);  //drop Y pixel
 
-                    customSleep(100);  //wait for drop (purple)
+                    drive.turn(Math.toRadians(160));
+
+                    aawAdjust(0, 0, 1, 300, 0.45);
+
+                    gripAdjust(leftopen, rightclose);  //drop Pur pixel
+
+                    drive.followTrajectory(L2);
 
                     gripAdjust(leftclose, rightclose);  //close grip
 
-                    drive.followTrajectory(RedC_trajL2);  //move to backstage, adjust angle and length
-
-                    gripAdjust(leftclose, rightopen);  //drop yellow pixel
-                    customSleep(100);  //wait for drop
-
-                    gripAdjust(leftclose, rightclose);  //close grip
-
-                    drive.followTrajectory(RedC_trajL3_LP);  //move to parking zone and init arm position
-
-                    drive.followTrajectory(RedC_trajL4_LP);  //move to parking zone
 
                 }
                 else if (biconPosition == 2) {  //code RedC_trajMn
@@ -397,26 +229,11 @@ public class TensorFlowTestRedAutonomous_RC_C_LP extends LinearOpMode {
                     leftHandServo.setPosition(leftclose);
                     rightHandServo.setPosition(rightclose);  //init claw close
 
-                    drive.followTrajectory(RedC_trajM1);  //move to spike place, extend arm
+                   drive.followTrajectory(M1);
 
-                    gripAdjust(leftopen, rightclose);  //drop purple pixel
+                   drive.followTrajectory(M2);
 
-                    customSleep(100);  //wait for drop (purple)
-
-                    gripAdjust(leftclose, rightclose);  //close grip
-
-                    drive.followTrajectory(RedC_trajM2);  //move to backstage, adjust angle and length
-
-                    gripAdjust(leftclose, rightopen);  //drop yellow pixel
-                    customSleep(100);  //wait for drop
-
-                    gripAdjust(leftclose, rightclose);  //close grip
-
-                    drive.followTrajectory(RedC_trajM3_LP);  //move to parking zone and init arm position
-
-                    drive.followTrajectory(RedC_trajM4_LP);  //move to parking zone
-
-                    customSleep(2000);
+                   drive.followTrajectory(M3);
 
                 }
                 else {  //code RedC_trajRn
@@ -424,7 +241,7 @@ public class TensorFlowTestRedAutonomous_RC_C_LP extends LinearOpMode {
                     leftHandServo.setPosition(leftclose);
                     rightHandServo.setPosition(rightclose);  //init claw close
 
-                    drive.followTrajectory(RedC_trajR1);  //move to spike place, extend arm
+                   // drive.followTrajectory(RedC_trajR1);  //move to spike place, extend arm
 
                     gripAdjust(leftopen, rightclose);  //drop purple pixel
 
@@ -432,16 +249,16 @@ public class TensorFlowTestRedAutonomous_RC_C_LP extends LinearOpMode {
 
                     gripAdjust(leftclose, rightclose);  //close grip
 
-                    drive.followTrajectory(RedC_trajR2);  //move to backstage, adjust angle and length
+                  //  drive.followTrajectory(RedC_trajR2);  //move to backstage, adjust angle and length
 
                     gripAdjust(leftclose, rightopen);  //drop yellow pixel
                     customSleep(100);  //wait for drop
 
                     gripAdjust(leftclose, rightclose);  //close grip
 
-                    drive.followTrajectory(RedC_trajR3_LP);  //move to parking zone and init arm position
+                   // drive.followTrajectory(RedC_trajR3_LP);  //move to parking zone and init arm position
 
-                    drive.followTrajectory(RedC_trajR4_LP);  //move to parking zone
+                  //  drive.followTrajectory(RedC_trajR4_LP);  //move to parking zone
 
                 }
             }
