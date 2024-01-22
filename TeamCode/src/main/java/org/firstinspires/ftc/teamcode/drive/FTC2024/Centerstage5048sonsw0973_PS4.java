@@ -84,7 +84,7 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
         double wTargetPosition = 0;
         double wCurrentPosition = 0.82;
         double shooterTrigTarget = 0.02;
-        double shooterAngleTarget = 0.2;
+        double shooterAngleTarget = 0.0;
 
         int AngleErrorValue = 0; //adjust by player - encoder err
 
@@ -451,10 +451,10 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
             if (currentGamepad1.touchpad && !previousGamepad1.touchpad) {
                 if (DroneShooterAngleStatus == 0) { //DroneShooter angle adjust: low -> high
                     shooterAngleTarget = 0.35;
-                    DroneShooterAngleStatus = 1;
+                    DroneShooterAngleStatus = 1;  //status 0 -> 1
                 } else if (DroneShooterAngleStatus == 1) { //DroneShooter angle adjust: high -> low
-                    shooterAngleTarget = 0.18;
-                    DroneShooterAngleStatus = 0;
+                    shooterAngleTarget = 0.0;
+                    DroneShooterAngleStatus = 0;  //status 1 -> 0
                 }
             }
 
@@ -462,7 +462,7 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
             if (gamepad1.dpad_up && gamepad1.y) {
                 shooterTrigTarget = 0.35;
 
-                shooterAngleTarget = 0.18;
+                shooterAngleTarget = 0.0;
                 DroneShooterAngleStatus = 0;
 
             }

@@ -84,7 +84,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
         double wTargetPosition = 0;
         double wCurrentPosition = 0;
         double shooterTrigTarget = 0.02;
-        double shooterAngleTarget = 0.2;
+        double shooterAngleTarget = 0.0;
 
         int AngleErrorValue = 0; //adjust by player - encoder err
 
@@ -221,8 +221,8 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
 
             //arm angle optional adjust
             if (currentGamepad2.right_stick_button && !previousGamepad2.right_stick_button) {
-                if (aCurrentPosition > 4000 - AngleErrorValue) {
-                    aTargetPosition = 4200 - AngleErrorValue;
+                if (aCurrentPosition > 3400 - AngleErrorValue) {
+                    aTargetPosition = 3600 - AngleErrorValue;
                     armMotor.setTargetPosition(aTargetPosition);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     armMotor.setPower(0.8);
@@ -441,12 +441,12 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
 
 
             //drone shooter angle adjust
-            if (currentGamepad1.touchpad && !previousGamepad1.touchpad) {
+            if (currentGamepad1.back && !previousGamepad1.back) {
                 if (DroneShooterAngleStatus == 0) { //DroneShooter angle adjust: low -> high
                     shooterAngleTarget = 0.35;
                     DroneShooterAngleStatus = 1;
                 } else if (DroneShooterAngleStatus == 1) { //DroneShooter angle adjust: high -> low
-                    shooterAngleTarget = 0.18;
+                    shooterAngleTarget = 0.0;
                     DroneShooterAngleStatus = 0;
                 }
             }
@@ -455,7 +455,7 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
             if (gamepad1.dpad_up && gamepad1.y) {
                 shooterTrigTarget = 0.35;
 
-                shooterAngleTarget = 0.18;
+                shooterAngleTarget = 0.0;
                 DroneShooterAngleStatus = 0;
 
             }
