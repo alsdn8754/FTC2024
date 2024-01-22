@@ -466,11 +466,11 @@ public class Centerstage5048sonsw0973 extends LinearOpMode {
 
             //adjust unexpected arm angle encoder error
             if (currentGamepad2.back && !previousGamepad2.back) {
-                AngleErrorValue = AngleErrorValue - 50;
+                AngleErrorValue = AngleErrorValue + 50;
             }
 
             if (currentGamepad2.start && !previousGamepad2.start) {
-                AngleErrorValue = AngleErrorValue + 50;
+                AngleErrorValue = AngleErrorValue - 50;
             }
 
 
