@@ -99,7 +99,6 @@ public class TensorFlowTestRedAutonomous_RC_S_LP extends LinearOpMode {
         drive.setPoseEstimate(new Pose2d(11.5, -65, 0));
 
 
-   //Trajectory "allianceColor + position(Close, Far) _ traj"biconposition" + "trajsequence"
 
                 //right traj
 
@@ -158,7 +157,6 @@ public class TensorFlowTestRedAutonomous_RC_S_LP extends LinearOpMode {
 
         Trajectory M3 = drive.trajectoryBuilder(M2.end())
                 .lineToLinearHeading(new Pose2d(43.5, -13, Math.toRadians(270)))
-                .strafeLeft(17)
 
                 .addTemporalMarker(1, () -> {
                     // Run your action in here!
@@ -169,6 +167,9 @@ public class TensorFlowTestRedAutonomous_RC_S_LP extends LinearOpMode {
 
                 .build();
 
+        Trajectory M4 = drive.trajectoryBuilder(M3.end())
+                .strafeLeft(17)
+                .build();
 
             //left traj
 
@@ -200,7 +201,7 @@ public class TensorFlowTestRedAutonomous_RC_S_LP extends LinearOpMode {
 
         Trajectory L3 = drive.trajectoryBuilder(L2.end())
                 .lineToLinearHeading(new Pose2d(43.5, -13, Math.toRadians(270)))
-                .strafeLeft(17)
+
 
                 .addTemporalMarker(1, () -> {
                     // Run your action in here!
@@ -211,12 +212,19 @@ public class TensorFlowTestRedAutonomous_RC_S_LP extends LinearOpMode {
 
                 .build();
 
+        Trajectory L4 = drive.trajectoryBuilder(L3.end())
+                .strafeLeft(17)
+                .build();
+
 
 
 
 
 
         initTfod();
+
+        telemetryTfod();
+
 
         // Wait for the DS start button to be touched.
         telemetry.addData("DS preview on/off", "3 dots, Camera Stream");
@@ -228,7 +236,7 @@ public class TensorFlowTestRedAutonomous_RC_S_LP extends LinearOpMode {
 
         if (!isStopRequested()) {
 
-                telemetryTfod();
+
 
                 // Push telemetry to the Driver Station.
                 telemetry.update();
@@ -352,9 +360,9 @@ public class TensorFlowTestRedAutonomous_RC_S_LP extends LinearOpMode {
             telemetry.addData("- Position", "%.0f / %.0f", x, y);
             telemetry.addData("biconPosition", biconPosition);
 
-            if (x >= 200 && x < 400) {
+            if (x < 300) {
                 biconPosition = 2;
-            } else if (x <=400) {
+            } else if (x >= 300) {
                 biconPosition = 3;
             } else {
                 biconPosition = 1;
