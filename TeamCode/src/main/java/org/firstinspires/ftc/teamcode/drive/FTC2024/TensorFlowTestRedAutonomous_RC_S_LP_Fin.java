@@ -163,7 +163,7 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
 
         Trajectory R3 = drive.trajectoryBuilder(R2.end())  //to park-2
 
-                .strafeLeft(17)
+                .strafeLeft(15)
 
                 .build();
 
@@ -223,7 +223,7 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
                 .build();
 
         Trajectory M4 = drive.trajectoryBuilder(M3.end())
-                .strafeLeft(17)
+                .strafeLeft(15)
                 .build();
 
             //left traj
@@ -277,7 +277,7 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
                 .build();
 
         Trajectory L4 = drive.trajectoryBuilder(L3.end())
-                .strafeLeft(17)
+                .strafeLeft(15)
                 .build();
 
 
