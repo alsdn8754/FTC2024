@@ -14,11 +14,10 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-
 import java.util.List;
 
 @Autonomous(name = "RedC_Short_LP", group = "RedClose")
-public class TensorFlowTestRedAutonomous_RC_S_LP extends LinearOpMode {
+public class TensorFlowTestRedAutonomous_RC_S_RP_Fin extends LinearOpMode {
 
 
     int biconPosition = 1;
@@ -62,6 +61,25 @@ public class TensorFlowTestRedAutonomous_RC_S_LP extends LinearOpMode {
 
         armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        armMotor.setPower(ArmPower);
+        grabMotor.setPower(GrabPower);
+
+        telemetry.addData("armta", ArmTarget);
+        telemetry.addData("grta", GrabTarget);
+
+        telemetry.update();
+    }
+
+    public void DaawAdjust(double ArmPower, int ArmTarget, double GrabPower, int GrabTarget, double WristTarget, int delay) {
+
+        armMotor.setTargetPosition(ArmTarget);
+        grabMotor.setTargetPosition(GrabTarget);
+        wristServo.setPosition(WristTarget);
+
+        grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        customSleep(delay);
+        armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         armMotor.setPower(ArmPower);
         grabMotor.setPower(GrabPower);
@@ -117,11 +135,11 @@ public class TensorFlowTestRedAutonomous_RC_S_LP extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(43.5, -30, Math.toRadians(170)))
 
                 .addTemporalMarker(0, () -> {
-                    aawAdjust(1, 0, 1, 0, 0.82);
+                    DaawAdjust(1, 0, 1, 0, 0.82, 100);
                 })
 
                 .addTemporalMarker(1, () -> {
-                    aawAdjust(1, 200, 1, 2100, 0.52);
+                    aawAdjust(1, 100, 1, 2100, 0.52);
                 })
 
                 .build();
@@ -132,7 +150,7 @@ public class TensorFlowTestRedAutonomous_RC_S_LP extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, -13, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, -65, Math.toRadians(270)))
 
                 .addTemporalMarker(0.2, () -> {
                     // Run your action in here!
@@ -188,7 +206,7 @@ public class TensorFlowTestRedAutonomous_RC_S_LP extends LinearOpMode {
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
-                    aawAdjust(1, 0, 1, 0, 0.82);
+                    DaawAdjust(1, 0, 1, 0, 0.82, 100);
 
 
                 })
@@ -197,7 +215,7 @@ public class TensorFlowTestRedAutonomous_RC_S_LP extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, -13, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, -65, Math.toRadians(270)))
 
 
 
@@ -240,12 +258,12 @@ public class TensorFlowTestRedAutonomous_RC_S_LP extends LinearOpMode {
 
 
         Trajectory L3 = drive.trajectoryBuilder(L2.end())
-                .lineToLinearHeading(new Pose2d(43.5, -13, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, -65, Math.toRadians(270)))
 
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
-                    aawAdjust(1, 0, 1, 0, 0.82);
+                    DaawAdjust(1, 0, 1, 0, 0.82, 100);
 
 
                 })
