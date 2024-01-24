@@ -17,7 +17,7 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 import java.util.List;
 
 @Autonomous(name = "RedC_Short_RP", group = "RedClose")
-public class TensorFlowTestRedAutonomous_RC_S_RP_almost extends LinearOpMode {
+public class TensorFlowTestRedAutonomous_RC_S_RP_fin extends LinearOpMode {
 
 
     int biconPosition = 1;
@@ -139,7 +139,7 @@ public class TensorFlowTestRedAutonomous_RC_S_RP_almost extends LinearOpMode {
                 })
 
                 .addTemporalMarker(1, () -> {
-                    aawAdjust(1, 100, 1, 2100, 0.52);
+                    aawAdjust(1, 150, 1, 2100, 0.52);
                 })
 
                 .build();
@@ -150,7 +150,7 @@ public class TensorFlowTestRedAutonomous_RC_S_RP_almost extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, -65, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, -63, Math.toRadians(270)))
 
                 .addTemporalMarker(0.2, () -> {
                     // Run your action in here!
@@ -215,7 +215,7 @@ public class TensorFlowTestRedAutonomous_RC_S_RP_almost extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, -65, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, -63, Math.toRadians(270)))
 
 
 
@@ -258,7 +258,7 @@ public class TensorFlowTestRedAutonomous_RC_S_RP_almost extends LinearOpMode {
 
 
         Trajectory L3 = drive.trajectoryBuilder(L2.end())
-                .lineToLinearHeading(new Pose2d(43.5, -65, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, -63, Math.toRadians(270)))
 
 
                 .addTemporalMarker(0, () -> {

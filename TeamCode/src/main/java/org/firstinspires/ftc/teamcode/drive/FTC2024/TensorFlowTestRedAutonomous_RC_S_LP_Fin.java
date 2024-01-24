@@ -140,7 +140,7 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
                 })
 
                 .addTemporalMarker(1, () -> {
-                    aawAdjust(1, 100, 1, 2100, 0.52);
+                    aawAdjust(1, 150, 1, 2100, 0.52);
                 })
 
                 .build();
