@@ -122,7 +122,7 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
                 //right traj
 
         Trajectory R1 = drive.trajectoryBuilder(new Pose2d(11.5, -65))  //to backdrop
-                .lineToLinearHeading(new Pose2d(43.5, -42, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(44, -42, Math.toRadians(0)))
 
                 .addTemporalMarker(0.1, () -> {
                     // Run your action in here!

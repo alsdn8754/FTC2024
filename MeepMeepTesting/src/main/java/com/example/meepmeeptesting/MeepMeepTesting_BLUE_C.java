@@ -9,17 +9,17 @@ public class MeepMeepTesting_BLUE_C {
 
 
     public static void main(String[] args) {
-        MeepMeep meepMeep = new MeepMeep(800);
+        MeepMeep meepMeep = new MeepMeep(700);
 
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(30, 30, Math.toRadians(210.816), Math.toRadians(60), 15.24)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(13, 65, Math.toRadians(180)))
-                                .lineToLinearHeading(new Pose2d(13, 41, Math.toRadians(315))) //1
-                                .lineToLinearHeading(new Pose2d(43.5, 34, Math.toRadians(0)))  //2
-                                .lineToLinearHeading(new Pose2d(43.5, 13, Math.toRadians(270)))  //3
-                                .strafeLeft(17)  //4
+                        drive.trajectorySequenceBuilder(new Pose2d(11.5, 60, Math.toRadians(180)))
+                                .lineToLinearHeading(new Pose2d(43.5, 42, Math.toRadians(0)))
+                                .lineToLinearHeading(new Pose2d(43.5, 30, Math.toRadians(185)))
+                                .lineToLinearHeading(new Pose2d(43.5, 63, Math.toRadians(270)))
+                                .strafeLeft(15)
 
                                 .build()
                 );
