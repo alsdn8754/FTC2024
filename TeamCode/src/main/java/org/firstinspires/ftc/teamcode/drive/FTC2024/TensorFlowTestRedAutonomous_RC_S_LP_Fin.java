@@ -287,31 +287,19 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
 
         initTfod();
 
+        while (!isStarted() && !isStopRequested()) {
+            // Wait for the DS start button to be touched.
+            telemetry.addData("DS preview on/off", "3 dots, Camera Stream");
+            telemetry.addData(">", "Touch Play to start OpMode");
+            telemetry.addData("position", biconPosition);
+            telemetry.update();
 
 
+            telemetryTfod();
 
-        // Wait for the DS start button to be touched.
-        telemetry.addData("DS preview on/off", "3 dots, Camera Stream");
-        telemetry.addData(">", "Touch Play to start OpMode");
-        telemetry.addData("position", biconPosition);
-        telemetry.update();
-
-        waitForStart();
-
-        if (opModeIsActive()) {
-            while (opModeIsActive()) {
-
-                telemetryTfod();
-
-                // Push telemetry to the Driver Station.
-                telemetry.update();
-
-                // Save CPU resources; can resume streaming when needed.
-                if (gamepad1.dpad_down) {
-                    visionPortal.stopStreaming();
-                } else if (gamepad1.dpad_up) {
-                    visionPortal.resumeStreaming();
-                }
+            // Push telemetry to the Driver Station.
+            telemetry.update();
+        }
 
                 // Share the CPU.
                 sleep(20);
@@ -393,8 +381,8 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
                     sleep(30000);
 
                 }
-            }
-        }
+
+
 
         visionPortal.close();
 
@@ -436,7 +424,7 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
             double x = (recognition.getLeft() + recognition.getRight()) / 2;
             double y = (recognition.getTop()  + recognition.getBottom()) / 2;
 
-            if (x >= 0 && x < 300) {
+            if (x > 0 && x < 300) {
                 biconPosition = 2;
             } else if (x >= 300) {
                 biconPosition = 3;

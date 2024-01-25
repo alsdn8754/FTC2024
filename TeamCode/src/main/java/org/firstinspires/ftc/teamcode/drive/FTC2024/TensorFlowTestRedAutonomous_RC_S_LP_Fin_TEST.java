@@ -16,8 +16,8 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
-@Autonomous(name = "RedC_Short_RP", group = "RedClose")
-public class TensorFlowTestRedAutonomous_RC_S_RP_fin extends LinearOpMode {
+@Autonomous(name = "RedC_Short_LP_T", group = "RedClose")
+public class TensorFlowTestRedAutonomous_RC_S_LP_Fin_TEST extends LinearOpMode {
 
 
     int biconPosition = 1;
@@ -150,7 +150,7 @@ public class TensorFlowTestRedAutonomous_RC_S_RP_fin extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, -63, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, -13, Math.toRadians(270)))
 
                 .addTemporalMarker(0.2, () -> {
                     // Run your action in here!
@@ -215,7 +215,7 @@ public class TensorFlowTestRedAutonomous_RC_S_RP_fin extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, -63, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, -13, Math.toRadians(270)))
 
 
 
@@ -258,7 +258,7 @@ public class TensorFlowTestRedAutonomous_RC_S_RP_fin extends LinearOpMode {
 
 
         Trajectory L3 = drive.trajectoryBuilder(L2.end())
-                .lineToLinearHeading(new Pose2d(43.5, -63, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, -13, Math.toRadians(270)))
 
 
                 .addTemporalMarker(0, () -> {
@@ -286,6 +286,8 @@ public class TensorFlowTestRedAutonomous_RC_S_RP_fin extends LinearOpMode {
 
         initTfod();
 
+
+
         while (!isStarted() && !isStopRequested()) {
             // Wait for the DS start button to be touched.
             telemetry.addData("DS preview on/off", "3 dots, Camera Stream");
@@ -300,8 +302,9 @@ public class TensorFlowTestRedAutonomous_RC_S_RP_fin extends LinearOpMode {
             telemetry.update();
         }
 
-                // Share the CPU.
-                sleep(20);
+            // Share the CPU.
+            sleep(20);
+
 
 
                 if (biconPosition == 1) {  //code RedC_trajLn
@@ -425,7 +428,7 @@ public class TensorFlowTestRedAutonomous_RC_S_RP_fin extends LinearOpMode {
             double x = (recognition.getLeft() + recognition.getRight()) / 2;
             double y = (recognition.getTop()  + recognition.getBottom()) / 2;
 
-            if (x > 0 && x < 300) {
+            if (x >= 0 && x < 300) {
                 biconPosition = 2;
             } else if (x >= 300) {
                 biconPosition = 3;
