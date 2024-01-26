@@ -16,7 +16,7 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
-@Autonomous(name = "BlueClose_RP", group = "BlueClose")
+@Autonomous(name = "BlueClose_LP", group = "BlueClose")
 public class Autonomous_BC_S_RP extends LinearOpMode {
 
 
