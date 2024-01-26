@@ -251,7 +251,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
 
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, 22, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(43.5, 16, Math.toRadians(0)))
 
                 .build();
 
@@ -304,7 +304,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
         //left traj
 
         Trajectory R1 = drive.trajectoryBuilder(new Pose2d(-38, 65, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(-38, 20, Math.toRadians(225)))
+                .lineToLinearHeading(new Pose2d(-38, 20, Math.toRadians(135)))
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
@@ -399,7 +399,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
                 sleep(20);
 
 
-                if (biconPosition == 1) {  //code RedC_trajLn
+                if (biconPosition == 3) {  //code RedC_trajLn
 
                     leftHandServo.setPosition(leftclose);
                     rightHandServo.setPosition(rightclose);  //init claw close
