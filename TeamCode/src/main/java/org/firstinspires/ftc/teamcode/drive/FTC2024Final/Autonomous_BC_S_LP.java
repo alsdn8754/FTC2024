@@ -162,7 +162,7 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
 
         Trajectory L3 = drive.trajectoryBuilder(L2.end())  //to park-2
 
-                .strafeLeft(15)
+                .strafeRight(15)
 
                 .build();
 
@@ -171,8 +171,8 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
 
                 //mid traj
 
-        Trajectory M1 = drive.trajectoryBuilder(new Pose2d(11.5, 60))
-                .lineToLinearHeading(new Pose2d(11.5, 39, Math.toRadians(270)))
+        Trajectory M1 = drive.trajectoryBuilder(new Pose2d(11.5, 65))
+                .lineToLinearHeading(new Pose2d(11.5, 41, Math.toRadians(270)))
 
                 .addTemporalMarker(1, () -> {
                     // Run your action in here!
@@ -196,7 +196,7 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);  //close grip
                 })
 
-                .lineToLinearHeading(new Pose2d(44, 37, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(43.5, 37, Math.toRadians(0)))
 
 
                 .build();
@@ -215,19 +215,19 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, 63, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, 64, Math.toRadians(90)))
 
 
 
                 .build();
 
         Trajectory M4 = drive.trajectoryBuilder(M3.end())
-                .strafeLeft(15)
+                .strafeRight(15)
                 .build();
 
             //left traj
 
-        Trajectory R1 = drive.trajectoryBuilder(new Pose2d(11.5, 60))
+        Trajectory R1 = drive.trajectoryBuilder(new Pose2d(11.5, 65))
                 .lineToLinearHeading(new Pose2d(11.5, 41, Math.toRadians(210)))
 
                 .addTemporalMarker(0, () -> {
@@ -252,13 +252,13 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);  //close grip
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, 30, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(43.5, 28, Math.toRadians(0)))
 
                 .build();
 
 
         Trajectory R3 = drive.trajectoryBuilder(R2.end())
-                .lineToLinearHeading(new Pose2d(43.5, 63, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, 64, Math.toRadians(90)))
 
 
                 .addTemporalMarker(0, () -> {
@@ -276,7 +276,7 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
                 .build();
 
         Trajectory R4 = drive.trajectoryBuilder(R3.end())
-                .strafeLeft(15)
+                .strafeRight(15)
                 .build();
 
 
