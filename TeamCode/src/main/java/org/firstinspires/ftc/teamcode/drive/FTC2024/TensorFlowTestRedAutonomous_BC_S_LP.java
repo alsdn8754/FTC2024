@@ -326,7 +326,7 @@ public class TensorFlowTestRedAutonomous_BC_S_LP extends LinearOpMode {
 
                     gripAdjust(leftclose, rightclose);  //close grip
 
-                    sleep(30000);
+
 
 
 
@@ -353,7 +353,6 @@ public class TensorFlowTestRedAutonomous_BC_S_LP extends LinearOpMode {
 
                     gripAdjust(leftclose, rightclose);  //close grip
 
-                    sleep(30000);
 
                 }
                 else {  //code RedC_trajRn
@@ -379,7 +378,7 @@ public class TensorFlowTestRedAutonomous_BC_S_LP extends LinearOpMode {
 
                     drive.followTrajectory(L3);
 
-                    sleep(30000);
+
 
                 }
 

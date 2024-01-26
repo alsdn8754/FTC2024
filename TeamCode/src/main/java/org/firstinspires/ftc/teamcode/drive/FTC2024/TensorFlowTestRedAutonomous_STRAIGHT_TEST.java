@@ -14,11 +14,10 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-
 import java.util.List;
 
-@Autonomous(name = "RedC_Short_LP", group = "RedClose")
-public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
+@Autonomous(name = "GOTEST", group = "RedClose")
+public class TensorFlowTestRedAutonomous_STRAIGHT_TEST extends LinearOpMode {
 
 
     int biconPosition = 1;
@@ -253,7 +252,7 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);  //close grip
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, -28, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(43.5, -30, Math.toRadians(0)))
 
                 .build();
 
@@ -280,7 +279,9 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
                 .strafeLeft(15)
                 .build();
 
-
+        Trajectory GO = drive.trajectoryBuilder(new Pose2d(11.5, -65))
+                        .forward(80)
+                        .build();
 
 
 
@@ -305,82 +306,7 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
                 sleep(20);
 
 
-                if (biconPosition == 1) {  //code RedC_trajLn
-
-                    leftHandServo.setPosition(leftclose);
-                    rightHandServo.setPosition(rightclose);  //init claw close
-
-                    drive.followTrajectory(L1);  //move to backdrop place, extend arm
-
-                    gripAdjust(leftopen, rightclose);  //drop P pixel
-
-                    drive.followTrajectory(L2);
-
-                    gripAdjust(leftclose, rightopen);  //drop Y pixel
-                    customSleep(100);
-
-
-                    drive.followTrajectory(L3);
-                    drive.followTrajectory(L4);
-
-                    gripAdjust(leftclose, rightclose);  //close grip
-
-
-
-
-
-
-                }
-                else if (biconPosition == 2) {  //code RedC_trajMn
-
-                    leftHandServo.setPosition(leftclose);
-                    rightHandServo.setPosition(rightclose);  //init claw close
-
-                    drive.followTrajectory(M1);  //move to backdrop place, extend arm
-
-                    gripAdjust(leftopen, rightclose);  //drop P pixel
-                    customSleep(100);
-
-                    drive.followTrajectory(M2);
-
-                    gripAdjust(leftclose, rightopen);  //drop Y pixel
-                    customSleep(100);
-
-
-                    drive.followTrajectory(M3);
-                    drive.followTrajectory(M4);
-
-                    gripAdjust(leftclose, rightclose);  //close grip
-
-
-
-                }
-                else {  //code RedC_trajRn
-
-                    leftHandServo.setPosition(leftclose);
-                    rightHandServo.setPosition(rightclose);  //init claw close
-
-
-                    drive.followTrajectory(R1);  //move to backdrop place, extend arm
-
-                    gripAdjust(leftclose, rightopen);   //Y DR
-                    customSleep(100);
-
-                    gripAdjust(leftclose, rightclose);
-                    drive.followTrajectory(rotateR);
-
-
-                    gripAdjust(leftopen, rightclose);
-                    customSleep(100);
-
-
-                    drive.followTrajectory(R2);
-
-                    drive.followTrajectory(R3);
-
-
-
-                }
+               drive.followTrajectory(GO);
 
 
 

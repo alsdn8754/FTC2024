@@ -326,7 +326,7 @@ public class TensorFlowTestRedAutonomous_RC_S_RP_fin extends LinearOpMode {
 
                     gripAdjust(leftclose, rightclose);  //close grip
 
-                    sleep(30000);
+
 
 
 
@@ -353,7 +353,7 @@ public class TensorFlowTestRedAutonomous_RC_S_RP_fin extends LinearOpMode {
 
                     gripAdjust(leftclose, rightclose);  //close grip
 
-                    sleep(30000);
+
 
                 }
                 else {  //code RedC_trajRn
@@ -379,7 +379,7 @@ public class TensorFlowTestRedAutonomous_RC_S_RP_fin extends LinearOpMode {
 
                     drive.followTrajectory(R3);
 
-                    sleep(30000);
+
 
                 }
 
