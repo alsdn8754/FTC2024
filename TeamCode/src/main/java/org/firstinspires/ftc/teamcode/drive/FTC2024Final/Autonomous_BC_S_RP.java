@@ -121,11 +121,11 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
                 //right traj
 
         Trajectory L1 = drive.trajectoryBuilder(new Pose2d(11.5, 65,Math.toRadians(180)))  //to backdrop
-                .lineToLinearHeading(new Pose2d(43.5, 43, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(44.5, 28, Math.toRadians(0)))
 
                 .addTemporalMarker(0.1, () -> {
                     // Run your action in here!
-                    aawAdjust(1, 400, 1, 1500, 0.67);
+                    aawAdjust(1, 450, 1, 1550, 0.67);
 
                 })
 
@@ -161,9 +161,7 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
                 .build();
 
         Trajectory L3 = drive.trajectoryBuilder(L2.end())  //to park-2
-
                 .strafeRight(15)
-
                 .build();
 
 
@@ -189,7 +187,7 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
 
-                    aawAdjust(1, 400, 1, 1500, 0.67);
+                    aawAdjust(1, 450, 1, 1550, 0.67);
                 })
 
                 .addTemporalMarker(0.5, () -> {
@@ -263,7 +261,7 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
-                    DaawAdjust(1, 0, 1, 0, 0.82, 100);
+                    DaawAdjust(1, 0, 1, 0, 0.82, 400);
 
 
                 })

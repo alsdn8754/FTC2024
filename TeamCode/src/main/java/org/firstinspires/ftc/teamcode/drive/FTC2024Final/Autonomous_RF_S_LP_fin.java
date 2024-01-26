@@ -133,7 +133,7 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
                 .build();
 
         Trajectory R2 = drive.trajectoryBuilder(R1.end())
-                .lineToLinearHeading(new Pose2d(-38.5, -15.5, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-38.5, -15, Math.toRadians(0)))
 
                 .addTemporalMarker(0, () -> {
                     gripAdjust(leftclose, rightclose);
@@ -163,7 +163,7 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
 
                 .addTemporalMarker(0.2, () -> {
                     // Run your action in here!
-                    aawAdjust(1, 400, 1, 1600, 0.62);
+                    aawAdjust(1, 500, 1, 1400, 0.67);
 
                 })
                 .build();
@@ -172,16 +172,20 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
-                    DaawAdjust(1, 0, 1, 0, 0.82, 400);
+                    aawAdjust(1, 500, 1, 0, 0.82);
 
 
+                })
+                .addTemporalMarker(0, () -> {
+                    // Run your action in here!
+                    aawAdjust(1, 0, 1, 0, 0.82);
                 })
 
                 .addTemporalMarker(0.1, () -> {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(42, -25, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(48, -11, Math.toRadians(270)))
 
                 .build();
 
@@ -198,7 +202,7 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
                     //gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(57, -13, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(57, -11, Math.toRadians(270)))
 
                 .build();
 
@@ -251,7 +255,7 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
 
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, -16, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(43.5, -12, Math.toRadians(0)))
 
                 .build();
 
@@ -259,10 +263,10 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
-                    aawAdjust(1, 400, 1, 1650, 0.67);
+                    aawAdjust(1, 500, 1, 1400, 0.67);
                 })
 
-                .lineToLinearHeading(new Pose2d(48, -35, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(48, -34, Math.toRadians(0)))
 
                 .build();
 
@@ -270,7 +274,7 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
-                    DaawAdjust(1, 0, 1, 0, 0.82, 400);
+                    aawAdjust(1, 800, 1, 0, 0.82);
 
 
                 })
@@ -279,7 +283,7 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(42, -13, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(40, -11, Math.toRadians(270)))
 
                 .build();
 
@@ -287,7 +291,7 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
-                    //DaawAdjust(1, 0, 1, 0, 0.82, 100);
+                    aawAdjust(1, 0, 1, 0, 0.82);
 
 
                 })
@@ -296,7 +300,7 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
                     //gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(57, -18, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(57, -11, Math.toRadians(270)))
 
                 .build();
 
@@ -327,7 +331,7 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
                 .addTemporalMarker(0, () -> {
                     gripAdjust(leftclose, rightclose);  //close grip
                 })
-                .lineToLinearHeading(new Pose2d(-38, -15, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-38, -12, Math.toRadians(0)))
 
                 .build();
 
@@ -341,21 +345,27 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
 
-                    aawAdjust(1, 400, 1, 1500, 0.67);
+                    aawAdjust(1, 500, 1, 1400, 0.67);
                 })
 
-                .lineToLinearHeading(new Pose2d(48, -33, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(48, -30, Math.toRadians(0)))
 
 
                 .build();
 
         Trajectory L5 = drive.trajectoryBuilder(L4.end())
-                .lineToLinearHeading(new Pose2d(43.5, -13, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, -11, Math.toRadians(270)))
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
-                    DaawAdjust(1, 0, 1, 0, 0.82, 400);
+                    aawAdjust(1, 500, 1, 0, 0.82);
 
+
+                })
+
+                .addTemporalMarker(0.6, () -> {
+                    // Run your action in here!
+                    aawAdjust(1, 0, 1, 0, 0.82);
 
                 })
 

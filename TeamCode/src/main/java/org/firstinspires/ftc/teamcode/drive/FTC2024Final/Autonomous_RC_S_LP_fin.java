@@ -126,7 +126,7 @@ public class Autonomous_RC_S_LP_fin extends LinearOpMode {
 
                 .addTemporalMarker(0.1, () -> {
                     // Run your action in here!
-                    aawAdjust(1, 400, 1, 1550, 0.67);
+                    aawAdjust(1, 450, 1, 1550, 0.67);
 
                 })
 
@@ -190,7 +190,7 @@ public class Autonomous_RC_S_LP_fin extends LinearOpMode {
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
 
-                    aawAdjust(1, 400, 1, 1550, 0.67);
+                    aawAdjust(1, 450, 1, 1550, 0.67);
                 })
 
                 .addTemporalMarker(0.5, () -> {
@@ -246,7 +246,7 @@ public class Autonomous_RC_S_LP_fin extends LinearOpMode {
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
 
-                    aawAdjust(1, 400, 1, 1500, 0.67);
+                    aawAdjust(1, 450 , 1, 1500, 0.67);
                 })
 
                 .addTemporalMarker(0.5, () -> {
