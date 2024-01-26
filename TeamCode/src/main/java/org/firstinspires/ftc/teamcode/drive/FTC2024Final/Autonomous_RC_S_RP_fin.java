@@ -252,7 +252,7 @@ public class Autonomous_RC_S_RP_fin extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);  //close grip
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, -28, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(44.5, -30, Math.toRadians(0)))
 
                 .build();
 
