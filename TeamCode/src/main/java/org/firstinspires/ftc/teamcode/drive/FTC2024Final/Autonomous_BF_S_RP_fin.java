@@ -17,7 +17,7 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 import java.util.List;
 
 @Autonomous(name = "BlueFar_RP", group = "BlueFar")
-public class Autonomous_BF_S_RP extends LinearOpMode {
+public class Autonomous_BF_S_RP_fin extends LinearOpMode {
 
 
     int biconPosition = 1;
