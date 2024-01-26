@@ -150,7 +150,7 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, 64, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(43.5, 13, Math.toRadians(90)))
 
                 .addTemporalMarker(0.2, () -> {
                     // Run your action in here!
@@ -215,7 +215,7 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, 64, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(43.5, 13, Math.toRadians(90)))
 
 
 
@@ -258,7 +258,7 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
 
 
         Trajectory R3 = drive.trajectoryBuilder(R2.end())
-                .lineToLinearHeading(new Pose2d(43.5, 64, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(43.5, 13, Math.toRadians(90)))
 
 
                 .addTemporalMarker(0, () -> {
