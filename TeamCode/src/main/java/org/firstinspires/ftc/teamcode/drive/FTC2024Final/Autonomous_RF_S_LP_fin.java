@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.FTC2024;
+package org.firstinspires.ftc.teamcode.drive.FTC2024Final;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
@@ -16,7 +16,7 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
-@Autonomous(name = "RedF_LP", group = "RedFar")
+@Autonomous(name = "RedFar_LP", group = "RedFar")
 public class Autonomous_RF_S_LP_fin extends LinearOpMode {
 
 
@@ -172,7 +172,7 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
-                    DaawAdjust(1, 0, 1, 0, 0.82, 300);
+                    DaawAdjust(1, 0, 1, 0, 0.82, 400);
 
 
                 })
@@ -270,7 +270,7 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
-                    DaawAdjust(1, 0, 1, 0, 0.82, 300);
+                    DaawAdjust(1, 0, 1, 0, 0.82, 400);
 
 
                 })
@@ -324,7 +324,7 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
                     aawAdjust(1, 0, 1, 0, 0.82);
                 })
 
-                .addTemporalMarker(0.5, () -> {
+                .addTemporalMarker(0, () -> {
                     gripAdjust(leftclose, rightclose);  //close grip
                 })
                 .lineToLinearHeading(new Pose2d(-38, -15, Math.toRadians(0)))
@@ -344,10 +344,6 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
                     aawAdjust(1, 400, 1, 1500, 0.67);
                 })
 
-                .addTemporalMarker(0.5, () -> {
-                    gripAdjust(leftclose, rightclose);  //close grip
-                })
-
                 .lineToLinearHeading(new Pose2d(48, -33, Math.toRadians(0)))
 
 
@@ -358,12 +354,12 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
-                    DaawAdjust(1, 0, 1, 0, 0.82, 100);
+                    DaawAdjust(1, 0, 1, 0, 0.82, 400);
 
 
                 })
 
-                .addTemporalMarker(0.1, () -> {
+                .addTemporalMarker(0, () -> {
                             gripAdjust(leftclose, rightclose);
                         })
 

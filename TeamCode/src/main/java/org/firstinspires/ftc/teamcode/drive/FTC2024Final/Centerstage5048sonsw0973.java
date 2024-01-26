@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.FTC2024;
+package org.firstinspires.ftc.teamcode.drive.FTC2024Final;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -11,9 +11,9 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
-@TeleOp
+@TeleOp (name = "CenterstageLogitech", group = "Centerstage" )
 
-public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
+public class Centerstage5048sonsw0973 extends LinearOpMode {
 
     @Override
 
@@ -82,7 +82,7 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
         int gTargetPosition = 0; //grab
         int gCurrentPosition = 0;
         double wTargetPosition = 0;
-        double wCurrentPosition = 0.82;
+        double wCurrentPosition = 0;
         double shooterTrigTarget = 0.02;
         double shooterAngleTarget = 0.0;
 
@@ -94,21 +94,14 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
 
         boolean isFirstRun = true;
 
-        //Rumble Gamepad begin ENDGAME PERIOD
-        Gamepad.RumbleEffect ENDGAME_ALERT = new Gamepad.RumbleEffect.Builder()
-                .addStep(0.0, 0.0, 90000) //Rumble wait for 90000ms = 90sec
-                .addStep(1.0, 1.0, 1000) //ENDGAME RUMBLE for 1000ms = 1sec
-                .build();
+
 
 
         while (opModeIsActive()) {
 
             if (isFirstRun) {  //ONLY ONCE RUNNING CODE
 
-                gamepad1.runRumbleEffect(ENDGAME_ALERT);
-                gamepad2.runRumbleEffect(ENDGAME_ALERT);
-
-                wristServo.setPosition(wCurrentPosition);
+                wristServo.setPosition(0.82);
 
                 isFirstRun = false; /*!important!*/
             }
@@ -448,13 +441,13 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
 
 
             //drone shooter angle adjust
-            if (currentGamepad1.touchpad && !previousGamepad1.touchpad) {
+            if (currentGamepad1.back && !previousGamepad1.back) {
                 if (DroneShooterAngleStatus == 0) { //DroneShooter angle adjust: low -> high
                     shooterAngleTarget = 0.35;
-                    DroneShooterAngleStatus = 1;  //status 0 -> 1
+                    DroneShooterAngleStatus = 1;
                 } else if (DroneShooterAngleStatus == 1) { //DroneShooter angle adjust: high -> low
                     shooterAngleTarget = 0.0;
-                    DroneShooterAngleStatus = 0;  //status 1 -> 0
+                    DroneShooterAngleStatus = 0;
                 }
             }
 
@@ -472,9 +465,9 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
             }
 
             //adjust unexpected arm angle encoder error
-             if (currentGamepad2.back && !previousGamepad2.back) {
+            if (currentGamepad2.back && !previousGamepad2.back) {
                 AngleErrorValue = AngleErrorValue + 50;
-           }
+            }
 
             if (currentGamepad2.start && !previousGamepad2.start) {
                 AngleErrorValue = AngleErrorValue - 50;

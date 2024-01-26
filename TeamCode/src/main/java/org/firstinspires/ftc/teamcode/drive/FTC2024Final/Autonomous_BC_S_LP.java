@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.FTC2024;
+package org.firstinspires.ftc.teamcode.drive.FTC2024Final;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
@@ -16,17 +16,17 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
-@Autonomous(name = "BlueC_RP", group = "BlueClose")
-public class Autonomous_BC_S_RP extends LinearOpMode {
+@Autonomous(name = "BlueClose_LP", group = "BlueClose")
+public class Autonomous_BC_S_LP extends LinearOpMode {
 
 
     int biconPosition = 1;
     private static final boolean USE_WEBCAM = true;
 
-    private static final String TFOD_MODEL_ASSET = "5048Red.tflite";
+    private static final String TFOD_MODEL_ASSET = "5048Blue.tflite";
 
     private static final String[] LABELS = {
-            "RED",
+            "BLUE",
     };
 
     private TfodProcessor tfod;
@@ -114,14 +114,14 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        drive.setPoseEstimate(new Pose2d(11.5, -65, 0));
+        drive.setPoseEstimate(new Pose2d(11.5, 60, Math.toRadians(180)));
 
 
 
                 //right traj
 
-        Trajectory R1 = drive.trajectoryBuilder(new Pose2d(11.5, -65))  //to backdrop
-                .lineToLinearHeading(new Pose2d(43.5, -42, Math.toRadians(0)))
+        Trajectory R1 = drive.trajectoryBuilder(new Pose2d(11.5, 60))  //to backdrop
+                .lineToLinearHeading(new Pose2d(43.5, 42, Math.toRadians(0)))
 
                 .addTemporalMarker(0.1, () -> {
                     // Run your action in here!
@@ -132,7 +132,7 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
                 .build();
 
         Trajectory rotateR = drive.trajectoryBuilder(R1.end())
-                .lineToLinearHeading(new Pose2d(43.5, -30, Math.toRadians(170)))
+                .lineToLinearHeading(new Pose2d(43.5, 30, Math.toRadians(185)))
 
                 .addTemporalMarker(0, () -> {
                     DaawAdjust(1, 0, 1, 0, 0.82, 100);
@@ -150,7 +150,7 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, -63, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, 63, Math.toRadians(270)))
 
                 .addTemporalMarker(0.2, () -> {
                     // Run your action in here!
@@ -171,8 +171,8 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
 
                 //mid traj
 
-        Trajectory M1 = drive.trajectoryBuilder(new Pose2d(11.5, -65))
-                .lineToLinearHeading(new Pose2d(11.5, -41, Math.toRadians(90)))
+        Trajectory M1 = drive.trajectoryBuilder(new Pose2d(11.5, 60))
+                .lineToLinearHeading(new Pose2d(11.5, 39, Math.toRadians(270)))
 
                 .addTemporalMarker(1, () -> {
                     // Run your action in here!
@@ -196,7 +196,7 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);  //close grip
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, -37, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(44, 37, Math.toRadians(0)))
 
 
                 .build();
@@ -215,7 +215,7 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, -63, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, 63, Math.toRadians(270)))
 
 
 
@@ -227,8 +227,8 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
 
             //left traj
 
-        Trajectory L1 = drive.trajectoryBuilder(new Pose2d(11.5, -65))
-                .lineToLinearHeading(new Pose2d(11.5, -41, Math.toRadians(150)))
+        Trajectory L1 = drive.trajectoryBuilder(new Pose2d(11.5, 60))
+                .lineToLinearHeading(new Pose2d(11.5, 41, Math.toRadians(210)))
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
@@ -252,13 +252,13 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);  //close grip
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, -30, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(43.5, 30, Math.toRadians(0)))
 
                 .build();
 
 
         Trajectory L3 = drive.trajectoryBuilder(L2.end())
-                .lineToLinearHeading(new Pose2d(43.5, -63, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, 63, Math.toRadians(270)))
 
 
                 .addTemporalMarker(0, () -> {
@@ -304,32 +304,28 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
                 sleep(20);
 
 
-                if (biconPosition == 1) {  //code RedC_trajLn
+                if (biconPosition == 3) {  //code RedC_trajLn
 
                     leftHandServo.setPosition(leftclose);
                     rightHandServo.setPosition(rightclose);  //init claw close
 
+
+                    drive.followTrajectory(R1);  //move to backdrop place, extend arm
+
+                    gripAdjust(leftclose, rightopen);   //Y DR
                     customSleep(100);
 
-                    drive.followTrajectory(L1);  //move to backdrop place, extend arm
+                    gripAdjust(leftclose, rightclose);
+                    drive.followTrajectory(rotateR);
 
-                    gripAdjust(leftopen, rightclose);  //drop P pixel
 
-                    drive.followTrajectory(L2);
-
-                    gripAdjust(leftclose, rightopen);  //drop Y pixel
+                    gripAdjust(leftopen, rightclose);
                     customSleep(100);
 
 
-                    drive.followTrajectory(L3);
-                    drive.followTrajectory(L4);
+                    drive.followTrajectory(R2);
 
-                    gripAdjust(leftclose, rightclose);  //close grip
-
-
-
-
-
+                    drive.followTrajectory(R3);
 
                 }
                 else if (biconPosition == 2) {  //code RedC_trajMn
@@ -354,33 +350,30 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);  //close grip
 
 
-
                 }
                 else {  //code RedC_trajRn
 
                     leftHandServo.setPosition(leftclose);
                     rightHandServo.setPosition(rightclose);  //init claw close
 
-
-                    drive.followTrajectory(R1);  //move to backdrop place, extend arm
-
-                    gripAdjust(leftclose, rightopen);   //Y DR
                     customSleep(100);
 
-                    gripAdjust(leftclose, rightclose);
-                    drive.followTrajectory(rotateR);
+                    drive.followTrajectory(L1);  //move to backdrop place, extend arm
 
+                    gripAdjust(leftopen, rightclose);  //drop P pixel
 
-                    gripAdjust(leftopen, rightclose);
+                    drive.followTrajectory(L2);
+
+                    gripAdjust(leftclose, rightopen);  //drop Y pixel
                     customSleep(100);
 
 
-                    drive.followTrajectory(R2);
+                    drive.followTrajectory(L3);
+                    drive.followTrajectory(L4);
 
-                    drive.followTrajectory(R3);
+                    gripAdjust(leftclose, rightclose);  //close grip
 
-
-
+                    
                 }
 
 
@@ -418,6 +411,8 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
 
     private void telemetryTfod() {
 
+        biconPosition = 1;
+
         List<Recognition> currentRecognitions = tfod.getRecognitions();
         telemetry.addData("# Objects Detected", currentRecognitions.size());
 
@@ -425,12 +420,15 @@ public class Autonomous_BC_S_RP extends LinearOpMode {
             double x = (recognition.getLeft() + recognition.getRight()) / 2;
             double y = (recognition.getTop()  + recognition.getBottom()) / 2;
 
-            if (x > 0 && x < 300) {
-                biconPosition = 2;
-            } else if (x >= 300) {
-                biconPosition = 3;
-            } else {
+            if (currentRecognitions.size() == 0) {
                 biconPosition = 1;
+            } else {
+
+                if (x > 0 && x < 300) {
+                    biconPosition = 2;
+                } else if (x >= 300) {
+                    biconPosition = 3;
+                }
             }
 
 

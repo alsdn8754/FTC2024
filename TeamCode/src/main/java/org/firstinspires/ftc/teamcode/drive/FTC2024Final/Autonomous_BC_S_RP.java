@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.FTC2024;
+package org.firstinspires.ftc.teamcode.drive.FTC2024Final;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
@@ -16,17 +16,17 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
-@Autonomous(name = "RedC_RP", group = "RedClose")
-public class Autonomous_RC_S_RP_fin extends LinearOpMode {
+@Autonomous(name = "BlueClose_RP", group = "BlueClose")
+public class Autonomous_BC_S_RP extends LinearOpMode {
 
 
     int biconPosition = 1;
     private static final boolean USE_WEBCAM = true;
 
-    private static final String TFOD_MODEL_ASSET = "5048Red.tflite";
+    private static final String TFOD_MODEL_ASSET = "5048Blue.tflite";
 
     private static final String[] LABELS = {
-            "RED",
+            "Blue",
     };
 
     private TfodProcessor tfod;
@@ -125,7 +125,7 @@ public class Autonomous_RC_S_RP_fin extends LinearOpMode {
 
                 .addTemporalMarker(0.1, () -> {
                     // Run your action in here!
-                    aawAdjust(1, 400, 1, 1550, 0.67);
+                    aawAdjust(1, 400, 1, 1500, 0.67);
 
                 })
 
@@ -189,7 +189,7 @@ public class Autonomous_RC_S_RP_fin extends LinearOpMode {
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
 
-                    aawAdjust(1, 400, 1, 1550, 0.67);
+                    aawAdjust(1, 400, 1, 1500, 0.67);
                 })
 
                 .addTemporalMarker(0.5, () -> {

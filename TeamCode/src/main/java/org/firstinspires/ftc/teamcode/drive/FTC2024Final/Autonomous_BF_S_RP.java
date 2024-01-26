@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.drive.FTC2024;
+package org.firstinspires.ftc.teamcode.drive.FTC2024Final;
 
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.trajectory.Trajectory;
@@ -16,17 +16,17 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
-@Autonomous(name = "RedF_RP", group = "RedFar")
-public class Autonomous_RF_S_RP_fin extends LinearOpMode {
+@Autonomous(name = "BlueFar_RP", group = "BlueFar")
+public class Autonomous_BF_S_RP extends LinearOpMode {
 
 
     int biconPosition = 1;
     private static final boolean USE_WEBCAM = true;
 
-    private static final String TFOD_MODEL_ASSET = "5048Red.tflite";
+    private static final String TFOD_MODEL_ASSET = "5048Blue.tflite";
 
     private static final String[] LABELS = {
-            "RED",
+            "Blue",
     };
 
     private TfodProcessor tfod;
