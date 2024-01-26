@@ -121,18 +121,18 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
                 //right traj
 
         Trajectory L1 = drive.trajectoryBuilder(new Pose2d(11.5, 65, Math.toRadians(180)))  //to backdrop
-                .lineToLinearHeading(new Pose2d(43.5, 43, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(44.5, 46, Math.toRadians(0)))
 
                 .addTemporalMarker(0.1, () -> {
                     // Run your action in here!
-                    aawAdjust(1, 400, 1, 1500, 0.67);
+                    aawAdjust(1, 450, 1, 1550, 0.67);
 
                 })
 
                 .build();
 
         Trajectory rotateL = drive.trajectoryBuilder(L1.end())
-                .lineToLinearHeading(new Pose2d(43.5, 30, Math.toRadians(190)))
+                .lineToLinearHeading(new Pose2d(43.5, 34, Math.toRadians(190)))
 
                 .addTemporalMarker(0, () -> {
                     DaawAdjust(1, 0, 1, 0, 0.82, 100);
@@ -304,7 +304,7 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
                 sleep(20);
 
 
-                if (biconPosition == 3) {  //code RedC_trajLn
+                if (biconPosition == 1) {  //code RedC_trajLn
 
                     leftHandServo.setPosition(leftclose);
                     rightHandServo.setPosition(rightclose);  //init claw close
