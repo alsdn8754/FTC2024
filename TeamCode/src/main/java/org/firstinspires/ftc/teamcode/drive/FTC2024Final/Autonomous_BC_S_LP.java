@@ -121,7 +121,7 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
                 //right traj
 
         Trajectory L1 = drive.trajectoryBuilder(new Pose2d(11.5, 65, Math.toRadians(180)))  //to backdrop
-                .lineToLinearHeading(new Pose2d(44.5, 46, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(44.5, 49, Math.toRadians(0)))
 
                 .addTemporalMarker(0.1, () -> {
                     // Run your action in here!
@@ -132,9 +132,13 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
                 .build();
 
         Trajectory rotateL = drive.trajectoryBuilder(L1.end())
-                .lineToLinearHeading(new Pose2d(43.5, 34, Math.toRadians(190)))
+                .lineToLinearHeading(new Pose2d(42.5, 35, Math.toRadians(190)))
 
                 .addTemporalMarker(0, () -> {
+                    DaawAdjust(1, 450, 1, 0, 0.82, 100);
+                })
+
+                .addTemporalMarker(0.5, () -> {
                     DaawAdjust(1, 0, 1, 0, 0.82, 100);
                 })
 
@@ -189,14 +193,14 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
 
-                    aawAdjust(1, 400, 1, 1500, 0.67);
+                    aawAdjust(1, 400, 1, 1550, 0.67);
                 })
 
                 .addTemporalMarker(0.5, () -> {
                     gripAdjust(leftclose, rightclose);  //close grip
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, 37, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(45, 39, Math.toRadians(0)))
 
 
                 .build();
@@ -206,9 +210,11 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
+                    DaawAdjust(1, 400, 1, 0, 0.82, 100);
+                })
+
+                .addTemporalMarker(0.5, () -> {
                     DaawAdjust(1, 0, 1, 0, 0.82, 100);
-
-
                 })
 
                 .addTemporalMarker(0.1, () -> {
@@ -228,12 +234,12 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
             //left traj
 
         Trajectory R1 = drive.trajectoryBuilder(new Pose2d(11.5, 65, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(11.5, 41, Math.toRadians(210)))
+                .lineToLinearHeading(new Pose2d(11.5, 38, Math.toRadians(180)))
 
-                .addTemporalMarker(0, () -> {
+                .addTemporalMarker(1, () -> {
                     // Run your action in here!
 
-                    aawAdjust(0, 0, 1, 600, 0.52);
+                    aawAdjust(0, 0, 1, 270, 0.52);
 
                 })
 
@@ -245,14 +251,14 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
 
-                    aawAdjust(1, 400, 1, 1500, 0.67);
+                    aawAdjust(1, 400, 1, 1550, 0.67);
                 })
 
                 .addTemporalMarker(0.5, () -> {
                     gripAdjust(leftclose, rightclose);  //close grip
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, 28, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(44.5, 34, Math.toRadians(0)))
 
                 .build();
 
@@ -365,7 +371,7 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
                     drive.followTrajectory(R2);
 
                     gripAdjust(leftclose, rightopen);  //drop Y pixel
-                    customSleep(100);
+                    customSleep(500);
 
 
                     drive.followTrajectory(R3);
