@@ -120,8 +120,8 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
 
                 //right traj
 
-        Trajectory R1 = drive.trajectoryBuilder(new Pose2d(11.5, 65))  //to backdrop
-                .lineToLinearHeading(new Pose2d(43.5, 42, Math.toRadians(0)))
+        Trajectory L1 = drive.trajectoryBuilder(new Pose2d(11.5, 65))  //to backdrop
+                .lineToLinearHeading(new Pose2d(43.5, 43, Math.toRadians(0)))
 
                 .addTemporalMarker(0.1, () -> {
                     // Run your action in here!
@@ -131,8 +131,8 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
 
                 .build();
 
-        Trajectory rotateR = drive.trajectoryBuilder(R1.end())
-                .lineToLinearHeading(new Pose2d(43.5, 30, Math.toRadians(185)))
+        Trajectory rotateL = drive.trajectoryBuilder(L1.end())
+                .lineToLinearHeading(new Pose2d(43.5, 30, Math.toRadians(190)))
 
                 .addTemporalMarker(0, () -> {
                     DaawAdjust(1, 0, 1, 0, 0.82, 100);
@@ -144,13 +144,13 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
 
                 .build();
 
-        Trajectory R2 = drive.trajectoryBuilder(rotateR.end())  //to park-1
+        Trajectory L2 = drive.trajectoryBuilder(rotateL.end())  //to park-1
 
                 .addTemporalMarker(0, () -> {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, 63, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, 64, Math.toRadians(90)))
 
                 .addTemporalMarker(0.2, () -> {
                     // Run your action in here!
@@ -160,7 +160,7 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
 
                 .build();
 
-        Trajectory R3 = drive.trajectoryBuilder(R2.end())  //to park-2
+        Trajectory L3 = drive.trajectoryBuilder(L2.end())  //to park-2
 
                 .strafeLeft(15)
 
@@ -227,7 +227,7 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
 
             //left traj
 
-        Trajectory L1 = drive.trajectoryBuilder(new Pose2d(11.5, 60))
+        Trajectory R1 = drive.trajectoryBuilder(new Pose2d(11.5, 60))
                 .lineToLinearHeading(new Pose2d(11.5, 41, Math.toRadians(210)))
 
                 .addTemporalMarker(0, () -> {
@@ -241,7 +241,7 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
                 .build();
 
 
-        Trajectory L2 = drive.trajectoryBuilder(L1.end())
+        Trajectory R2 = drive.trajectoryBuilder(R1.end())
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
 
@@ -257,7 +257,7 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
                 .build();
 
 
-        Trajectory L3 = drive.trajectoryBuilder(L2.end())
+        Trajectory R3 = drive.trajectoryBuilder(R2.end())
                 .lineToLinearHeading(new Pose2d(43.5, 63, Math.toRadians(270)))
 
 
@@ -275,7 +275,7 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
 
                 .build();
 
-        Trajectory L4 = drive.trajectoryBuilder(L3.end())
+        Trajectory R4 = drive.trajectoryBuilder(R3.end())
                 .strafeLeft(15)
                 .build();
 
@@ -310,22 +310,22 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
                     rightHandServo.setPosition(rightclose);  //init claw close
 
 
-                    drive.followTrajectory(R1);  //move to backdrop place, extend arm
+                    drive.followTrajectory(L1);  //move to backdrop place, extend arm
 
                     gripAdjust(leftclose, rightopen);   //Y DR
                     customSleep(100);
 
                     gripAdjust(leftclose, rightclose);
-                    drive.followTrajectory(rotateR);
+                    drive.followTrajectory(rotateL);
 
 
                     gripAdjust(leftopen, rightclose);
                     customSleep(100);
 
 
-                    drive.followTrajectory(R2);
+                    drive.followTrajectory(L2);
 
-                    drive.followTrajectory(R3);
+                    drive.followTrajectory(L3);
 
                 }
                 else if (biconPosition == 2) {  //code RedC_trajMn
@@ -358,18 +358,18 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
 
                     customSleep(100);
 
-                    drive.followTrajectory(L1);  //move to backdrop place, extend arm
+                    drive.followTrajectory(R1);  //move to backdrop place, extend arm
 
                     gripAdjust(leftopen, rightclose);  //drop P pixel
 
-                    drive.followTrajectory(L2);
+                    drive.followTrajectory(R2);
 
                     gripAdjust(leftclose, rightopen);  //drop Y pixel
                     customSleep(100);
 
 
-                    drive.followTrajectory(L3);
-                    drive.followTrajectory(L4);
+                    drive.followTrajectory(R3);
+                    drive.followTrajectory(R4);
 
                     gripAdjust(leftclose, rightclose);  //close grip
 
