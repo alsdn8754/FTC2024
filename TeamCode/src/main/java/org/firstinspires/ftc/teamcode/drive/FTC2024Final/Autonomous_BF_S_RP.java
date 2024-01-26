@@ -114,7 +114,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        drive.setPoseEstimate(new Pose2d(-38, -65, Math.toRadians(180)));
+        drive.setPoseEstimate(new Pose2d(-38, 65, Math.toRadians(180)));
 
 
 
@@ -159,7 +159,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
 
         Trajectory L4 = drive.trajectoryBuilder(L3.end())
 
-                .lineToLinearHeading(new Pose2d(48, 55, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(47, 52, Math.toRadians(0)))
 
                 .addTemporalMarker(0.2, () -> {
                     // Run your action in here!
@@ -181,7 +181,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(42, 25, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(40, 13, Math.toRadians(90)))
 
                 .build();
 
@@ -198,7 +198,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
                     //gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(57, 25, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(57, 13, Math.toRadians(90)))
 
                 .build();
 
@@ -210,7 +210,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
                 //mid traj
 
         Trajectory M1 = drive.trajectoryBuilder(new Pose2d(-38, 65, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(-35, 11.5, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(-41, 11.5, Math.toRadians(80)))
 
                 .addTemporalMarker(1.5, () -> {
                     // Run your action in here!
@@ -251,7 +251,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
 
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, 16, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(43.5, 12, Math.toRadians(0)))
 
                 .build();
 
@@ -262,7 +262,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
                     aawAdjust(1, 400, 1, 1650, 0.67);
                 })
 
-                .lineToLinearHeading(new Pose2d(48, 40, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(48, 44, Math.toRadians(0)))
 
                 .build();
 
@@ -279,7 +279,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(42, 18, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(42, 13, Math.toRadians(90)))
 
                 .build();
 
@@ -296,7 +296,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
                     //gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(57, 18, Math.toRadians(90)))
+                .lineToLinearHeading(new Pose2d(57, 13, Math.toRadians(90)))
 
                 .build();
 
@@ -309,7 +309,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
 
-                    aawAdjust(1, 2, 1, 600, 0.5);
+                    aawAdjust(1, 2, 1, 500, 0.5);
 
                 })
 
@@ -333,7 +333,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
 
 
         Trajectory R3 = drive.trajectoryBuilder(R2.end())
-                .lineToLinearHeading(new Pose2d(43.5, 12, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(43.5, 13, Math.toRadians(0)))
 
                 .build();
 
@@ -348,7 +348,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);  //close grip
                 })
 
-                .lineToLinearHeading(new Pose2d(48, 33, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(48, 35, Math.toRadians(0)))
 
 
                 .build();
@@ -399,7 +399,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
                 sleep(20);
 
 
-                if (biconPosition == 3) {  //code RedC_trajLn
+                if (biconPosition == 1) {  //code RedC_trajLn
 
                     leftHandServo.setPosition(leftclose);
                     rightHandServo.setPosition(rightclose);  //init claw close
@@ -444,7 +444,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
 
                     drive.followTrajectory(M4);
                     gripAdjust(leftclose, rightopen);
-                    customSleep(100);
+                    customSleep(500);
 
                     //gripAdjust(leftopen, rightopen);
                     //customSleep(100);
