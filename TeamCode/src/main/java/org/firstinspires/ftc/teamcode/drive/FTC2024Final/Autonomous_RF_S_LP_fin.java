@@ -159,7 +159,7 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
 
         Trajectory R4 = drive.trajectoryBuilder(R3.end())
 
-                .lineToLinearHeading(new Pose2d(48, -55, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(48, -47.5, Math.toRadians(0)))
 
                 .addTemporalMarker(0.2, () -> {
                     // Run your action in here!
@@ -198,7 +198,7 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
                     //gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(57, -25, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(57, -13, Math.toRadians(270)))
 
                 .build();
 
@@ -262,7 +262,7 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
                     aawAdjust(1, 400, 1, 1650, 0.67);
                 })
 
-                .lineToLinearHeading(new Pose2d(48, -40, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(48, -35, Math.toRadians(0)))
 
                 .build();
 
@@ -279,7 +279,7 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(42, -18, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(42, -13, Math.toRadians(270)))
 
                 .build();
 
@@ -515,6 +515,8 @@ public class Autonomous_RF_S_LP_fin extends LinearOpMode {
     }
 
     private void telemetryTfod() {
+
+        biconPosition = 1;
 
         List<Recognition> currentRecognitions = tfod.getRecognitions();
         telemetry.addData("# Objects Detected", currentRecognitions.size());

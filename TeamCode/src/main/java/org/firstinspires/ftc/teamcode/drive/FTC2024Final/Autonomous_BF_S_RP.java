@@ -16,7 +16,7 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
-@Autonomous(name = "BlueFar_LP", group = "BlueFar")
+@Autonomous(name = "BlueFar_RP", group = "BlueFar")
 public class Autonomous_BF_S_RP extends LinearOpMode {
 
 
@@ -120,7 +120,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
 
                 //right traj
 
-        Trajectory L1 = drive.trajectoryBuilder(new Pose2d(-38, 65, Math.toRadians(0)))  //to backdrop
+        Trajectory L1 = drive.trajectoryBuilder(new Pose2d(-38, 65, Math.toRadians(180)))  //to backdrop
                 .lineToLinearHeading(new Pose2d(-38, 35, Math.toRadians(0)))
 
                 .addTemporalMarker(0.7, () -> {
@@ -209,7 +209,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
 
                 //mid traj
 
-        Trajectory M1 = drive.trajectoryBuilder(new Pose2d(-38, 65, Math.toRadians(0)))
+        Trajectory M1 = drive.trajectoryBuilder(new Pose2d(-38, 65, Math.toRadians(180)))
                 .lineToLinearHeading(new Pose2d(-35, 11.5, Math.toRadians(90)))
 
                 .addTemporalMarker(1.5, () -> {
@@ -303,7 +303,7 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
 
         //left traj
 
-        Trajectory R1 = drive.trajectoryBuilder(new Pose2d(-38, 65, Math.toRadians(0)))
+        Trajectory R1 = drive.trajectoryBuilder(new Pose2d(-38, 65, Math.toRadians(180)))
                 .lineToLinearHeading(new Pose2d(-38, 20, Math.toRadians(135)))
 
                 .addTemporalMarker(0, () -> {
@@ -519,6 +519,8 @@ public class Autonomous_BF_S_RP extends LinearOpMode {
     }
 
     private void telemetryTfod() {
+
+        biconPosition = 1;
 
         List<Recognition> currentRecognitions = tfod.getRecognitions();
         telemetry.addData("# Objects Detected", currentRecognitions.size());

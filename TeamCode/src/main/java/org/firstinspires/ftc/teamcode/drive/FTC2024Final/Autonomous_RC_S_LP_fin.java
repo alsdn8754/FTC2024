@@ -417,6 +417,8 @@ public class Autonomous_RC_S_LP_fin extends LinearOpMode {
 
     private void telemetryTfod() {
 
+        biconPosition = 1;
+
         List<Recognition> currentRecognitions = tfod.getRecognitions();
         telemetry.addData("# Objects Detected", currentRecognitions.size());
 

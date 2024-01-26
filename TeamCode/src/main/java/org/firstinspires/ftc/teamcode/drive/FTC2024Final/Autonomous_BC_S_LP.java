@@ -120,7 +120,7 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
 
                 //right traj
 
-        Trajectory L1 = drive.trajectoryBuilder(new Pose2d(11.5, 65))  //to backdrop
+        Trajectory L1 = drive.trajectoryBuilder(new Pose2d(11.5, 65, Math.toRadians(180)))  //to backdrop
                 .lineToLinearHeading(new Pose2d(43.5, 43, Math.toRadians(0)))
 
                 .addTemporalMarker(0.1, () -> {
@@ -171,7 +171,7 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
 
                 //mid traj
 
-        Trajectory M1 = drive.trajectoryBuilder(new Pose2d(11.5, 65))
+        Trajectory M1 = drive.trajectoryBuilder(new Pose2d(11.5, 65, Math.toRadians(180)))
                 .lineToLinearHeading(new Pose2d(11.5, 41, Math.toRadians(270)))
 
                 .addTemporalMarker(1, () -> {
@@ -227,7 +227,7 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
 
             //left traj
 
-        Trajectory R1 = drive.trajectoryBuilder(new Pose2d(11.5, 65))
+        Trajectory R1 = drive.trajectoryBuilder(new Pose2d(11.5, 65, Math.toRadians(180)))
                 .lineToLinearHeading(new Pose2d(11.5, 41, Math.toRadians(210)))
 
                 .addTemporalMarker(0, () -> {
