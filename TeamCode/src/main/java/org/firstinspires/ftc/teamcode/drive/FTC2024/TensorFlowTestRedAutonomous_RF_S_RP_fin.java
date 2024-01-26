@@ -14,11 +14,10 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
-
 import java.util.List;
 
-@Autonomous(name = "RedC_Short_LP", group = "RedClose")
-public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
+@Autonomous(name = "RedF_RP", group = "RedFar")
+public class TensorFlowTestRedAutonomous_RF_S_RP_fin extends LinearOpMode {
 
 
     int biconPosition = 1;
@@ -115,43 +114,40 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        drive.setPoseEstimate(new Pose2d(11.5, -65, 0));
+        drive.setPoseEstimate(new Pose2d(-38, -65, Math.toRadians(0)));
 
 
 
                 //right traj
 
-        Trajectory R1 = drive.trajectoryBuilder(new Pose2d(11.5, -65))  //to backdrop
-                .lineToLinearHeading(new Pose2d(44.5, -42, Math.toRadians(0)))
+        Trajectory R1 = drive.trajectoryBuilder(new Pose2d(-38, -65, Math.toRadians(0)))  //to backdrop
+                .lineToLinearHeading(new Pose2d(-38, -35, Math.toRadians(0)))
 
-                .addTemporalMarker(0.1, () -> {
+                .addTemporalMarker(0.7, () -> {
                     // Run your action in here!
-                    aawAdjust(1, 400, 1, 1500, 0.67);
+
+                    aawAdjust(1, 100, 1, 600, 0.5);
 
                 })
 
                 .build();
 
-        Trajectory rotateR = drive.trajectoryBuilder(R1.end())
-                .lineToLinearHeading(new Pose2d(43.5, -30, Math.toRadians(170)))
-
-                .addTemporalMarker(0, () -> {
-                    DaawAdjust(1, 0, 1, 0, 0.82, 100);
-                })
-
-                .addTemporalMarker(1, () -> {
-                    aawAdjust(1, 150, 1, 2100, 0.52);
-                })
-
-                .build();
-
-        Trajectory R2 = drive.trajectoryBuilder(rotateR.end())  //to park-1
+        Trajectory R2 = drive.trajectoryBuilder(R1.end())
+                .lineToLinearHeading(new Pose2d(-38.5, -15.5, Math.toRadians(0)))
 
                 .addTemporalMarker(0, () -> {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, -13, Math.toRadians(270)))
+                .addTemporalMarker(0, () -> {
+                    aawAdjust(1, 0, 1, 0, 0.82);
+                })
+
+                .build();
+
+        Trajectory R3 = drive.trajectoryBuilder(R2.end())
+
+                .lineToLinearHeading(new Pose2d(43.5, -15, Math.toRadians(0)))
 
                 .addTemporalMarker(0.2, () -> {
                     // Run your action in here!
@@ -161,24 +157,65 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
 
                 .build();
 
-        Trajectory R3 = drive.trajectoryBuilder(R2.end())  //to park-2
+        Trajectory R4 = drive.trajectoryBuilder(R3.end())
 
-                .strafeLeft(15)
+                .lineToLinearHeading(new Pose2d(48, -55, Math.toRadians(0)))
+
+                .addTemporalMarker(0.2, () -> {
+                    // Run your action in here!
+                    aawAdjust(1, 400, 1, 1600, 0.62);
+
+                })
+                .build();
+
+        Trajectory R5 = drive.trajectoryBuilder(R4.end())
+
+                .addTemporalMarker(0, () -> {
+                    // Run your action in here!
+                    DaawAdjust(1, 0, 1, 0, 0.82, 300);
+
+
+                })
+
+                .addTemporalMarker(0.1, () -> {
+                    gripAdjust(leftclose, rightclose);
+                })
+
+                .lineToLinearHeading(new Pose2d(42, -72, Math.toRadians(270)))
+
+                .build();
+
+        Trajectory R6 = drive.trajectoryBuilder(R5.end())
+
+                .addTemporalMarker(0, () -> {
+                    // Run your action in here!
+                    //DaawAdjust(1, 0, 1, 0, 0.82, 100);
+
+
+                })
+
+                .addTemporalMarker(0.1, () -> {
+                    //gripAdjust(leftclose, rightclose);
+                })
+
+                .lineToLinearHeading(new Pose2d(57, -72, Math.toRadians(270)))
 
                 .build();
 
 
 
 
+
+
                 //mid traj
 
-        Trajectory M1 = drive.trajectoryBuilder(new Pose2d(11.5, -65))
-                .lineToLinearHeading(new Pose2d(11.5, -41, Math.toRadians(90)))
+        Trajectory M1 = drive.trajectoryBuilder(new Pose2d(-38, -65, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-35, -11.5, Math.toRadians(270)))
 
-                .addTemporalMarker(1, () -> {
+                .addTemporalMarker(1.5, () -> {
                     // Run your action in here!
 
-                    aawAdjust(0, 0, 1, 600, 0.52);
+                    aawAdjust(0, 0, 1, 700, 0.52);
 
                 })
 
@@ -187,17 +224,19 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
 
         Trajectory M2 = drive.trajectoryBuilder(M1.end())
 
-                .addTemporalMarker(0, () -> {
-                    // Run your action in here!
+                .lineToLinearHeading(new Pose2d(-34, -12, Math.toRadians(0)))
 
-                    aawAdjust(1, 400, 1, 1500, 0.67);
+                .addTemporalMarker(0, () -> {
+                    gripAdjust(leftclose, rightclose);
+                    aawAdjust(1, 0, 1, 0, 0.82);
                 })
 
                 .addTemporalMarker(0.5, () -> {
-                    gripAdjust(leftclose, rightclose);  //close grip
+                    // Run your action in here!
+
+                    //aawAdjust(1, 0, 1, 0, 0.82);
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, -37, Math.toRadians(0)))
 
 
                 .build();
@@ -207,7 +246,31 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
-                    DaawAdjust(1, 0, 1, 0, 0.82, 400);
+                    aawAdjust(1, 0, 1, 0, 0.82);
+
+
+                })
+
+                .lineToLinearHeading(new Pose2d(43.5, -22, Math.toRadians(0)))
+
+                .build();
+
+        Trajectory M4 = drive.trajectoryBuilder(M3.end())
+
+                .addTemporalMarker(0, () -> {
+                    // Run your action in here!
+                    aawAdjust(1, 400, 1, 1650, 0.67);
+                })
+
+                .lineToLinearHeading(new Pose2d(48, -40, Math.toRadians(0)))
+
+                .build();
+
+        Trajectory M5 = drive.trajectoryBuilder(M4.end())
+
+                .addTemporalMarker(0, () -> {
+                    // Run your action in here!
+                    DaawAdjust(1, 0, 1, 0, 0.82, 300);
 
 
                 })
@@ -216,25 +279,37 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, -13, Math.toRadians(270)))
-
-
+                .lineToLinearHeading(new Pose2d(42, -64, Math.toRadians(270)))
 
                 .build();
 
-        Trajectory M4 = drive.trajectoryBuilder(M3.end())
-                .strafeLeft(15)
+        Trajectory M6 = drive.trajectoryBuilder(M5.end())
+
+                .addTemporalMarker(0, () -> {
+                    // Run your action in here!
+                    //DaawAdjust(1, 0, 1, 0, 0.82, 100);
+
+
+                })
+
+                .addTemporalMarker(0.1, () -> {
+                    //gripAdjust(leftclose, rightclose);
+                })
+
+                .lineToLinearHeading(new Pose2d(57, -64, Math.toRadians(270)))
+
                 .build();
 
-            //left traj
 
-        Trajectory L1 = drive.trajectoryBuilder(new Pose2d(11.5, -65))
-                .lineToLinearHeading(new Pose2d(11.5, -41, Math.toRadians(150)))
+        //left traj
+
+        Trajectory L1 = drive.trajectoryBuilder(new Pose2d(-38, -65, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-38, -20, Math.toRadians(225)))
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
 
-                    aawAdjust(0, 0, 1, 600, 0.52);
+                    aawAdjust(1, 2, 1, 600, 0.5);
 
                 })
 
@@ -246,6 +321,26 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
 
+                    aawAdjust(1, 0, 1, 0, 0.82);
+                })
+
+                .addTemporalMarker(0.5, () -> {
+                    gripAdjust(leftclose, rightclose);  //close grip
+                })
+                .lineToLinearHeading(new Pose2d(-38, -15, Math.toRadians(0)))
+
+                .build();
+
+
+        Trajectory L3 = drive.trajectoryBuilder(L2.end())
+                .lineToLinearHeading(new Pose2d(43.5, -12, Math.toRadians(0)))
+
+                .build();
+
+        Trajectory L4 = drive.trajectoryBuilder((L3.end()))
+                .addTemporalMarker(0, () -> {
+                    // Run your action in here!
+
                     aawAdjust(1, 400, 1, 1500, 0.67);
                 })
 
@@ -253,14 +348,13 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);  //close grip
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, -28, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(48, -33, Math.toRadians(0)))
+
 
                 .build();
 
-
-        Trajectory L3 = drive.trajectoryBuilder(L2.end())
-                .lineToLinearHeading(new Pose2d(43.5, -13, Math.toRadians(270)))
-
+        Trajectory L5 = drive.trajectoryBuilder(L4.end())
+                .lineToLinearHeading(new Pose2d(43.5, -62, Math.toRadians(270)))
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
@@ -270,13 +364,12 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
                 })
 
                 .addTemporalMarker(0.1, () -> {
-                    gripAdjust(leftclose, rightclose);
-                })
-
+                            gripAdjust(leftclose, rightclose);
+                        })
 
                 .build();
 
-        Trajectory L4 = drive.trajectoryBuilder(L3.end())
+        Trajectory L6 = drive.trajectoryBuilder(L5.end())
                 .strafeLeft(15)
                 .build();
 
@@ -286,7 +379,6 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
 
 
         initTfod();
-
         while (!isStarted() && !isStopRequested()) {
             // Wait for the DS start button to be touched.
             telemetry.addData("DS preview on/off", "3 dots, Camera Stream");
@@ -301,6 +393,8 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
             telemetry.update();
         }
 
+
+
                 // Share the CPU.
                 sleep(20);
 
@@ -313,15 +407,18 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
                     drive.followTrajectory(L1);  //move to backdrop place, extend arm
 
                     gripAdjust(leftopen, rightclose);  //drop P pixel
+                    customSleep(100);
 
                     drive.followTrajectory(L2);
+                    drive.followTrajectory(L3);
+                    drive.followTrajectory(L4);
 
                     gripAdjust(leftclose, rightopen);  //drop Y pixel
                     customSleep(100);
 
 
-                    drive.followTrajectory(L3);
-                    drive.followTrajectory(L4);
+                    drive.followTrajectory(L5);
+                    drive.followTrajectory(L6);
 
                     gripAdjust(leftclose, rightclose);  //close grip
 
@@ -343,14 +440,20 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
 
                     drive.followTrajectory(M2);
 
-                    gripAdjust(leftclose, rightopen);  //drop Y pixel
+                    drive.followTrajectory(M3);
+
+                    drive.followTrajectory(M4);
+                    gripAdjust(leftclose, rightopen);
                     customSleep(100);
 
+                    //gripAdjust(leftopen, rightopen);
+                    //customSleep(100);
 
-                    drive.followTrajectory(M3);
-                    drive.followTrajectory(M4);
+                    drive.followTrajectory(M5);
 
-                    gripAdjust(leftclose, rightclose);  //close grip
+                    //gripAdjust(leftclose, rightclose);  //close grip
+
+                    drive.followTrajectory(M6);
 
 
 
@@ -363,25 +466,25 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_Fin extends LinearOpMode {
 
                     drive.followTrajectory(R1);  //move to backdrop place, extend arm
 
-                    gripAdjust(leftclose, rightopen);   //Y DR
+                    gripAdjust(leftopen, rightclose);   //P DR
                     customSleep(100);
-
-                    gripAdjust(leftclose, rightclose);
-                    drive.followTrajectory(rotateR);
-
-
-                    gripAdjust(leftopen, rightclose);
-                    customSleep(100);
-
 
                     drive.followTrajectory(R2);
 
+
                     drive.followTrajectory(R3);
 
+                    drive.followTrajectory(R4);
+
+                    gripAdjust(leftclose, rightopen);
+                    customSleep(100);
+
+                    drive.followTrajectory(R5);
+
+                    drive.followTrajectory(R6);
 
 
                 }
-
 
 
         visionPortal.close();
