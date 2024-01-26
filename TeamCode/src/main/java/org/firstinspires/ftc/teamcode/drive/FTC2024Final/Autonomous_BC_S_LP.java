@@ -114,13 +114,13 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
 
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        drive.setPoseEstimate(new Pose2d(11.5, 60, Math.toRadians(180)));
+        drive.setPoseEstimate(new Pose2d(11.5, 65, Math.toRadians(180)));
 
 
 
                 //right traj
 
-        Trajectory R1 = drive.trajectoryBuilder(new Pose2d(11.5, 60))  //to backdrop
+        Trajectory R1 = drive.trajectoryBuilder(new Pose2d(11.5, 65))  //to backdrop
                 .lineToLinearHeading(new Pose2d(43.5, 42, Math.toRadians(0)))
 
                 .addTemporalMarker(0.1, () -> {
@@ -373,7 +373,7 @@ public class Autonomous_BC_S_LP extends LinearOpMode {
 
                     gripAdjust(leftclose, rightclose);  //close grip
 
-                    
+
                 }
 
 
