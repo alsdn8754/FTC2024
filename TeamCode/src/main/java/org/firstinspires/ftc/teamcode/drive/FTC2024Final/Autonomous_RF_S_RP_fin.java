@@ -272,7 +272,7 @@ public class Autonomous_RF_S_RP_fin extends LinearOpMode {
 
         Trajectory M5 = drive.trajectoryBuilder(M4.end())
 
-                .addTemporalMarker(0, () -> {
+                .addTemporalMarker(0.5, () -> {
                     // Run your action in here!
                     aawAdjust(1, 0, 1, 0, 0.82);
                 })
