@@ -16,8 +16,8 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
-@Autonomous(name = "RedC_Short_RP", group = "RedClose")
-public class TensorFlowTestRedAutonomous_RC_S_RP_fin extends LinearOpMode {
+@Autonomous(name = "BlueC_RP", group = "BlueClose")
+public class Autonomous_BC_S_RP extends LinearOpMode {
 
 
     int biconPosition = 1;

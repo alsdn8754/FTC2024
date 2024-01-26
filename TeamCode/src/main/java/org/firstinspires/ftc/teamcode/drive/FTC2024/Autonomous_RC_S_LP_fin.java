@@ -17,8 +17,8 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
-@Autonomous(name = "RedC_Short_LP", group = "RedClose")
-public class TensorFlowTestRedAutonomous_RC_S_LP_fin extends LinearOpMode {
+@Autonomous(name = "RedC_LP", group = "RedClose")
+public class Autonomous_RC_S_LP_fin extends LinearOpMode {
 
 
     int biconPosition = 1;
@@ -126,7 +126,7 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_fin extends LinearOpMode {
 
                 .addTemporalMarker(0.1, () -> {
                     // Run your action in here!
-                    aawAdjust(1, 400, 1, 1500, 0.67);
+                    aawAdjust(1, 400, 1, 1550, 0.67);
 
                 })
 
@@ -136,7 +136,7 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_fin extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(43.5, -30, Math.toRadians(170)))
 
                 .addTemporalMarker(0, () -> {
-                    DaawAdjust(1, 0, 1, 0, 0.82, 100);
+                    DaawAdjust(1, 0, 1, 0, 0.82, 400);
                 })
 
                 .addTemporalMarker(1, () -> {
@@ -190,7 +190,7 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_fin extends LinearOpMode {
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
 
-                    aawAdjust(1, 400, 1, 1500, 0.67);
+                    aawAdjust(1, 400, 1, 1550, 0.67);
                 })
 
                 .addTemporalMarker(0.5, () -> {
@@ -264,7 +264,7 @@ public class TensorFlowTestRedAutonomous_RC_S_LP_fin extends LinearOpMode {
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
-                    DaawAdjust(1, 0, 1, 0, 0.82, 100);
+                    DaawAdjust(1, 0, 1, 0, 0.82, 400);
 
 
                 })

@@ -16,8 +16,8 @@ import org.firstinspires.ftc.vision.tfod.TfodProcessor;
 
 import java.util.List;
 
-@Autonomous(name = "RedF_RP", group = "RedFar")
-public class TensorFlowTestRedAutonomous_RF_S_RP_fin extends LinearOpMode {
+@Autonomous(name = "RedF_LP", group = "RedFar")
+public class Autonomous_RF_S_LP_fin extends LinearOpMode {
 
 
     int biconPosition = 1;
@@ -181,7 +181,7 @@ public class TensorFlowTestRedAutonomous_RF_S_RP_fin extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(42, -72, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(42, -25, Math.toRadians(270)))
 
                 .build();
 
@@ -198,7 +198,7 @@ public class TensorFlowTestRedAutonomous_RF_S_RP_fin extends LinearOpMode {
                     //gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(57, -72, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(57, -25, Math.toRadians(270)))
 
                 .build();
 
@@ -251,7 +251,7 @@ public class TensorFlowTestRedAutonomous_RF_S_RP_fin extends LinearOpMode {
 
                 })
 
-                .lineToLinearHeading(new Pose2d(43.5, -22, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(43.5, -16, Math.toRadians(0)))
 
                 .build();
 
@@ -279,7 +279,7 @@ public class TensorFlowTestRedAutonomous_RF_S_RP_fin extends LinearOpMode {
                     gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(42, -64, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(42, -18, Math.toRadians(270)))
 
                 .build();
 
@@ -296,7 +296,7 @@ public class TensorFlowTestRedAutonomous_RF_S_RP_fin extends LinearOpMode {
                     //gripAdjust(leftclose, rightclose);
                 })
 
-                .lineToLinearHeading(new Pose2d(57, -64, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(57, -18, Math.toRadians(270)))
 
                 .build();
 
@@ -354,7 +354,7 @@ public class TensorFlowTestRedAutonomous_RF_S_RP_fin extends LinearOpMode {
                 .build();
 
         Trajectory L5 = drive.trajectoryBuilder(L4.end())
-                .lineToLinearHeading(new Pose2d(43.5, -62, Math.toRadians(270)))
+                .lineToLinearHeading(new Pose2d(43.5, -13, Math.toRadians(270)))
 
                 .addTemporalMarker(0, () -> {
                     // Run your action in here!
