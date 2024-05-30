@@ -397,32 +397,8 @@ public class Centerstage5048sonsw0973_PS4 extends LinearOpMode {
                     wCurrentPosition = wTargetPosition;
 
                     //ArmHighPosition to 3
-                    Armhighposition = 3;
-
-                } else if (Armhighposition == 3) { //position 3 -> 0
-                    //arm angle adjust
-                    aTargetPosition = 0 - AngleErrorValue;
-                    armMotor.setTargetPosition(aTargetPosition);
-                    armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    armMotor.setPower(0.8);
-
-                    //grip length adjust
-                    gTargetPosition = 20;
-                    grabMotor.setTargetPosition(gTargetPosition);
-                    grabMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    grabMotor.setPower(1);
-
-                    //wrist adjust
-                    wTargetPosition = 0.82;
-                    wristServo.setPosition(wTargetPosition);
-
-                    //sync with current - target position
-                    gCurrentPosition = gTargetPosition;
-                    aCurrentPosition = aTargetPosition;
-                    wCurrentPosition = wTargetPosition;
-
-                    //ArmHighPosition to 0
                     Armhighposition = 0;
+
                 }
             }
 
